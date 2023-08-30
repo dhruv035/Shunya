@@ -8,6 +8,16 @@
   --background-end-rgb: 255, 255, 255;
 }
 
+@font-face {
+  font-family: "Custom-1";
+  src: url("/fonts/La_Belle_Aurore/LaBelleAurore-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Custom-2";
+  src: url("/fonts/Titillium_Web/TitilliumWeb-Regular.ttf");
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
