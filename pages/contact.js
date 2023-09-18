@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import Menu from "@/components/menu";
 import { delay, motion } from "framer-motion";
 import {
   Input,
