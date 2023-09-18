@@ -45,7 +45,7 @@ const Home = () => {
             loop
             style={{ opacity: 1, width: "100%", height: "100%" }}
           >
-            <source src="./animations/anime.mov" />
+            <source src="./animations/anime.mp4" />
           </video>
         </div>
       </div>
