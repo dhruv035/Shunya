@@ -1,12 +1,15 @@
 /** @type {import('tailwindcss').Config} */
+const colors = require('tailwindcss/colors')
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     colors: {
+      ...colors,
       'blackShunya':'#131313',
     'greenLight':'#bad8a0',
     'greenDark': '#cfb53b ',
