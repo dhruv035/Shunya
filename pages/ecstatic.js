@@ -17,11 +17,11 @@ const Ecstatic = () => {
         </div>
         
         <div className="flex flex-col items-center ">
-        <Text className="text-[30px] md:text-[60px] text-amber-400 mt-30">
+        <Text className="text-[30px] md:text-[60px] text-amber-400 mt-[40px] md:mt-[20px]">
             Ecstatic Dance
           </Text>
 
-          <div className=" flex overflow-hidden -mt-[130px]">
+          <div className=" flex overflow-hidden -mt-[150px] md:-mt-[200px]">
             
             <video
               className="-z-[1]"
