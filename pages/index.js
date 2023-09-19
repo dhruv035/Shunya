@@ -59,12 +59,7 @@ const Home = () => {
   console.log("here", window.innerHeight);
 
   return (
-    <main className="flex-col ">
-      <div
-        style={{ position: "fixed" }}
-        className="-z-[2] flex-col grow-1 px-6 py-10 bg-black -mt-10 w-full h-[100vh]"
-      />
-
+    <main className="flex-col bg-black ">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -73,7 +68,7 @@ const Home = () => {
         <Menu />
         <div className="h-[400px] flex flex-row place-items-center">
           <div className=" flex flex-col h-max w-full items-center self-start">
-            <Text className="text-greenDark text-[30px] mt-4 md:text-[80px] font-custom1 self-center">
+            <Text className="text-greenDark text-[30px] mt-4 md:text-[80px] font-custom1 self-center z-[20]">
               Shunya Wellness
             </Text>
             <motion.img
@@ -90,7 +85,7 @@ const Home = () => {
                 width:(windowDimensions.height+80)*16/9,
                 objectFit: "cover",
                 height:windowDimensions.height+80,
-                zIndex: -1,
+                zIndex: 10,
               }}
             />
             {
