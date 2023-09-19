@@ -62,7 +62,7 @@ const Home = () => {
     <main className="flex-col ">
       <div
         style={{ position: "fixed" }}
-        className="-z-[2] flex-col grow-1 px-6 py-10 bg-black w-full h-[100vh]"
+        className="-z-[2] flex-col grow-1 px-6 py-10 bg-black -mt-10 w-full h-[100vh]"
       />
 
       <motion.div
@@ -72,8 +72,8 @@ const Home = () => {
       >
         <Menu />
         <div className="h-[400px] flex flex-row place-items-center">
-          <div className=" mt-10 flex flex-col h-max w-full items-center self-start">
-            <Text className="text-greenDark text-[30px] md:text-[80px] font-custom1 self-center mb-40">
+          <div className=" flex flex-col h-max w-full items-center self-start">
+            <Text className="text-greenDark text-[30px] mt-4 md:text-[80px] font-custom1 self-center">
               Shunya Wellness
             </Text>
             <motion.img
@@ -82,12 +82,13 @@ const Home = () => {
               transition={{ duration: 0.5 }}
               src={"/images/banyan.jpg"}
               style={{
-                marginTop: "100px",
+                marginTop: "-85px",
                 opacity: 1,
                 filter: "grayscale(100%)",
                 left: 0,
                 top: 0,
                 width: "100%",
+                objectFit: "cover",
                 height: windowDimensions.height > 700 ? "100vh" : "auto",
                 zIndex: -1,
               }}

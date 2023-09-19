@@ -6,22 +6,19 @@ const Ecstatic = () => {
     const dimensions = useDimensions();
   return (
     <div>
+       <Menu />
+      <main className=" flex-col -mt-6"> 
       <div
         style={{ position: "fixed" }}
-        className="-z-[2] flex-col grow-1 px-6 py-10 bg-black w-full h-full"
+        className="-z-[2] flex-col grow-1 px-6 bg-black w-full h-full"
       />
-      <main className=" flex-col py-10">
-        <div className="ml-5">
-          <Menu />
-          
-        </div>
-        
+         
         <div className="flex flex-col items-center ">
         <Text className="text-[30px] md:text-[60px] text-amber-400 mt-[40px] md:mt-[20px]">
             Ecstatic Dance
           </Text>
 
-          <div className=" flex overflow-hidden -mt-[150px] md:-mt-[200px]">
+          <div className=" flex overflow-hidden -mt-[140px] md:-mt-[180px]">
             
             <video
               className="-z-[1]"
@@ -30,8 +27,8 @@ const Ecstatic = () => {
               loop
               style={{
                 opacity: 0.7,
-                width:(dimensions.height+50)*16/9,
-                height:dimensions.height+50,
+                width:(dimensions.height+80)*16/9,
+                height:dimensions.height+80,
                 top:0,
                 left:0,
                 objectFit:"cover",
