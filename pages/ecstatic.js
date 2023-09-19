@@ -9,7 +9,7 @@ const Ecstatic = () => {
        <Menu />
       <main className=" flex-col -mt-6"> 
       <div
-        className="-z-[2] flex px-6 bg-black w-full h-full fixed"
+        className="-z-[2] flex px-6 bg-black w-full h-full sticky"
       />
         <div className="flex flex-col items-center ">
         <Text className="text-[30px] md:text-[60px] text-amber-400 mt-[40px] md:mt-[20px]">
