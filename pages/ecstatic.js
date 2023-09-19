@@ -38,7 +38,7 @@ const Ecstatic = () => {
                 filter: "grayscale(70%)",
               }}
             >
-              <source src="./videos/shunya-bg.webm" />
+              <source src="./videos/ecstatic-bg.mp4" />
             </video>
           </div>
           
