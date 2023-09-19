@@ -2,6 +2,7 @@ import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { Inter } from "next/font/google";
 import { delay, motion } from "framer-motion";
+import useDimensions from "@/components/useDimensions";
 const inter = Inter({ subsets: ["latin"] });
 import { background, useDisclosure } from "@chakra-ui/react";
 import { IconButton, Input, Button, Link, Text } from "@chakra-ui/react";
@@ -25,6 +26,7 @@ const Home = () => {
     "Our Team",
   ];
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isMobile, setIsMobile] = useState(0);
   const btnRef = React.useRef();
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -34,6 +36,9 @@ const Home = () => {
 
     return () => clearTimeout(timer);
   }, []);
+
+  const windowDimensions= useDimensions();
+  
 
   if (isLoading) {
     return (
@@ -51,25 +56,15 @@ const Home = () => {
       </div>
     );
   }
+  console.log("here", window.innerHeight);
 
   return (
-    <main className="flex-col px-1 py-3">
-      <motion.img
-        initial={{ opacity: 0.7 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        src={"/banyan.jpg"}
-        style={{
-          opacity: 1,
-          filter: "grayscale(100%)",
-          position: "fixed",
-          left: 0,
-          top: 0,
-          width: "100%",
-          height: "100vh",
-          zIndex: -1,
-        }}
+    <main className="flex-col ">
+      <div
+        style={{ position: "fixed" }}
+        className="-z-[2] flex-col grow-1 px-6 py-10 bg-black w-full h-[100vh]"
       />
+
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -77,41 +72,30 @@ const Home = () => {
       >
         <Menu />
         <div className="h-[400px] flex flex-row place-items-center">
-          <div className=" mt-10 mx-10 flex flex-col h-max w-full items-center self-start">
-            <Text className="text-greenDark text-[30px] md:text-[80px] font-custom1 self-center">
+          <div className=" mt-10 flex flex-col h-max w-full items-center self-start">
+            <Text className="text-greenDark text-[30px] md:text-[80px] font-custom1 self-center mb-40">
               Shunya Wellness
             </Text>
-            {
-              //<Text className="text-greenDark text-[80px] font-custom2">Shunya Wellness</Text>
-            }
-            <Text className="text-greenDark text-left text-[15px] md:text-[30px]">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quis
-              metus pharetra, pulvinar ante in, luctus urna. Phasellus faucibus
-              cursus libero, a finibus est viverra vel. Integer ex mauris,
-              feugiat nec gravida eget, porttitor id nunc. Duis consequat nibh
-              ut lacus semper vulputate. Donec aliquet nisi porta metus viverra,
-              id malesuada urna imperdiet. Quisque tortor tellus, dictum sed
-              ligula id, tempus vehicula lorem. Vestibulum egestas imperdiet
-              nibh, ac iaculis orci efficitur sit amet. <br/><br/>Class aptent taciti
-              sociosqu ad litora torquent per conubia nostra, per inceptos
-              himenaeos. Quisque malesuada cursus lacus non rhoncus. Vestibulum
-              malesuada mi nisi, a egestas lorem vestibulum at. Sed suscipit
-              tincidunt elit, non laoreet justo fringilla sed. Sed cursus justo
-              quis tincidunt fringilla. Etiam porttitor faucibus aliquam. Ut
-              quis dui tempor, varius purus lobortis, vehicula dui. Mauris eu
-              vestibulum tellus, id consequat lorem.
-            </Text>
-            <img
-              src={"/party1.jpeg"}
+            <motion.img
+              initial={{ opacity: 0.7 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              src={"/images/banyan.jpg"}
               style={{
-                marginTop: "520px",
-                filter: "grayscale(20%)",
+                marginTop: "100px",
+                opacity: 1,
+                filter: "grayscale(100%)",
                 left: 0,
                 top: 0,
                 width: "100%",
-                height: " auto",
+                height: windowDimensions.height > 700 ? "100vh" : "auto",
+                zIndex: -1,
               }}
             />
+            {
+              //<Text className="text-greenDark text-[80px] font-custom2">Shunya Wellness</Text>
+            }
+            <Text className="text-greenDark text-left text-[15px] md:text-[30px]"></Text>
           </div>
         </div>
       </motion.div>

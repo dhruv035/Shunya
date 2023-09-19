@@ -29,23 +29,25 @@ const Menu = () => {
   }
   return (
 
-    <div>
+    <div className="flex flex-row-reverse mr-10">
        <IconButton
           className="fixed"
           onClick={onOpen}
-          style={{ position: "fixed", background: "transparent" }}
+          style={{ position: "fixed", background: "transparent", opacity:"0.3" }}
           aria-label="Drawer-Icon"
           icon={<HamburgerIcon boxSize={10} color="#C0D065" />}
         />
     <Drawer
       isOpen={isOpen}
-      placement="left"
+      style={{opacity:0.2}}
+      placement="right"
       onClose={onClose}
       finalFocusRef={btnRef}
       color="#131313"
     >
-      <DrawerOverlay />
-      <DrawerContent backgroundColor="#000000" color={"#FCA311"}>
+      <DrawerOverlay
+       />
+      <DrawerContent backgroundColor="#000000" opacity={"0.5"}  color={"#FCA311"}>
         <DrawerCloseButton />
         <DrawerHeader fontSize={"2xl"} className="font-custom1 font-black">
           Shunya Wellness
