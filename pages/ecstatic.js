@@ -10,7 +10,7 @@ const Ecstatic = () => {
       <main className=" flex-col -mt-6"> 
       <div
         style={{ position: "fixed" }}
-        className="-z-[2] flex-col grow-1 px-6 bg-black w-full h-max"
+        className="-z-[2] flex-col grow-1 px-6 bg-black w-full h-full"
       />
          
         <div className="flex flex-col items-center ">
