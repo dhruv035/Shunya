@@ -5,11 +5,11 @@ import useDimensions from "@/components/useDimensions";
 const Ecstatic = () => {
     const dimensions = useDimensions();
   return (
-    <div className="bg-black">
+    <div className="flex bg-black">
       <div className="z-[100]">
        <Menu />
        </div>
-      <main className=" flex-col -mt-6"> 
+      <main className=" flex-col -mt-6 bg-black"> 
       
         <div className="flex flex-col items-center bg-black">
         <Text className="text-[30px] md:text-[60px] text-amber-400 mt-[40px] md:mt-[20px] z-[11]">

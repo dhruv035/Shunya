@@ -59,15 +59,15 @@ const Home = () => {
   console.log("here", window.innerHeight);
 
   return (
-    <main className="flex-col bg-black ">
+    <main className="flex-col bg-black">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 2, delay: 0.5 }}
       >
         <Menu />
-        <div className="h-[400px] flex flex-row place-items-center">
-          <div className=" flex flex-col h-max w-full items-center self-start">
+        <div className="h-[400px] flex flex-row place-items-center bg-black h-max">
+          <div className=" flex flex-col h-max w-full items-center self-start bg-black">
             <Text className="text-greenDark text-[30px] mt-4 md:text-[80px] font-custom1 self-center z-[20]">
               Shunya Wellness
             </Text>
