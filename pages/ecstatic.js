@@ -5,11 +5,9 @@ import useDimensions from "@/components/useDimensions";
 const Ecstatic = () => {
     const dimensions = useDimensions();
   return (
-    <div className="flex bg-black">
-      <div className="z-[100]">
+    <div className="bg-black">
        <Menu />
-       </div>
-      <main className=" flex-col -mt-6 bg-black"> 
+      <main className=" flex-col -mt-6"> 
       
         <div className="flex flex-col items-center bg-black">
         <Text className="text-[30px] md:text-[60px] text-amber-400 mt-[40px] md:mt-[20px] z-[11]">
@@ -24,7 +22,7 @@ const Ecstatic = () => {
               muted
               loop
               style={{
-                opacity: 1,
+                opacity: 0.7,
                 width:(dimensions.height+80)*16/9,
                 height:dimensions.height+80,
                 top:0,
