@@ -10,7 +10,7 @@ const Ecstatic = () => {
       <main className=" flex-col -mt-6"> 
       
         <div className="flex flex-col items-center bg-black">
-        <Text className="text-[30px] md:text-[60px] text-amber-400 mt-[40px] md:mt-[20px]">
+        <Text className="text-[30px] md:text-[60px] text-amber-400 mt-[40px] md:mt-[20px] z-[11]">
             Ecstatic Dance
           </Text>
 
