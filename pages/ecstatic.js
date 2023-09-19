@@ -12,7 +12,6 @@ const Ecstatic = () => {
         style={{ position: "fixed" }}
         className="-z-[2] flex-col grow-1 px-6 bg-black w-full h-full"
       />
-         
         <div className="flex flex-col items-center ">
         <Text className="text-[30px] md:text-[60px] text-amber-400 mt-[40px] md:mt-[20px]">
             Ecstatic Dance

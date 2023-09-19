@@ -29,7 +29,7 @@ const Menu = () => {
   }
   return (
 
-    <div className="flex flex-row-reverse mr-6 mt-6">
+    <div className="flex flex-row-reverse pr-6 pt-6">
        <IconButton
           className="fixed"
           onClick={onOpen}
