@@ -82,14 +82,14 @@ const Home = () => {
               transition={{ duration: 0.5 }}
               src={"/images/banyan.jpg"}
               style={{
-                marginTop: "-85px",
+                marginTop: windowDimensions.width<700?"-150px":"-160px",
                 opacity: 1,
                 filter: "grayscale(100%)",
                 left: 0,
                 top: 0,
-                width: "100%",
+                width:(windowDimensions.height+80)*16/9,
                 objectFit: "cover",
-                height: windowDimensions.height > 700 ? "100vh" : "auto",
+                height:windowDimensions.height+80,
                 zIndex: -1,
               }}
             />
