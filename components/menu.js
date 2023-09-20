@@ -33,7 +33,7 @@ const Menu = () => {
        <IconButton
           className="fixed z-[20]"
           onClick={onOpen}
-          style={{ position: "fixed", background: "transparent", opacity:"0.3" }}
+          style={{ position: "fixed", background: "transparent", opacity:"0.7" }}
           aria-label="Drawer-Icon"
           icon={<HamburgerIcon boxSize={10} color="#C0D065" />}
         />

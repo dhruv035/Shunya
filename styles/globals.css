@@ -18,6 +18,11 @@
   src: url("/fonts/Titillium_Web/TitilliumWeb-Regular.ttf");
 }
 
+@font-face {
+  font-family: "Custom-3";
+  src: url("/fonts/Lobster/Lobster-Regular.ttf");
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;

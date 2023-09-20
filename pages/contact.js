@@ -58,7 +58,7 @@ const Contact = () => {
               type="number"
               variant="flushed"
               textColor="#fbbf24"
-              placeholder="Enter Name..."
+              placeholder="Contact No..."
               _placeholder={{ opacity: 0.2, color: "inherit" }}
             />
           </InputGroup>

@@ -1,22 +1,13 @@
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { Inter } from "next/font/google";
-import { delay, motion } from "framer-motion";
+import {  motion, useScroll, useMotionValueEvent, useTransform} from "framer-motion";
 import useDimensions from "@/components/useDimensions";
 const inter = Inter({ subsets: ["latin"] });
 import { background, useDisclosure } from "@chakra-ui/react";
 import { IconButton, Input, Button, Link, Text } from "@chakra-ui/react";
 import Menu from "@/components/menu";
-import {
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-} from "@chakra-ui/react";
-
+const logoTextClass = "text-[25px] my-2 w-[65vw] text-limeLight font-custom3 ";
 const Home = () => {
   const menuElements = [
     "Home",
@@ -25,21 +16,47 @@ const Home = () => {
     "Carnival",
     "Our Team",
   ];
+  const {scrollY} = useScroll();
+  const [tracker,setTracker] = useState(0)
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isMobile, setIsMobile] = useState(0);
   const btnRef = React.useRef();
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
+  const [scrolling, setScrolling]= useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const logoVariants={
+    initial:{opacity:0},
+    base:{opacity:1},
+    scrolled:{scale:0.2, opacity:0.6, x:-130,y:-275, transition:{duration:0.3}}
+  }
+
+  const textLeftVariants={
+    initial:{x:"-100%"},
+    base:{x:0},
+    scrolled:{x:"-100%", transform:{duration:0.3}}
+  }
+
+  const textRightVariants={
+    initial:{x:"+100%"},
+    base:{x:0},
+    scrolled:{x:"+100%", transform:{duration:0.3}}
+  }
+
+  useEffect(()=>{
+    console.log(scrollY)
+  },[scrollY])
+  /*useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 3000); // 5000 ms = 5 seconds
 
     return () => clearTimeout(timer);
-  }, []);
+  }, []);*/
+  const windowDimensions = useDimensions();
 
-  const windowDimensions= useDimensions();
-  
-
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setTracker(latest)
+  })
   if (isLoading) {
     return (
       <div className="fixed inset-0 z-10 h-screen bg-[#000000] flex items-center justify-center flex-col">
@@ -56,22 +73,19 @@ const Home = () => {
       </div>
     );
   }
-  console.log("here", window.innerHeight);
 
   return (
     <main className="flex-col bg-black">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
+        
         transition={{ duration: 2, delay: 0.5 }}
       >
         <Menu />
-        <div className="h-[400px] flex flex-row place-items-center bg-black h-max">
-          <div className=" flex flex-col h-max w-full items-center self-start bg-black">
-            <Text className="text-greenDark text-[30px] mt-4 md:text-[80px] font-custom1 self-center z-[20]">
-              Shunya Wellness
-            </Text>
-            <motion.img
+        <div className="flex flex-row place-items-center bg-black h-[100vh]">
+          <div className=" flex flex-col h-max w-[100vw] items-center self-start bg-black">
+            {<motion.img
               initial={{ opacity: 0.7 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
@@ -79,15 +93,105 @@ const Home = () => {
               style={{
                 marginTop: windowDimensions.width<700?"-150px":"-160px",
                 opacity: 1,
-                filter: "grayscale(100%)",
+                filter: "grayscale(100%) contrast(130%)",
                 left: 0,
                 top: 0,
                 width:(windowDimensions.height+80)*16/9,
                 objectFit: "cover",
-                height:windowDimensions.height+80,
+                height:windowDimensions.height+100,
                 zIndex: 10,
+                
+              }}
+            />}
+            <motion.img
+            
+              initial={tracker>0?"base":{opacity:0}}
+              animate={tracker>0?"scrolled":"base"}
+              variants={logoVariants}
+              transition={{ duration:0.1 }}
+              className="shunya-logo fixed mt-20"
+              src={"/images/shunyaLogo.png"}
+              style={{
+                opacity: 1,
+                marginTop:
+                  windowDimensions.width > windowDimensions.height
+                    ? (windowDimensions.height * 1) / 10
+                    : (windowDimensions.width * 4) / 10,
+                //filter: "hue-rotate(90deg) contrast(160%)",
+                
+                height:
+                  windowDimensions.width > windowDimensions.height
+                    ? (windowDimensions.height * 8) / 10
+                    : (windowDimensions.width * 8) / 10,
+                width:
+                  windowDimensions.width > windowDimensions.height
+                    ? (windowDimensions.height * 8) / 10
+                    : (windowDimensions.width * 8) / 10,
+                zIndex: 100,
               }}
             />
+            <div className="flex flex-col -mt-40 z-20 overflow-clip">
+              <motion.div
+                initial={"initial"}
+                animate={{ x: 0 }}
+                variants={textLeftVariants}
+                transition={{ duration: 0.3, delay: 1 }}
+                className={logoTextClass + "text-left"}
+              >
+                ECSTATIC DANCE
+              </motion.div>
+              <motion.div
+                initial={"initial"}
+                animate={tracker>0?"scrolled":"base"}
+                variants={textRightVariants}
+                transition={{ duration: 0.3, delay: 1.2 }}
+                className={logoTextClass + "text-right overflow-hidden"}
+              >
+                WELLNESS RETREAT
+              </motion.div>
+              <motion.div
+                initial={{ x: "-100%" }}
+                animate={{ x: 0 }}
+                variants={textLeftVariants}
+                transition={{ duration: 0.3, delay: 1.5 }}
+                className={logoTextClass}
+              >
+                ART SPACE
+              </motion.div>
+              
+            </div>
+            <Text className="text-greenLight relative text-[16px] md:text-[30px] mt-10 opacity-50 z-[100]">
+              Throughout human history, people have practiced some form of dance
+              as a way of altering one’s consciousness and connecting with
+              nature, other, and self. The modern day movement of ecstatic dance
+              brings us back to these ancient practices, with the influence of
+              Gabrielle Roth’s 5Rhythms practice, conscious dance movement
+              meditations, yoga, and somatic therapies flourishing today. It is
+              a free-form dance practice where participants can gather to dance
+              to music without the need of following the instructions of a
+              leader. In Ecstatic Dance the music is the leader and participants
+              are free to weave their way through the different soundscapes.
+              Throughout human history, people have practiced some form of dance
+              as a way of altering one’s consciousness and connecting with
+              nature, other, and self. The modern day movement of ecstatic dance
+              brings us back to these ancient practices, with the influence of
+              Gabrielle Roth’s 5Rhythms practice, conscious dance movement
+              meditations, yoga, and somatic therapies flourishing today. It is
+              a free-form dance practice where participants can gather to dance
+              to music without the need of following the instructions of a
+              leader. In Ecstatic Dance the music is the leader and participants
+              are free to weave their way through the different soundscapes.
+              Throughout human history, people have practiced some form of dance
+              as a way of altering one’s consciousness and connecting with
+              nature, other, and self. The modern day movement of ecstatic dance
+              brings us back to these ancient practices, with the influence of
+              Gabrielle Roth’s 5Rhythms practice, conscious dance movement
+              meditations, yoga, and somatic therapies flourishing today. It is
+              a free-form dance practice where participants can gather to dance
+              to music without the need of following the instructions of a
+              leader. In Ecstatic Dance the music is the leader and participants
+              are free to weave their way through the different soundscapes.
+            </Text>
             {
               //<Text className="text-greenDark text-[80px] font-custom2">Shunya Wellness</Text>
             }

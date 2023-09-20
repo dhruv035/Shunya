@@ -10,11 +10,11 @@ const Ecstatic = () => {
       <main className=" flex-col -mt-6"> 
       
         <div className="flex flex-col items-center bg-black">
-        <Text className="text-[30px] md:text-[60px] text-amber-400 mt-[40px] md:mt-[20px] z-[11]">
+        {/*<Text className="text-[30px] md:text-[60px] text-amber-400 mt-[40px] md:mt-[20px] z-[11]">
             Ecstatic Dance
-          </Text>
+  </Text>*/}
 
-          <div className=" flex overflow-hidden -mt-[140px] md:-mt-[180px]">
+          <div className=" flex overflow-hidden">
             
             <video
               className="z-[10]"
@@ -22,13 +22,13 @@ const Ecstatic = () => {
               muted
               loop
               style={{
+                filter: "hue-rotate(120deg)",
                 opacity: 0.7,
                 width:(dimensions.height+80)*16/9,
                 height:dimensions.height+80,
                 top:0,
                 left:0,
                 objectFit:"cover",
-                filter: "grayscale(70%)",
               }}
             >
               <source src="./videos/ecstatic-bg.mp4" />
