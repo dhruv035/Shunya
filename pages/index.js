@@ -26,9 +26,9 @@ const Home = () => {
   const [scrolled, setScrolled] = useState(false)
 
   const logoVariants={
-    initial:{opacity:0},
-    base:{opacity:1},
-    scrolled:{scale:0.2, opacity:0.6, x:-130,y:-275, transition:{duration:1}}
+    initial:{opacity:0, transition:{duration:0.5}},
+    base:{opacity:1, transition:{duration:0.5}},
+    scrolled:{scale:0.2, opacity:0.6, x:-130,y:-275, transition:{duration:0.5}}
   }
 
   const textLeftVariants={
@@ -108,10 +108,10 @@ const Home = () => {
             />}
             <motion.img
             
-              initial={tracker>0?"base":{opacity:0}}
+              initial={{opacity:0}}
               animate={tracker>0?"scrolled":"base"}
               variants={logoVariants}
-              transition={{ duration:0.1 }}
+              transition={{ duration:0.5 }}
               className="shunya-logo fixed mt-20"
               src={"/images/shunyaLogo.png"}
               style={{
