@@ -28,7 +28,7 @@ const Home = () => {
   const logoVariants={
     initial:{opacity:0, transition:{duration:0.5}},
     base:{opacity:1, transition:{duration:0.5}},
-    scrolled:{scale:0.2, opacity:0.6, x:-130,y:-275, transition:{duration:0.5}}
+    scrolled:{scale:0.2, opacity:0.6, x:-130,y:-265, transition:{duration:0.5}}
   }
 
   const textLeftVariants={
