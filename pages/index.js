@@ -23,23 +23,24 @@ const Home = () => {
   const btnRef = React.useRef();
   const [scrolling, setScrolling]= useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [scrolled, setScrolled] = useState(false)
 
   const logoVariants={
     initial:{opacity:0},
     base:{opacity:1},
-    scrolled:{scale:0.2, opacity:0.6, x:-130,y:-275, transition:{duration:0.3}}
+    scrolled:{scale:0.2, opacity:0.6, x:-130,y:-275, transition:{duration:1}}
   }
 
   const textLeftVariants={
     initial:{x:"-100%"},
     base:{x:0},
-    scrolled:{x:"-100%", transform:{duration:0.3}}
+    scrolled:{x:"-100%", transition:{duration:0.3}}
   }
 
   const textRightVariants={
     initial:{x:"+100%"},
     base:{x:0},
-    scrolled:{x:"+100%", transform:{duration:0.3}}
+    scrolled:{x:"+100%", transition:{duration:0.3}}
   }
 
   useEffect(()=>{
@@ -55,6 +56,8 @@ const Home = () => {
   const windowDimensions = useDimensions();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
+    if(!scrolled)
+    setScrolled(true)
     setTracker(latest)
   })
   if (isLoading) {
@@ -118,7 +121,6 @@ const Home = () => {
                     ? (windowDimensions.height * 1) / 10
                     : (windowDimensions.width * 4) / 10,
                 //filter: "hue-rotate(90deg) contrast(160%)",
-                
                 height:
                   windowDimensions.width > windowDimensions.height
                     ? (windowDimensions.height * 8) / 10
@@ -132,28 +134,28 @@ const Home = () => {
             />
             <div className="flex flex-col -mt-40 z-20 overflow-clip">
               <motion.div
-                initial={"initial"}
-                animate={{ x: 0 }}
+                 initial={tracker>0?"base":"initial"}
+                 animate={tracker>0?"scrolled":"base"}
                 variants={textLeftVariants}
-                transition={{ duration: 0.3, delay: 1 }}
+                transition={{ duration: 0.3, delay: scrolled?0:1 }}
                 className={logoTextClass + "text-left"}
               >
                 ECSTATIC DANCE
               </motion.div>
               <motion.div
-                initial={"initial"}
+                initial={tracker>0?"base":"initial"}
                 animate={tracker>0?"scrolled":"base"}
                 variants={textRightVariants}
-                transition={{ duration: 0.3, delay: 1.2 }}
+                transition={{ duration: 0.3, delay: scrolled?0:1.2 }}
                 className={logoTextClass + "text-right overflow-hidden"}
               >
                 WELLNESS RETREAT
               </motion.div>
               <motion.div
-                initial={{ x: "-100%" }}
-                animate={{ x: 0 }}
+                 initial={tracker>0?"base":"initial"}
+                 animate={tracker>0?"scrolled":"base"}
                 variants={textLeftVariants}
-                transition={{ duration: 0.3, delay: 1.5 }}
+                transition={{ duration: 0.3, delay: scrolled?0:1.5 }}
                 className={logoTextClass}
               >
                 ART SPACE
