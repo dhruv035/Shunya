@@ -83,7 +83,7 @@ const Ecstatic = () => {
             initial={{ opacity: 0 }}
             animate={isInView2 ? "scrolled" : "base"}
             variants={variantsTextRight}
-            className="w-3/4  ml-10 md:ml-20 self-start z-[20] mt-[40px] mb-[200px]">
+            className="w-3/4  ml-10 md:ml-20 self-start z-[20] mt-[40px] mb-[20px]">
           <Text className="text-greenDark text-center text-[32px]">
               The Team<br></br><br></br>
             </Text>
@@ -103,12 +103,15 @@ const Ecstatic = () => {
                 }}
               />
               <Text className="text-greenLight relative text-[16px] text-center md:text-[30px] mt-2 z-[100]">Marsy Anna</Text>
+              <Text className="text-greenLight relative text-[24px] md:text-[30px] mt-6 mb-10 z-[100]">
+              Here is some text about the artist. The text is not a lot. It is enough to give details
+            </Text>
             </motion.div >
             <motion.div  ref={ref3}
             initial={{ opacity: 0 }}
             animate={isInView3 ? "scrolled" : "base"}
             variants={variantsTextLeft}
-            className="w-3/4  ml-10 md:ml-20 self-start z-[20] mt-[40px] mb-[200px]">
+            className="w-3/4  ml-10 md:ml-20 self-start z-[20] mt-[40px] mb-[20px]">
           
             <motion.img
                 initial={{ opacity: 0.7 }}
@@ -126,12 +129,15 @@ const Ecstatic = () => {
                 }}
               />
               <Text className="text-greenLight relative text-[16px] text-center md:text-[30px] mt-2 z-[100]">Marsy Anna</Text>
+              <Text className="text-greenLight relative text-[24px] md:text-[30px] mt-6 mb-10 z-[100]">
+              Here is some text about the artist. The text is not a lot. It is enough to give details
+            </Text>
             </motion.div >
             <motion.div  ref={ref4}
             initial={{ opacity: 0 }}
             animate={isInView4 ? "scrolled" : "base"}
             variants={variantsTextRight}
-            className="w-3/4  ml-10 md:ml-20 self-start z-[20] mt-[40px] mb-[200px]">
+            className="w-3/4  ml-10 md:ml-20 self-start z-[20] mt-[40px] mb-[20px]">
           
             <motion.img
                 initial={{ opacity: 0.7 }}
@@ -149,6 +155,9 @@ const Ecstatic = () => {
                 }}
               />
               <Text className="text-greenLight relative text-[16px] text-center md:text-[30px] mt-2 z-[100]">Marsy Anna</Text>
+              <Text className="text-greenLight relative text-[24px] md:text-[30px] mt-6 mb-10 z-[100]">
+              Here is some text about the artist. The text is not a lot. It is enough to give details
+            </Text>
             </motion.div >
           
         </div>
