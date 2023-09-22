@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Menu from "@/components/menu";
 import { Text } from "@chakra-ui/react";
+
+
 const Carnival = () => {
+  useEffect(() => {
+    async function data() {
+      const response = await fetch(
+        "/api/calendar"
+      );
+      console.log(await response.json())
+    }
+    data();
+  }, []);
   return (
     <div>
       <main className="flex-col grow-1 px-6 py-10 bg-black w-full h-[100vh]">

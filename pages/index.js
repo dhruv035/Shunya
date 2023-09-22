@@ -1,11 +1,12 @@
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Inter } from "next/font/google";
 import {
   motion,
   useScroll,
   useMotionValueEvent,
   useTransform,
+  useInView
 } from "framer-motion";
 import useDimensions from "@/components/useDimensions";
 const inter = Inter({ subsets: ["latin"] });
@@ -14,14 +15,6 @@ import { IconButton, Input, Button, Link, Text } from "@chakra-ui/react";
 import Menu from "@/components/menu";
 const logoTextClass = "text-[25px] my-2 w-[65vw] text-limeLight font-custom3 ";
 const Home = () => {
-  const menuElements = [
-    "Home",
-    "Ecstatic Dance",
-    "Workshops",
-    "Carnival",
-    "Our Team",
-  ];
-
   const windowDimensions = useDimensions();
   const { scrollY } = useScroll();
   const [tracker, setTracker] = useState(0);
@@ -31,18 +24,33 @@ const Home = () => {
   const [scrolling, setScrolling] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [scrolled, setScrolled] = useState(false);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { amount: 0.6 });
 
-  const logoScale = 0.15
+  const logoScale = 0.15;
   const logoVariants = {
     initial: { opacity: 0, transition: { duration: 0.5 } },
     base: { opacity: 1, transition: { duration: 0.5 } },
     scrolled: {
       scale: logoScale,
       opacity: 0.6,
-      x: windowDimensions.height>windowDimensions.width?(-windowDimensions.width*(5-4*logoScale)/10+32):-265,
-      y: windowDimensions.height>windowDimensions.width?(-windowDimensions.height/6-windowDimensions.width*2/5*(1-logoScale)+20):-265,
+      x:
+        windowDimensions.height > windowDimensions.width
+          ? (-windowDimensions.width * (5 - 4 * logoScale)) / 10 + 32
+          : -265,
+      y:
+        windowDimensions.height > windowDimensions.width
+          ? -windowDimensions.height / 6 -
+            ((windowDimensions.width * 2) / 5) * (1 - logoScale) +
+            20
+          : -265,
       transition: { duration: 0.5 },
     },
+  };
+
+  const variantsTextLeft = {
+    base: { opacity: 0, x: -100, transition: { duration: 1 } },
+    scrolled: { opacity: 1, x: 0, transition: { duration: 1 } },
   };
 
   const textLeftVariants = {
@@ -67,7 +75,6 @@ const Home = () => {
 
     return () => clearTimeout(timer);
   }, []);
-  
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (!scrolled) setScrolled(true);
@@ -132,7 +139,7 @@ const Home = () => {
                   windowDimensions.width > windowDimensions.height
                     ? windowDimensions.width / 6
                     : windowDimensions.height / 6,
-                
+
                 //filter: "hue-rotate(90deg) contrast(160%)",
                 height:
                   windowDimensions.width > windowDimensions.height
@@ -174,38 +181,24 @@ const Home = () => {
                 ART SPACE
               </motion.div>
             </div>
-            <Text className="text-greenLight relative text-[16px] md:text-[30px] mt-10 opacity-50 z-[100]">
-              Throughout human history, people have practiced some form of dance
-              as a way of altering one’s consciousness and connecting with
-              nature, other, and self. The modern day movement of ecstatic dance
-              brings us back to these ancient practices, with the influence of
-              Gabrielle Roth’s 5Rhythms practice, conscious dance movement
-              meditations, yoga, and somatic therapies flourishing today. It is
-              a free-form dance practice where participants can gather to dance
-              to music without the need of following the instructions of a
-              leader. In Ecstatic Dance the music is the leader and participants
-              are free to weave their way through the different soundscapes.
-              Throughout human history, people have practiced some form of dance
-              as a way of altering one’s consciousness and connecting with
-              nature, other, and self. The modern day movement of ecstatic dance
-              brings us back to these ancient practices, with the influence of
-              Gabrielle Roth’s 5Rhythms practice, conscious dance movement
-              meditations, yoga, and somatic therapies flourishing today. It is
-              a free-form dance practice where participants can gather to dance
-              to music without the need of following the instructions of a
-              leader. In Ecstatic Dance the music is the leader and participants
-              are free to weave their way through the different soundscapes.
-              Throughout human history, people have practiced some form of dance
-              as a way of altering one’s consciousness and connecting with
-              nature, other, and self. The modern day movement of ecstatic dance
-              brings us back to these ancient practices, with the influence of
-              Gabrielle Roth’s 5Rhythms practice, conscious dance movement
-              meditations, yoga, and somatic therapies flourishing today. It is
-              a free-form dance practice where participants can gather to dance
-              to music without the need of following the instructions of a
-              leader. In Ecstatic Dance the music is the leader and participants
-              are free to weave their way through the different soundscapes.
-            </Text>
+            <motion.div
+              className="flex flex-col w-3/4 "
+              ref={ref}
+              initial={{ opacity: 1 }}
+              animate={isInView ? "scrolled" : "base"}
+              variants={variantsTextLeft}
+            >
+              <Text className="text-greenDark text-left text-[32px] mt-[50px]">
+                Shunya Wellness
+              </Text>
+              <Text className="text-greenLight relative text-[24px] md:text-[30px] mt-6 opacity-50 z-[100]">
+                Throughout human history, people have practiced some form of
+                dance as a way of altering one’s consciousness and connecting
+                with nature, other, and self. The modern day movement of
+                ecstatic dance brings us back to these ancient practices, with
+                the influence of Gabrielle Roth’s 5Rhythms practice.
+              </Text>
+            </motion.div>
             {
               //<Text className="text-greenDark text-[80px] font-custom2">Shunya Wellness</Text>
             }

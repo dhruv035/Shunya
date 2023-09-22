@@ -28,7 +28,6 @@ const Menu = () => {
     "Workshops":"workshops",
     "Carnival":"carnival",
     "Stay":"stay",
-    "Our Team":"team",
   }
   return (
 
