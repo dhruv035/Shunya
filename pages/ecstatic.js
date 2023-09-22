@@ -94,7 +94,7 @@ const Ecstatic = () => {
               initial={{ opacity: 0.7 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
-              src={"/images/team/marsy.jpeg"}
+              src={"/images/team/gary.jpg"}
               style={{
                 opacity: 1,
                 filter: "grayscale(100%) contrast(130%)",
@@ -106,7 +106,7 @@ const Ecstatic = () => {
               }}
             />
             <Text className="text-greenLight relative text-[16px] text-center md:text-[30px] mt-2 z-[100]">
-              Marsy Anna
+              Gary Gagarin
             </Text>
             <Text className="text-greenLight relative text-[24px] md:text-[30px] mt-6 mb-10 z-[100]">
               Here is some text about the artist. The text is not a lot. It is

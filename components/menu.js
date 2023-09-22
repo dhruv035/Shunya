@@ -21,12 +21,13 @@ const Menu = () => {
   const {width,height}=useDimensions()
   const logoScale = 0.15
   const menuElements = {
-  
-  
+
     "Home":"index",
     "Ecstatic Dance":"ecstatic",
     "Workshops":"workshops",
     "Carnival":"carnival",
+    "Events":"events",
+    "Gallery": "gallery",
     "Stay":"stay",
   }
   return (
