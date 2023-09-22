@@ -12,13 +12,16 @@ import {
   DrawerContent,
   DrawerCloseButton,
 } from "@chakra-ui/react";
+import useDimensions from "./useDimensions";
 
 const Menu = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
   const router = useRouter();
+  const {width,height}=useDimensions()
+  const logoScale = 0.15
   const menuElements = {
-
+  
   
     "Home":"index",
     "Ecstatic Dance":"ecstatic",
@@ -29,13 +32,13 @@ const Menu = () => {
   }
   return (
 
-    <div className="flex flex-row-reverse pr-6 pt-6">
+    <div className="flex flex-row-reverse ">
        <IconButton
-          className="fixed z-[20]"
+          className="fixed z-[20] mr-8"
           onClick={onOpen}
-          style={{ position: "fixed", background: "transparent", opacity:"0.7" }}
+          style={{ position: "fixed", background: "transparent", opacity:"0.7", marginTop: width*4*logoScale/10 }}
           aria-label="Drawer-Icon"
-          icon={<HamburgerIcon boxSize={10} color="#C0D065" />}
+          icon={<HamburgerIcon boxSize={`${width<810?width/15:50}px`} color="#C0D065" />}
         />
     <Drawer
       isOpen={isOpen}
