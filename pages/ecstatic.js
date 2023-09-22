@@ -11,11 +11,17 @@ const Ecstatic = () => {
   const [tracker, setTracker] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const ref = useRef(null);
-  const isInView = useInView(ref, { amount: 0.6});
+  const isInView = useInView(ref, { amount: 0.7});
+  const ref2 = useRef(null);
+  const isInView2 = useInView(ref2, { amount: 0.75});
 
-  const variantsText = {
-    base: { opacity: 0, y: 0, transition: { duration: 1 } },
-    scrolled: { opacity: 1, y: -100, transition: { duration: 1 } },
+  const variantsTextLeft = {
+    base: { opacity: 0, x: -100, transition: { duration: 1 } },
+    scrolled: { opacity: 1, x: 0, transition: { duration: 1 } },
+  };
+  const variantsTextRight = {
+    base: { opacity: 0, x: +100, transition: { duration: 1 } },
+    scrolled: { opacity: 1, x: 0, transition: { duration: 1 } },
   };
 
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -54,7 +60,7 @@ const Ecstatic = () => {
             ref={ref}
             initial={{ opacity: 0 }}
             animate={isInView ? "scrolled" : "base"}
-            variants={variantsText}
+            variants={variantsTextLeft}
             className="w-3/4  ml-10 md:ml-20 self-start z-[20]"
           >
             <Text className="text-greenDark text-[32px] mt-[150px]">
@@ -68,38 +74,34 @@ const Ecstatic = () => {
               Gabrielle Roth’s 5Rhythms practice
             </Text>
           </motion.div>
-          <motion.div className="w-3/4  ml-10 md:ml-20 self-start z-[20]">
-          <Text className="text-greenDark text-[32px] mt-[150px]">
-              The Team
+
+          <motion.div  ref={ref2}
+            initial={{ opacity: 0 }}
+            animate={isInView2 ? "scrolled" : "base"}
+            variants={variantsTextRight}
+            className="w-3/4  ml-10 md:ml-20 self-start z-[20] mt-[40px] mb-[200px]">
+          <Text className="text-greenDark text-center text-[32px]">
+              The Team<br></br><br></br>
             </Text>
-            <Text className="text-greenDark text-[32px] mt-[150px]">
-              The Team
-            </Text>
-            <Text className="text-greenDark text-[32px] mt-[150px]">
-              The Team
-            </Text>
-            <Text className="text-greenDark text-[32px] mt-[150px]">
-              The Team
-            </Text>
-            <Text className="text-greenDark text-[32px] mt-[150px]">
-              The Team
-            </Text>
-            <Text className="text-greenDark text-[32px] mt-[150px]">
-              The Team
-            </Text>
-            <Text className="text-greenDark text-[32px] mt-[150px]">
-              The Team
-            </Text>
-            <Text className="text-greenDark text-[32px] mt-[150px]">
-              The Team
-            </Text>
-            <Text className="text-greenDark text-[32px] mt-[150px]">
-              The Team
-            </Text>
-            <Text className="text-greenDark text-[32px] mt-[150px]">
-              The Team
-            </Text>
-          </motion.div >
+            <motion.img
+                initial={{ opacity: 0.7 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                src={"/images/team/marsy.jpeg"}
+                style={{
+                  opacity: 1,
+                  filter: "grayscale(100%) contrast(130%)",
+                  left: 0,
+                  top: 0,
+                  width: (dimensions.width),
+                  zIndex: 10,
+                  objectFit:"cover"
+                }}
+              />
+              <Text className="text-greenLight relative text-[16px] text-center md:text-[30px] mt-2 z-[100]">Marsy Anna</Text>
+            </motion.div >
+           
+          
         </div>
       </main>
     </div>
