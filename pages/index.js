@@ -25,7 +25,7 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const ref = useRef(null);
-  const isInView = useInView(ref, { amount: 0.6 });
+  const isInView = useInView(ref, { amount: 0.55 });
 
   const logoScale = 0.15;
   const logoVariants = {
