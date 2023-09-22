@@ -34,7 +34,7 @@ const Menu = () => {
 
     <div className="flex flex-row-reverse ">
        <IconButton
-          className="fixed z-[20] mr-8"
+          className="fixed z-[100] mr-8"
           onClick={onOpen}
           style={{ position: "fixed", background: "transparent", opacity:"0.7", marginTop: width*4*logoScale/10 }}
           aria-label="Drawer-Icon"
