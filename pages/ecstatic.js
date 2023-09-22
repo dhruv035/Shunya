@@ -100,7 +100,52 @@ const Ecstatic = () => {
               />
               <Text className="text-greenLight relative text-[16px] text-center md:text-[30px] mt-2 z-[100]">Marsy Anna</Text>
             </motion.div >
-           
+            <motion.div  ref={ref2}
+            initial={{ opacity: 0 }}
+            animate={isInView2 ? "scrolled" : "base"}
+            variants={variantsTextLeft}
+            className="w-3/4  ml-10 md:ml-20 self-start z-[20] mt-[40px] mb-[200px]">
+          
+            <motion.img
+                initial={{ opacity: 0.7 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                src={"/images/team/marsy.jpeg"}
+                style={{
+                  opacity: 1,
+                  filter: "grayscale(100%) contrast(130%)",
+                  left: 0,
+                  top: 0,
+                  width: (dimensions.width),
+                  zIndex: 10,
+                  objectFit:"cover"
+                }}
+              />
+              <Text className="text-greenLight relative text-[16px] text-center md:text-[30px] mt-2 z-[100]">Marsy Anna</Text>
+            </motion.div >
+            <motion.div  ref={ref2}
+            initial={{ opacity: 0 }}
+            animate={isInView2 ? "scrolled" : "base"}
+            variants={variantsTextRight}
+            className="w-3/4  ml-10 md:ml-20 self-start z-[20] mt-[40px] mb-[200px]">
+          
+            <motion.img
+                initial={{ opacity: 0.7 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                src={"/images/team/marsy.jpeg"}
+                style={{
+                  opacity: 1,
+                  filter: "grayscale(100%) contrast(130%)",
+                  left: 0,
+                  top: 0,
+                  width: (dimensions.width),
+                  zIndex: 10,
+                  objectFit:"cover"
+                }}
+              />
+              <Text className="text-greenLight relative text-[16px] text-center md:text-[30px] mt-2 z-[100]">Marsy Anna</Text>
+            </motion.div >
           
         </div>
       </main>
