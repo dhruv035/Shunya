@@ -46,15 +46,15 @@ const Home = () => {
   };
 
   const textLeftVariants = {
-    initial: { x: "-100%" },
+    initial: { x: "-150%" },
     base: { x: 0 },
-    scrolled: { x: "-100%", transition: { duration: 0.3 } },
+    scrolled: { x: "-150%", transition: { duration: 0.6 } },
   };
 
   const textRightVariants = {
-    initial: { x: "+100%" },
+    initial: { x: "+150%" },
     base: { x: 0 },
-    scrolled: { x: "+100%", transition: { duration: 0.3 } },
+    scrolled: { x: "+150%", transition: { duration: 0.6 } },
   };
 
   useEffect(() => {
@@ -150,7 +150,7 @@ const Home = () => {
                 initial={tracker > 0 ? "base" : "initial"}
                 animate={tracker > 0 ? "scrolled" : "base"}
                 variants={textLeftVariants}
-                transition={{ duration: 0.3, delay: scrolled ? 0 : 1 }}
+                transition={{ duration: 0.5, delay: scrolled ? 0 : 1 }}
                 className={logoTextClass + "text-left"}
               >
                 ECSTATIC DANCE
@@ -159,7 +159,7 @@ const Home = () => {
                 initial={tracker > 0 ? "base" : "initial"}
                 animate={tracker > 0 ? "scrolled" : "base"}
                 variants={textRightVariants}
-                transition={{ duration: 0.3, delay: scrolled ? 0 : 1.2 }}
+                transition={{ duration: 0.5, delay: scrolled ? 0 : 1.2 }}
                 className={logoTextClass + "text-right overflow-hidden"}
               >
                 WELLNESS RETREAT
@@ -168,7 +168,7 @@ const Home = () => {
                 initial={tracker > 0 ? "base" : "initial"}
                 animate={tracker > 0 ? "scrolled" : "base"}
                 variants={textLeftVariants}
-                transition={{ duration: 0.3, delay: scrolled ? 0 : 1.5 }}
+                transition={{ duration: 0.5, delay: scrolled ? 0 : 1.5 }}
                 className={logoTextClass}
               >
                 ART SPACE
