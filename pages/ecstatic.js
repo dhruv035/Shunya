@@ -30,8 +30,8 @@ const Ecstatic = () => {
   return (
     <div className="bg-black">
       <Menu />
-      <main className=" flex-col -mt-6">
-        <div className="flex flex-col items-center bg-black">
+      <main className=" flex-col -mt-6 overflow-clip">
+        <div className="flex flex-col items-center overflow-clip bg-black">
           {/*<Text className="text-[30px] md:text-[60px] text-amber-400 mt-[40px] md:mt-[20px] z-[11]">
             Ecstatic Dance
   </Text>*/}
