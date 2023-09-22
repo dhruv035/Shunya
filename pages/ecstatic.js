@@ -11,9 +11,13 @@ const Ecstatic = () => {
   const [tracker, setTracker] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const ref = useRef(null);
-  const isInView = useInView(ref, { amount: 0.7});
+  const isInView = useInView(ref, { amount: 0.6});
   const ref2 = useRef(null);
-  const isInView2 = useInView(ref2, { amount: 0.75});
+  const isInView2 = useInView(ref2, { amount: 0.6});
+  const ref3 = useRef(null);
+  const isInView3 = useInView(ref3, { amount: 0.6});
+  const ref4 = useRef(null);
+  const isInView4 = useInView(ref4, { amount: 0.6});
 
   const variantsTextLeft = {
     base: { opacity: 0, x: -100, transition: { duration: 1 } },
@@ -100,9 +104,9 @@ const Ecstatic = () => {
               />
               <Text className="text-greenLight relative text-[16px] text-center md:text-[30px] mt-2 z-[100]">Marsy Anna</Text>
             </motion.div >
-            <motion.div  ref={ref2}
+            <motion.div  ref={ref3}
             initial={{ opacity: 0 }}
-            animate={isInView2 ? "scrolled" : "base"}
+            animate={isInView3 ? "scrolled" : "base"}
             variants={variantsTextLeft}
             className="w-3/4  ml-10 md:ml-20 self-start z-[20] mt-[40px] mb-[200px]">
           
@@ -123,9 +127,9 @@ const Ecstatic = () => {
               />
               <Text className="text-greenLight relative text-[16px] text-center md:text-[30px] mt-2 z-[100]">Marsy Anna</Text>
             </motion.div >
-            <motion.div  ref={ref2}
+            <motion.div  ref={ref4}
             initial={{ opacity: 0 }}
-            animate={isInView2 ? "scrolled" : "base"}
+            animate={isInView4 ? "scrolled" : "base"}
             variants={variantsTextRight}
             className="w-3/4  ml-10 md:ml-20 self-start z-[20] mt-[40px] mb-[200px]">
           
