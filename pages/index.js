@@ -25,7 +25,7 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const ref = useRef(null);
-  const isInView = useInView(ref, { amount: 0.55 });
+  const isInView = useInView(ref, { amount: 0.5 });
 
   const logoScale = 0.15;
   const logoVariants = {
@@ -198,7 +198,34 @@ const Home = () => {
                 ecstatic dance brings us back to these ancient practices, with
                 the influence of Gabrielle Roth’s 5Rhythms practice.
               </Text>
+              <Text className="text-greenLight relative text-[24px] md:text-[30px] mt-6 opacity-50 z-[100]">
+                Throughout human history, people have practiced some form of
+                dance as a way of altering one’s consciousness and connecting
+                with nature, other, and self. The modern day movement of
+                ecstatic dance brings us back to these ancient practices, with
+                the influence of Gabrielle Roth’s 5Rhythms practice.
+              </Text>
+              <Text className="text-greenLight relative text-[24px] md:text-[30px] mt-6 opacity-50 z-[100]">
+                Throughout human history, people have practiced some form of
+                dance as a way of altering one’s consciousness and connecting
+                with nature, other, and self. The modern day movement of
+                ecstatic dance brings us back to these ancient practices, with
+                the influence of Gabrielle Roth’s 5Rhythms practice.
+              </Text>
+              <Text className="text-greenLight relative text-[24px] md:text-[30px] mt-6 opacity-50 z-[100]">
+                Throughout human history, people have practiced some form of
+                dance as a way of altering one’s consciousness and connecting
+                with nature, other, and self. The modern day movement of
+                ecstatic dance brings us back to these ancient practices, with
+                the influence of Gabrielle Roth’s 5Rhythms practice.
+              </Text>
             </motion.div>
+            <Text className="text-greenDark text-left text-[32px] mt-[50px]">
+                Shunya Wellness
+              </Text>
+              <Text className="text-greenDark text-left text-[32px] mt-[50px]">
+                Shunya Wellness
+              </Text>
             {
               //<Text className="text-greenDark text-[80px] font-custom2">Shunya Wellness</Text>
             }
