@@ -189,9 +189,8 @@ const Home = () => {
                 />
               </div>
               <div
-                style={{marginTop:windowDimensions.height*-1}}
                 className=
-                  "flex flex-col self-center w-3/4"
+                  "flex flex-col self-center w-3/4 -mt-[800px]"
               >
                 <motion.div
                   initial={{ opacity: 0 }}
