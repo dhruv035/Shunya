@@ -17,13 +17,20 @@ const Home = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { amount: 0.2 });
   const ref2 = useRef(null);
-  const isInView2 = useInView(ref2, { amount: 0.2});
+  const isInView2 = useInView(ref2, { amount: 0.2 });
   const ref3 = useRef(null);
   const isInView3 = useInView(ref3, { amount: 0.2 });
   const ref4 = useRef(null);
   const isInView4 = useInView(ref4, { amount: 0.2 });
   const ref5 = useRef(null);
   const isInView5 = useInView(ref5, { amount: 0.2 });
+  const ref6 = useRef(null);
+  const isInView6 = useInView(ref6, {
+    amount: 0.5,
+    margin: "-200px 100px 100px 100px",
+  });
+  const [delay, setDelay] = useState(1.2);
+
   useEffect(() => {
     if (Math.abs(dimensions.height - windowDimensions.height) > 100)
       setWindowDimensions(dimensions);
@@ -60,20 +67,28 @@ const Home = () => {
     scrolled: { opacity: 1, x: 0, transition: { duration: 1 } },
   };
 
-  const textLeftVariants = {
-    base: { opacity: 1, y: 0 },
-    scrolled: { opacity: 0, y: 40 },
+  var textLeftVariants = {
+    base: { opacity: 1, y: 0, transition: { duration: 0.6, delay: delay } },
+    scrolled: { opacity: 0, y: +40, transition: { duration: 0.6, delay: 0 } },
   };
 
-  const textRightVariants = {
-    base: { opacity: 1, y: 0 },
-    scrolled: { opacity: 0, y: +40 },
+  var textRightVariants = {
+    base: { opacity: 1, y: 0, transition: { duration: 0.6, delay: delay } },
+    scrolled: { opacity: 0, y: +40, transition: { duration: 0.6, delay: 0 } },
   };
+
   useMotionValueEvent(scrollY, "change", (latest) => {
-    if (!scrolled) setScrolled(true);
-    if (tracker && !latest) setTracker(false);
-    else if (!tracker && latest) setTracker(true);
+    setTracker(latest);
   });
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDelay(0);
+    }, 1000); // 5000 ms = 5 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <main className="flex-col bg-black">
       <motion.div
@@ -108,7 +123,7 @@ const Home = () => {
             }
             <motion.img
               initial={{ opacity: 0 }}
-              animate={tracker ? "scrolled" : "base"}
+              animate={tracker > 0 ? "scrolled" : "base"}
               variants={logoVariants}
               transition={{ duration: 0.5 }}
               className="shunya-logo fixed"
@@ -133,6 +148,7 @@ const Home = () => {
               }}
             />
             <div
+              ref={ref6}
               style={{
                 top:
                   windowDimensions.width > windowDimensions.height
@@ -145,9 +161,8 @@ const Home = () => {
             >
               <motion.div
                 initial={"scrolled"}
-                animate={!isInView && isInView2 ? "scrolled" : "base"}
+                animate={!isInView6 ? "scrolled" : "base"}
                 variants={textLeftVariants}
-                transition={{ duration: 0.6, delay: scrolled ? 0 : 1 }}
                 style={{
                   marginTop: 600,
                 }}
@@ -157,18 +172,18 @@ const Home = () => {
               </motion.div>
               <motion.div
                 initial={"scrolled"}
-                animate={!isInView && isInView2 ? "scrolled" : "base"}
+                animate={!isInView6 ? "scrolled" : "base"}
                 variants={textRightVariants}
-                transition={{ duration: 0.6, delay: scrolled ? 0 : 1 }}
+                transition={{ duration: 0.6, delay: 1 }}
                 className={logoTextClass + "text-right overflow-hidden"}
               >
                 WELLNESS RETREAT
               </motion.div>
               <motion.div
                 initial={"scrolled"}
-                animate={!isInView && isInView2? "scrolled" : "base"}
+                animate={!isInView6 ? "scrolled" : "base"}
                 variants={textLeftVariants}
-                transition={{ duration: 0.6, delay: scrolled ? 0 : 1 }}
+                transition={{ duration: 0.6, delay: 1 }}
                 className={logoTextClass}
               >
                 ART SPACE
@@ -227,11 +242,11 @@ const Home = () => {
                   <i className="text-gold2 font-custom2 font-black">
                     Shunya Wellness{" "}
                   </i>
-                   Shunya Wellness,
-                  nestled within a jungle, attracts people worldwide. Nomads,
-                  travelers, musicians, and dancers gather beneath the starry
-                  skies around a towering Banyan tree. It&apos;s a unique destination
-                  where a global community forms, uniting under nature&apos;s canopy.
+                  Shunya Wellness, nestled within a jungle, attracts people
+                  worldwide. Nomads, travelers, musicians, and dancers gather
+                  beneath the starry skies around a towering Banyan tree.
+                  It&apos;s a unique destination where a global community forms,
+                  uniting under nature&apos;s canopy.
                   <br></br>
                 </motion.div>
               </div>
@@ -286,8 +301,8 @@ const Home = () => {
                   }
                   className="text-limeDark relative text-[6.8vw] mt-10 md:text-[30px] font-custom2 opacity-70 z-[100]"
                 >
-                  Since 2021, we&apos;ve been the heart of Ecstatic Dance in Goa,
-                  hosting bi-weekly dance sessions with acclaimed DJs from
+                  Since 2021, we&apos;ve been the heart of Ecstatic Dance in
+                  Goa, hosting bi-weekly dance sessions with acclaimed DJs from
                   across the globe. Our vibrant community welcomes all to join
                   in the rhythmic celebration. In addition to the dance floor,
                   we offer a delightful vegetarian cafe and a serene tea
