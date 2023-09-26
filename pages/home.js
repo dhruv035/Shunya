@@ -89,8 +89,8 @@ const Home = () => {
         transition={{ duration: 2, delay: 0.5 }}
       >
         <Menu />
-        <div className="flex flex-row place-items-center bg-black h-[100vh]">
-          <div className=" flex flex-col h-max w-[100vw] items-center self-start overflow-clip bg-black">
+        <div className="flex flex-row place-items-center bg-black ">
+          <div className=" flex flex-col  w-[100vw] items-center self-start overflow-clip bg-black">
             {
               <motion.img
                 ref={ref}
@@ -104,9 +104,11 @@ const Home = () => {
                   filter: " contrast(120%)",
                   left: 0,
                   top: 0,
-                  width: ((windowDimensions.height + 80) * 16) / 9,
                   objectFit: "cover",
-                  height: windowDimensions.height + 100,
+                  height:
+                    windowDimensions.width < 700
+                      ? "835px"
+                      : windowDimensions.height + 100,
                   zIndex: 10,
                 }}
               />
@@ -137,7 +139,15 @@ const Home = () => {
                 zIndex: 100,
               }}
             />
-            <div className="flex flex-col -mt-[340px] z-20 ">
+            <div
+              style={{
+                top:
+                  windowDimensions.width > windowDimensions.height
+                    ? windowDimensions.width / 6
+                    : windowDimensions.height *7/10,
+              }}
+              className="flex flex-col fixed z-20 "
+            >
               <motion.div
                 initial={tracker ? "base" : "initial"}
                 animate={tracker ? "scrolled" : "base"}
@@ -172,7 +182,7 @@ const Home = () => {
               initial={{ opacity: 1 }}
               animate={isInView2 && !isInView ? "scrolled" : "base"}
               variants={variantsTextLeft}
-              className="flex flex-col self-start mt-[180px] h-[100vh]"
+              className="flex flex-col self-start"
             >
               <div className="flex">
                 <img
@@ -188,7 +198,7 @@ const Home = () => {
                   }}
                 />
               </div>
-              <div className="flex flex-col self-center w-3/4 -mt-[800px]">
+              <div className="self-center w-3/4 -mt-[835px] h-[835px] z-[100]">
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
@@ -199,7 +209,7 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  className="text-gold2 text-center relative font-custom3 text-[70px] z-[100] "
+                  className="text-gold2 text-center relative font-custom3 mt-[30px] text-[70px] z-[100] "
                 >
                   Shunya Wellness
                 </motion.div>
@@ -213,10 +223,13 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  className="text-limeDark relative text-[34px] mt-6 md:text-[30px] font-custom2 opacity-70 z-[100]"
+                  style={{
+                    fontSize:"6vw",
+                  }}
+                  className="text-limeDark relative opacity-70 z-[100]"
                 >
-                  Every season from November till April Goa{" "}
-                  <i className="text-gold2 font-custom2 font-black text-[40px]">
+                  Every season from November till April,
+                  <i className="text-gold2 font-custom2 font-black">
                     Shunya Wellness{" "}
                   </i>
                   becomes the place of destination of nomads, travellers,
@@ -232,7 +245,7 @@ const Home = () => {
               initial={{ opacity: 1 }}
               animate={isInView3 ? "scrolled" : "base"}
               variants={variantsTextLeft}
-              className="flex flex-col self-start mt-[140px]"
+              className="flex flex-col self-start"
             >
               <div className="flex">
                 <img
@@ -249,7 +262,7 @@ const Home = () => {
                 />
               </div>
 
-              <div className="flex flex-col self-center w-3/4 -mt-[800px]">
+              <div className="flex flex-col self-center w-3/4 -mt-[835px] h-[835px]">
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
@@ -260,7 +273,7 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  className="text-gold2 text-center relative font-custom3 text-[70px] z-[100] "
+                  className="text-gold2 text-center relative font-custom3 mt-[30px] text-[70px] z-[100] "
                 >
                   Ecstatic<br></br>Dance
                 </motion.div>
@@ -289,7 +302,7 @@ const Home = () => {
               initial={{ opacity: 1 }}
               animate={isInView4 ? "scrolled" : "base"}
               variants={variantsTextLeft}
-              className="flex flex-col self-start mt-[40px]"
+              className="flex flex-col self-start"
             >
               <div className="flex">
                 <img
@@ -306,7 +319,7 @@ const Home = () => {
                 />
               </div>
 
-              <div className="flex flex-col self-center w-3/4 -mt-[800px]">
+              <div className="flex flex-col self-center w-3/4 -mt-[835px] h-[835px]">
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
@@ -317,7 +330,7 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  className="text-gold2 text-center relative font-custom3 text-[70px] z-[100] "
+                  className="text-gold2 text-center relative font-custom3 mt-[30px] text-[70px] z-[100] "
                 >
                   Live-Concerts
                 </motion.div>
@@ -347,7 +360,7 @@ const Home = () => {
               initial={{ opacity: 1 }}
               animate={isInView5 ? "scrolled" : "base"}
               variants={variantsTextLeft}
-              className="flex flex-col self-start h-[100vh] mt-[95px] "
+              className="flex flex-col self-start h-[100vh]"
             >
               <div className="flex">
                 <img
@@ -364,7 +377,7 @@ const Home = () => {
                 />
               </div>
 
-              <div className="flex flex-col self-center w-3/4 -mt-[800px]">
+              <div className="flex flex-col self-center w-3/4 -mt-[835px] h-[835px]">
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
@@ -375,7 +388,7 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  className="text-gold2 text-center relative font-custom3 text-[70px] z-[100] "
+                  className="text-gold2 text-center relative font-custom3 mt-[30px] text-[70px] z-[100] "
                 >
                   Workshops
                 </motion.div>
