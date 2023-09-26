@@ -144,7 +144,7 @@ const Home = () => {
                 top:
                   windowDimensions.width > windowDimensions.height
                     ? windowDimensions.width / 6
-                    : windowDimensions.height *7/10,
+                    : (windowDimensions.height * 7) / 10,
               }}
               className="flex flex-col fixed z-20 "
             >
@@ -202,7 +202,7 @@ const Home = () => {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
-                    isInView2
+                    isInView2 && !isInView
                       ? {
                           opacity: 0.7,
                           transition: { duration: 0.3, delay: 0.3 },
@@ -216,14 +216,13 @@ const Home = () => {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
-                    isInView2
+                    isInView2 && !isInView
                       ? {
                           opacity: 0.7,
                           transition: { duration: 0.3, delay: 0.6 },
                         }
                       : { opacity: 0 }
                   }
-                 
                   className="text-limeDark text-[6.8vw] relative opacity-70 z-[100]"
                 >
                   Every season from November till April,
@@ -241,7 +240,7 @@ const Home = () => {
             <motion.div
               ref={ref3}
               initial={{ opacity: 1 }}
-              animate={isInView3 ? "scrolled" : "base"}
+              animate={isInView3 && !isInView2 ? "scrolled" : "base"}
               variants={variantsTextLeft}
               className="flex flex-col self-start"
             >
@@ -264,7 +263,7 @@ const Home = () => {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
-                    isInView3
+                    isInView3 && !isInView2
                       ? {
                           opacity: 0.7,
                           transition: { duration: 0.3, delay: 0.3 },
@@ -278,7 +277,7 @@ const Home = () => {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
-                    isInView3
+                    isInView3 && !isInView2
                       ? {
                           opacity: 0.7,
                           transition: { duration: 0.3, delay: 0.6 },
@@ -298,7 +297,7 @@ const Home = () => {
             <motion.div
               ref={ref4}
               initial={{ opacity: 1 }}
-              animate={isInView4 ? "scrolled" : "base"}
+              animate={isInView4 && !isInView3 ? "scrolled" : "base"}
               variants={variantsTextLeft}
               className="flex flex-col self-start"
             >
@@ -321,7 +320,7 @@ const Home = () => {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
-                    isInView4
+                    isInView4 && !isInView3
                       ? {
                           opacity: 0.7,
                           transition: { duration: 0.3, delay: 0.3 },
@@ -335,7 +334,7 @@ const Home = () => {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
-                    isInView4
+                    isInView4 && !isInView3
                       ? {
                           opacity: 0.7,
                           transition: { duration: 0.3, delay: 0.6 },
@@ -356,7 +355,7 @@ const Home = () => {
             <motion.div
               ref={ref5}
               initial={{ opacity: 1 }}
-              animate={isInView5 ? "scrolled" : "base"}
+              animate={isInView5 && !isInView4 ? "scrolled" : "base"}
               variants={variantsTextLeft}
               className="flex flex-col self-start h-[100vh]"
             >
@@ -379,7 +378,7 @@ const Home = () => {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
-                    isInView5
+                    isInView5 && !isInView4
                       ? {
                           opacity: 0.7,
                           transition: { duration: 0.3, delay: 0.3 },
@@ -393,7 +392,7 @@ const Home = () => {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
-                    isInView5
+                    isInView5 && !isInView4
                       ? {
                           opacity: 0.7,
                           transition: { duration: 0.3, delay: 0.6 },
