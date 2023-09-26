@@ -343,7 +343,7 @@ const Home = () => {
             >
               <div className="flex">
                 <img
-                  src={"/images/DSC_1444.jpg"}
+                  src={"/images/DSC_1444.jpeg"}
                   style={{
                     opacity: 1,
                     filter: " contrast(110%) brightness(60%)",
