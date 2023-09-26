@@ -13,6 +13,7 @@ const logoTextClass = "text-[25px] my-2 w-[65vw] text-limeLight font-custom3 ";
 const Home = () => {
   const dimensions = useDimensions();
   const [windowDimensions, setWindowDimensions] = useState(dimensions);
+  console.log("height", windowDimensions.height);
   const { scrollY } = useScroll();
   const [tracker, setTracker] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -182,12 +183,16 @@ const Home = () => {
                     left: 0,
                     top: 0,
                     objectFit: "cover",
-                    height: "100vh",
+                    height: "835px",
                     zIndex: 20,
                   }}
                 />
               </div>
-              <div className="flex flex-col self-center w-3/4 -mt-[800px]">
+              <div
+                style={{marginTop:windowDimensions.height*-1}}
+                className=
+                  "flex flex-col self-center w-3/4"
+              >
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
@@ -198,7 +203,7 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  className="text-gold2 text-center relative font-custom3 text-[70px] -mt-4 z-[100] "
+                  className="text-gold2 text-center relative font-custom3 text-[70px] z-[100] "
                 >
                   Shunya Wellness
                 </motion.div>
@@ -242,7 +247,7 @@ const Home = () => {
                     left: 0,
                     top: 0,
                     objectFit: "cover",
-                    height: "100vh",
+                    height: "835px",
                     zIndex: 20,
                   }}
                 />
@@ -299,7 +304,7 @@ const Home = () => {
                     left: 0,
                     top: 0,
                     objectFit: "cover",
-                    height: "100vh",
+                    height: "835px",
                     zIndex: 20,
                   }}
                 />
@@ -357,7 +362,7 @@ const Home = () => {
                     left: 0,
                     top: 0,
                     objectFit: "cover",
-                    height: "100vh",
+                    height: "835px",
                     zIndex: 20,
                   }}
                 />
