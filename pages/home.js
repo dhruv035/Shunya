@@ -18,15 +18,15 @@ const Home = () => {
   const [tracker, setTracker] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const ref = useRef(null);
-  const isInView = useInView(ref, { amount: 0.4 });
+  const isInView = useInView(ref, { amount: 0.3 });
   const ref2 = useRef(null);
-  const isInView2 = useInView(ref2, { amount: 0.4 });
+  const isInView2 = useInView(ref2, { amount: 0.3 });
   const ref3 = useRef(null);
-  const isInView3 = useInView(ref3, { amount: 0.4 });
+  const isInView3 = useInView(ref3, { amount: 0.3 });
   const ref4 = useRef(null);
-  const isInView4 = useInView(ref4, { amount: 0.4 });
+  const isInView4 = useInView(ref4, { amount: 0.3 });
   const ref5 = useRef(null);
-  const isInView5 = useInView(ref5, { amount: 0.4 });
+  const isInView5 = useInView(ref5, { amount: 0.3 });
 
   const bg1Variants = {
     base: { opacity: 0, x: -70, transition: { duration: 1 } },
@@ -188,10 +188,7 @@ const Home = () => {
                   }}
                 />
               </div>
-              <div
-                className=
-                  "flex flex-col self-center w-3/4 -mt-[800px]"
-              >
+              <div className="flex flex-col self-center w-3/4 -mt-[800px]">
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
@@ -235,7 +232,7 @@ const Home = () => {
               initial={{ opacity: 1 }}
               animate={isInView3 ? "scrolled" : "base"}
               variants={variantsTextLeft}
-              className="flex flex-col self-start "
+              className="flex flex-col self-start mt-[140px]"
             >
               <div className="flex">
                 <img
