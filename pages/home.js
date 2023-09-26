@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import Image from "next/image";
 import {
   motion,
   useScroll,
@@ -7,32 +6,27 @@ import {
   useInView,
 } from "framer-motion";
 import useDimensions from "@/components/useDimensions";
-import { Text } from "@chakra-ui/react";
 import Menu from "@/components/menu";
 const logoTextClass = "text-[25px] my-2 w-[65vw] text-limeLight font-custom3 ";
 const Home = () => {
   const dimensions = useDimensions();
   const [windowDimensions, setWindowDimensions] = useState(dimensions);
-  console.log("height", windowDimensions.height);
   const { scrollY } = useScroll();
-  const [tracker, setTracker] = useState(false);
+  const [tracker, setTracker] = useState();
   const [scrolled, setScrolled] = useState(false);
   const ref = useRef(null);
-  const isInView = useInView(ref, { amount: 0.25 });
+  const isInView = useInView(ref, { amount: 0.4 });
   const ref2 = useRef(null);
-  const isInView2 = useInView(ref2, { amount: 0.3 });
+  const isInView2 = useInView(ref2, { amount: 0.4 });
   const ref3 = useRef(null);
-  const isInView3 = useInView(ref3, { amount: 0.3 });
+  const isInView3 = useInView(ref3, { amount: 0.4 });
   const ref4 = useRef(null);
-  const isInView4 = useInView(ref4, { amount: 0.3 });
+  const isInView4 = useInView(ref4, { amount: 0.4 });
   const ref5 = useRef(null);
-  const isInView5 = useInView(ref5, { amount: 0.3 });
+  const isInView5 = useInView(ref5, { amount: 0.4 });
 
-  const bg1Variants = {
-    base: { opacity: 0, x: -70, transition: { duration: 1 } },
-    scrolled: { opacity: 1, x: 0, transition: { duration: 1 } },
-  };
-
+  const isInViewSpecial = useInView(ref, { amount: 0.8 });
+  console.log("VIew", isInViewSpecial);
   useEffect(() => {
     if (Math.abs(dimensions.height - windowDimensions.height) > 100)
       setWindowDimensions(dimensions);
@@ -60,26 +54,28 @@ const Home = () => {
   };
 
   const variantsTextLeft = {
-    base: { opacity: 0, x: -70, transition: { duration: 1 } },
+    base: { opacity: 0.2, x: -80, transition: { duration: 1 } },
+    scrolled: { opacity: 1, x: 0, transition: { duration: 1 } },
+  };
+
+  const variantsTextRight = {
+    base: { opacity: 0.2, x: +80, transition: { duration: 1 } },
     scrolled: { opacity: 1, x: 0, transition: { duration: 1 } },
   };
 
   const textLeftVariants = {
-    initial: { x: "-150%" },
-    base: { x: 0 },
-    scrolled: { x: "-150%", transition: { duration: 0.6 } },
+    base: { opacity: 1, y: 0 },
+    scrolled: { opacity: 0, y: 40 },
   };
 
   const textRightVariants = {
-    initial: { x: "+150%" },
-    base: { x: 0 },
-    scrolled: { x: "+150%", transition: { duration: 0.6 } },
+    base: { opacity: 1, y: 0 },
+    scrolled: { opacity: 0, y: +40 },
   };
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (!scrolled) setScrolled(true);
-    if (latest > 0 && tracker === false) setTracker(true);
-    else if (latest === 0 && tracker === true) setTracker(false);
-    console.log(isInView2);
+    if (tracker && !latest) setTracker(false);
+    else if (!tracker && latest) setTracker(true);
   });
   return (
     <main className="flex-col bg-black">
@@ -95,13 +91,13 @@ const Home = () => {
               <motion.img
                 ref={ref}
                 initial={{ opacity: 1 }}
-                animate={!isInView ? "base" : "scrolled"}
-                variants={bg1Variants}
+                animate={!isInView && isInView2 ? "base" : "scrolled"}
+                variants={variantsTextLeft}
                 transition={{ duration: 0.5 }}
                 src={"/images/banyan.jpg"}
                 style={{
                   opacity: 1,
-                  filter: " contrast(120%)",
+                  filter: " contrast(120%) brightness(60%)",
                   left: 0,
                   top: 0,
                   objectFit: "cover",
@@ -115,7 +111,7 @@ const Home = () => {
             }
             <motion.img
               initial={{ opacity: 0 }}
-              animate={tracker > 0 ? "scrolled" : "base"}
+              animate={tracker ? "scrolled" : "base"}
               variants={logoVariants}
               transition={{ duration: 0.5 }}
               className="shunya-logo fixed"
@@ -145,32 +141,37 @@ const Home = () => {
                   windowDimensions.width > windowDimensions.height
                     ? windowDimensions.width / 6
                     : (windowDimensions.height * 7) / 10,
+                height: "900px",
+                marginTop: "-900px",
               }}
-              className="flex flex-col fixed z-20 "
+              className="flex flex-col z-20 "
             >
               <motion.div
-                initial={tracker ? "base" : "initial"}
-                animate={tracker ? "scrolled" : "base"}
+                initial={"scrolled"}
+                animate={!isInViewSpecial ? "scrolled" : "base"}
                 variants={textLeftVariants}
-                transition={{ duration: 0.5, delay: scrolled ? 0 : 1 }}
+                transition={{ duration: 0.6, delay: scrolled ? 0 : 1 }}
+                style={{
+                  marginTop: 600,
+                }}
                 className={logoTextClass + "text-left"}
               >
                 ECSTATIC DANCE
               </motion.div>
               <motion.div
-                initial={tracker ? "base" : "initial"}
-                animate={tracker ? "scrolled" : "base"}
+                initial={"scrolled"}
+                animate={!isInViewSpecial ? "scrolled" : "base"}
                 variants={textRightVariants}
-                transition={{ duration: 0.5, delay: scrolled ? 0 : 1.2 }}
+                transition={{ duration: 0.6, delay: scrolled ? 0 : 1 }}
                 className={logoTextClass + "text-right overflow-hidden"}
               >
                 WELLNESS RETREAT
               </motion.div>
               <motion.div
-                initial={tracker ? "base" : "initial"}
-                animate={tracker ? "scrolled" : "base"}
+                initial={"scrolled"}
+                animate={!isInViewSpecial ? "scrolled" : "base"}
                 variants={textLeftVariants}
-                transition={{ duration: 0.5, delay: scrolled ? 0 : 1.5 }}
+                transition={{ duration: 0.6, delay: scrolled ? 0 : 1 }}
                 className={logoTextClass}
               >
                 ART SPACE
@@ -225,14 +226,16 @@ const Home = () => {
                   }
                   className="text-limeDark text-[6.8vw] relative opacity-70 z-[100]"
                 >
-                  Every season from November till April,
+                  Every year, from November through April,{" "}
                   <i className="text-gold2 font-custom2 font-black">
                     Shunya Wellness{" "}
                   </i>
-                  becomes the place of destination of nomads, travellers,
-                  musicians and dancers from all over the World. The venue is
-                  located in a middle of jungles, under the stars and around the
-                  giant Banyan tree<br></br>
+                   Shunya Wellness,
+                  nestled within a jungle, attracts people worldwide. Nomads,
+                  travelers, musicians, and dancers gather beneath the starry
+                  skies around a towering Banyan tree. It&apos;s a unique destination
+                  where a global community forms, uniting under nature&apos;s canopy.
+                  <br></br>
                 </motion.div>
               </div>
             </motion.div>
@@ -241,7 +244,7 @@ const Home = () => {
               ref={ref3}
               initial={{ opacity: 1 }}
               animate={isInView3 && !isInView2 ? "scrolled" : "base"}
-              variants={variantsTextLeft}
+              variants={variantsTextRight}
               className="flex flex-col self-start"
             >
               <div className="flex">
@@ -286,10 +289,13 @@ const Home = () => {
                   }
                   className="text-limeDark relative text-[6.8vw] mt-10 md:text-[30px] font-custom2 opacity-70 z-[100]"
                 >
-                  We are an international Ecstatic Dance venue and community in
-                  Goa since 2021. We host dances two times in a week every month
-                  with renowned dj’s from all over the World. We also have a
-                  nice vegetarian cafe and tea ceremony corner.<br></br>
+                  Since 2021, we&apos;ve been the heart of Ecstatic Dance in Goa,
+                  hosting bi-weekly dance sessions with acclaimed DJs from
+                  across the globe. Our vibrant community welcomes all to join
+                  in the rhythmic celebration. In addition to the dance floor,
+                  we offer a delightful vegetarian cafe and a serene tea
+                  ceremony corner, creating a holistic experience for mind,
+                  body, and soul.<br></br>
                 </motion.div>
               </div>
             </motion.div>
@@ -356,7 +362,7 @@ const Home = () => {
               ref={ref5}
               initial={{ opacity: 1 }}
               animate={isInView5 && !isInView4 ? "scrolled" : "base"}
-              variants={variantsTextLeft}
+              variants={variantsTextRight}
               className="flex flex-col self-start h-[100vh]"
             >
               <div className="flex">
