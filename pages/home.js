@@ -387,7 +387,7 @@ const Home = () => {
                   balance. Connect with your inner self through mindfulness
                   practices, explore the path to well-being, and embark on a
                   transformative journey toward personal growth and
-                  self-discovery."<br></br>
+                  self-discovery.<br></br>
                 </motion.div>
               </div>
             </motion.div>
