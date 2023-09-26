@@ -107,7 +107,7 @@ const Home = () => {
                   objectFit: "cover",
                   height:
                     windowDimensions.width < 700
-                      ? "835px"
+                      ? "900px"
                       : windowDimensions.height + 100,
                   zIndex: 10,
                 }}
@@ -193,12 +193,12 @@ const Home = () => {
                     left: 0,
                     top: 0,
                     objectFit: "cover",
-                    height: "835px",
+                    height: "900px",
                     zIndex: 20,
                   }}
                 />
               </div>
-              <div className="self-center w-5/6 justify-center -mt-[835px] h-[835px] z-[100]">
+              <div className="flex flex-col self-center w-5/6 justify-center -mt-[900px] h-[900px] z-[100]">
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
@@ -209,7 +209,7 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  className="text-gold2 text-center relative font-custom3 mt-[30px] text-[70px] z-[100] "
+                  className="text-gold2 text-center relative font-custom3 text-[70px] z-[100] "
                 >
                   Shunya Wellness
                 </motion.div>
@@ -254,13 +254,13 @@ const Home = () => {
                     left: 0,
                     top: 0,
                     objectFit: "cover",
-                    height: "835px",
+                    height: "900px",
                     zIndex: 20,
                   }}
                 />
               </div>
 
-              <div className="flex flex-col self-center justify-center w-5/6 -mt-[835px] h-[835px]">
+              <div className="flex flex-col self-center justify-center w-5/6 -mt-[900px] h-[900px]">
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
@@ -271,7 +271,7 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  className="text-gold2 text-center relative font-custom3 mt-[30px] text-[70px] z-[100] "
+                  className="text-gold2 text-center relative font-custom3 text-[70px] z-[100] "
                 >
                   Ecstatic<br></br>Dance
                 </motion.div>
@@ -311,13 +311,13 @@ const Home = () => {
                     left: 0,
                     top: 0,
                     objectFit: "cover",
-                    height: "835px",
+                    height: "900px",
                     zIndex: 20,
                   }}
                 />
               </div>
 
-              <div className="flex flex-col self-center w-5/6 justify-center -mt-[835px] h-[835px]">
+              <div className="flex flex-col self-center w-5/6 justify-center -mt-[900px] h-[900px]">
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
@@ -328,7 +328,7 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  className="text-gold2 text-center relative font-custom3 mt-[30px] text-[70px] z-[100] "
+                  className="text-gold2 text-center relative font-custom3 text-[70px] z-[100] "
                 >
                   Live Concerts
                 </motion.div>
@@ -369,13 +369,13 @@ const Home = () => {
                     left: 0,
                     top: 0,
                     objectFit: "cover",
-                    height: "835px",
+                    height: "900px",
                     zIndex: 20,
                   }}
                 />
               </div>
 
-              <div className="flex flex-col self-center w-5/6 justify-center -mt-[835px] h-[835px]">
+              <div className="flex flex-col self-center w-5/6 justify-center -mt-[900px] h-[900px]">
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
@@ -386,7 +386,7 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  className="text-gold2 text-center relative font-custom3 mt-[30px] text-[70px] z-[100] "
+                  className="text-gold2 text-center relative font-custom3 text-[70px] z-[100] "
                 >
                   Workshops
                 </motion.div>
