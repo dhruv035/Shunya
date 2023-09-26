@@ -148,7 +148,7 @@ const Home = () => {
             >
               <motion.div
                 initial={"scrolled"}
-                animate={!isInViewSpecial ? "scrolled" : "base"}
+                animate={!isInView && isInView2 ? "scrolled" : "base"}
                 variants={textLeftVariants}
                 transition={{ duration: 0.6, delay: scrolled ? 0 : 1 }}
                 style={{
@@ -160,7 +160,7 @@ const Home = () => {
               </motion.div>
               <motion.div
                 initial={"scrolled"}
-                animate={!isInViewSpecial ? "scrolled" : "base"}
+                animate={!isInView && isInView2 ? "scrolled" : "base"}
                 variants={textRightVariants}
                 transition={{ duration: 0.6, delay: scrolled ? 0 : 1 }}
                 className={logoTextClass + "text-right overflow-hidden"}
@@ -169,7 +169,7 @@ const Home = () => {
               </motion.div>
               <motion.div
                 initial={"scrolled"}
-                animate={!isInViewSpecial ? "scrolled" : "base"}
+                animate={!isInView && isInView2? "scrolled" : "base"}
                 variants={textLeftVariants}
                 transition={{ duration: 0.6, delay: scrolled ? 0 : 1 }}
                 className={logoTextClass}
