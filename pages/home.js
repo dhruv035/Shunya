@@ -12,7 +12,7 @@ import Menu from "@/components/menu";
 const logoTextClass = "text-[25px] my-2 w-[65vw] text-limeLight font-custom3 ";
 const Home = () => {
   const dimensions = useDimensions();
-  const [windowDimensions, setWindowDimensions] = useState(windowDimensions);
+  const [windowDimensions, setWindowDimensions] = useState(dimensions);
   const { scrollY } = useScroll();
   const [tracker, setTracker] = useState(false);
   const [scrolled, setScrolled] = useState(false);
