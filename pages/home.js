@@ -228,7 +228,7 @@ const Home = () => {
             >
               <div className="flex">
                 <img
-                  src={"/devImages/DSC_8681-2.jpg"}
+                  src={"/images/ecstatic-home.jpg"}
                   style={{
                     opacity: 1,
                     filter: " contrast(110%) brightness(40%)",
