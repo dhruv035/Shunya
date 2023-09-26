@@ -198,7 +198,7 @@ const Home = () => {
                   }}
                 />
               </div>
-              <div className="flex flex-col self-center w-5/6 justify-center -mt-[900px] h-[900px] z-[100]">
+              <div className="flex flex-col self-center w-7/8 justify-center -mt-[900px] h-[900px] z-[100]">
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
@@ -259,7 +259,7 @@ const Home = () => {
                 />
               </div>
 
-              <div className="flex flex-col self-center justify-center w-5/6 -mt-[900px] h-[900px]">
+              <div className="flex flex-col self-center justify-center w-7/8 -mt-[900px] h-[900px]">
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
@@ -316,7 +316,7 @@ const Home = () => {
                 />
               </div>
 
-              <div className="flex flex-col self-center w-5/6 justify-center -mt-[900px] h-[900px]">
+              <div className="flex flex-col self-center w-7/8 justify-center -mt-[900px] h-[900px]">
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
@@ -374,7 +374,7 @@ const Home = () => {
                 />
               </div>
 
-              <div className="flex flex-col self-center w-5/6 justify-center -mt-[900px] h-[900px]">
+              <div className="flex flex-col self-center w-7/8 justify-center -mt-[900px] h-[900px]">
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
