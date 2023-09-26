@@ -224,7 +224,7 @@ const Home = () => {
                       : { opacity: 0 }
                   }
                   style={{
-                    fontSize:"6vw",
+                    fontSize:"6.4vw",
                   }}
                   className="text-limeDark relative opacity-70 z-[100]"
                 >
@@ -287,7 +287,7 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  className="text-limeDark relative text-[34px] mt-10 md:text-[30px] font-custom2 opacity-70 z-[100]"
+                  className="text-limeDark relative text-[6.4vw] mt-10 md:text-[30px] font-custom2 opacity-70 z-[100]"
                 >
                   We are an international Ecstatic Dance venue and community in
                   Goa since 2021. We host dances two times in a week every month
@@ -344,7 +344,7 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  className="text-limeDark relative text-[34px] mt-10 md:text-[30px] font-custom2 opacity-70 z-[100]"
+                  className="text-limeDark relative text-[6.4vw] mt-10 md:text-[30px] font-custom2 opacity-70 z-[100]"
                 >
                   Elevate your senses at our live concerts. Immerse yourself in
                   electrifying performances, feel the music pulsate through your
@@ -402,7 +402,7 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  className="text-limeDark relative text-[34px] mt-10 md:text-[30px] font-custom2 opacity-70 z-[100]"
+                  className="text-limeDark relative text-[6.4vw] mt-10 md:text-[30px] font-custom2 opacity-70 z-[100]"
                 >
                   Experience workshops that nurture inner serenity and holistic
                   balance. Connect with your inner self through mindfulness
