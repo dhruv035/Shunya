@@ -1,24 +1,35 @@
-
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import {
   motion,
   useScroll,
   useMotionValueEvent,
-  useTransform,
-  useInView
+  useInView,
 } from "framer-motion";
 import useDimensions from "@/components/useDimensions";
-import {  Text } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 import Menu from "@/components/menu";
 const logoTextClass = "text-[25px] my-2 w-[65vw] text-limeLight font-custom3 ";
 const Home = () => {
   const windowDimensions = useDimensions();
   const { scrollY } = useScroll();
-  const [tracker, setTracker] = useState(0);
+  const [tracker, setTracker] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const ref = useRef(null);
-  const isInView = useInView(ref, { amount: 0.5 });
+  const isInView = useInView(ref, { amount: 0.4 });
+  const ref2 = useRef(null);
+  const isInView2 = useInView(ref2, { amount: 0.4 });
+  const ref3 = useRef(null);
+  const isInView3 = useInView(ref3, { amount: 0.4 });
+  const ref4 = useRef(null);
+  const isInView4 = useInView(ref4, { amount: 0.4 });
+  const ref5 = useRef(null);
+  const isInView5 = useInView(ref5, { amount: 0.4 });
 
+  const bg1Variants = {
+    base: { opacity: 0, x: -70, transition: { duration: 1 } },
+    scrolled: { opacity: 1, x: 0, transition: { duration: 1 } },
+  };
   const logoScale = 0.15;
   const logoVariants = {
     initial: { opacity: 0, transition: { duration: 0.5 } },
@@ -56,13 +67,12 @@ const Home = () => {
     base: { x: 0 },
     scrolled: { x: "+150%", transition: { duration: 0.6 } },
   };
-
-
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (!scrolled) setScrolled(true);
-    setTracker(latest);
+    if (latest > 0 && tracker === false) setTracker(true);
+    else if (latest === 0 && tracker === true) setTracker(false);
+    console.log(isInView2);
   });
-
   return (
     <main className="flex-col bg-black">
       <motion.div
@@ -75,14 +85,15 @@ const Home = () => {
           <div className=" flex flex-col h-max w-[100vw] items-center self-start overflow-clip bg-black">
             {
               <motion.img
-                initial={{ opacity: 0.7 }}
-                animate={{ opacity: 1 }}
+                ref={ref}
+                initial={{ opacity: 1 }}
+                animate={!isInView ? "base" : "scrolled"}
+                variants={bg1Variants}
                 transition={{ duration: 0.5 }}
                 src={"/images/banyan.jpg"}
                 style={{
-                  marginTop: windowDimensions.width < 700 ? "-150px" : "-160px",
                   opacity: 1,
-                  filter: "grayscale(100%) contrast(130%)",
+                  filter: " contrast(120%)",
                   left: 0,
                   top: 0,
                   width: ((windowDimensions.height + 80) * 16) / 9,
@@ -118,10 +129,10 @@ const Home = () => {
                 zIndex: 100,
               }}
             />
-            <div className="flex flex-col -mt-40 z-20 ">
+            <div className="flex flex-col -mt-[340px] z-20 ">
               <motion.div
-                initial={tracker > 0 ? "base" : "initial"}
-                animate={tracker > 0 ? "scrolled" : "base"}
+                initial={tracker ? "base" : "initial"}
+                animate={tracker ? "scrolled" : "base"}
                 variants={textLeftVariants}
                 transition={{ duration: 0.5, delay: scrolled ? 0 : 1 }}
                 className={logoTextClass + "text-left"}
@@ -129,8 +140,8 @@ const Home = () => {
                 ECSTATIC DANCE
               </motion.div>
               <motion.div
-                initial={tracker > 0 ? "base" : "initial"}
-                animate={tracker > 0 ? "scrolled" : "base"}
+                initial={tracker ? "base" : "initial"}
+                animate={tracker ? "scrolled" : "base"}
                 variants={textRightVariants}
                 transition={{ duration: 0.5, delay: scrolled ? 0 : 1.2 }}
                 className={logoTextClass + "text-right overflow-hidden"}
@@ -138,8 +149,8 @@ const Home = () => {
                 WELLNESS RETREAT
               </motion.div>
               <motion.div
-                initial={tracker > 0 ? "base" : "initial"}
-                animate={tracker > 0 ? "scrolled" : "base"}
+                initial={tracker ? "base" : "initial"}
+                animate={tracker ? "scrolled" : "base"}
                 variants={textLeftVariants}
                 transition={{ duration: 0.5, delay: scrolled ? 0 : 1.5 }}
                 className={logoTextClass}
@@ -149,38 +160,241 @@ const Home = () => {
             </div>
 
             <motion.div
-            ref={ref}
-            initial={{ opacity: 1 }}
-            animate={isInView ? "scrolled" : "base"}
-            variants={variantsTextLeft}
-            className="w-3/4  ml-10 md:ml-20 self-start z-[100]"
-          >
-            <Text className="text-greenDark text-[32px] mt-[150px]">
-              Shunya Wellness
-            </Text>
-            <Text className="text-greenLight relative text-[24px] md:text-[30px] mt-6 z-[100]">
-              Throughout human history, people have practiced some form of dance
-              as a way of altering one’s consciousness and connecting with
-              nature, other, and self. The modern day movement of ecstatic dance
-              brings us back to these ancient practices, with the influence of
-              Gabrielle Roth’s 5Rhythms practice
-            </Text>
-          </motion.div>
+              ref={ref2}
+              initial={{ opacity: 1 }}
+              animate={isInView2 && !isInView ? "scrolled" : "base"}
+              variants={variantsTextLeft}
+              className="flex flex-col self-start mt-[180px] h-[100vh]"
+            >
+              <div className="flex">
+                <img
+                  src={"/images/shunya-wellness-home.jpg"}
+                  style={{
+                    opacity: 1,
+                    filter: "contrast(110%) brightness(40%)",
+                    left: 0,
+                    top: 0,
+                    objectFit: "cover",
+                    height: "100vh",
+                    zIndex: 20,
+                  }}
+                />
+              </div>
+              <div className="flex flex-col self-center w-3/4 -mt-[800px]">
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={
+                    isInView2
+                      ? {
+                          opacity: 0.7,
+                          transition: { duration: 0.3, delay: 0.3 },
+                        }
+                      : { opacity: 0 }
+                  }
+                  className="text-gold2 text-center relative font-custom3 text-[70px] -mt-4 z-[100] "
+                >
+                  Shunya Wellness
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={
+                    isInView2
+                      ? {
+                          opacity: 0.7,
+                          transition: { duration: 0.3, delay: 0.6 },
+                        }
+                      : { opacity: 0 }
+                  }
+                  className="text-limeDark relative text-[34px] mt-6 md:text-[30px] font-custom2 opacity-70 z-[100]"
+                >
+                  Every season from November till April Goa{" "}
+                  <i className="text-gold2 font-custom2 font-black text-[40px]">
+                    Shunya Wellness{" "}
+                  </i>
+                  becomes the place of destination of nomads, travellers,
+                  musicians and dancers from all over the World. The venue is
+                  located in a middle of jungles, under the stars and around the
+                  giant Banyan tree<br></br>
+                </motion.div>
+              </div>
+            </motion.div>
 
-          
+            <motion.div
+              ref={ref3}
+              initial={{ opacity: 1 }}
+              animate={isInView3 ? "scrolled" : "base"}
+              variants={variantsTextLeft}
+              className="flex flex-col self-start "
+            >
+              <div className="flex">
+                <img
+                  src={"/devImages/DSC_8681-2.jpg"}
+                  style={{
+                    opacity: 1,
+                    filter: " contrast(110%) brightness(40%)",
+                    left: 0,
+                    top: 0,
+                    objectFit: "cover",
+                    height: "100vh",
+                    zIndex: 20,
+                  }}
+                />
+              </div>
 
+              <div className="flex flex-col self-center w-3/4 -mt-[800px]">
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={
+                    isInView3
+                      ? {
+                          opacity: 0.7,
+                          transition: { duration: 0.3, delay: 0.3 },
+                        }
+                      : { opacity: 0 }
+                  }
+                  className="text-gold2 text-center relative font-custom3 text-[70px] z-[100] "
+                >
+                  Ecstatic<br></br>Dance
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={
+                    isInView3
+                      ? {
+                          opacity: 0.7,
+                          transition: { duration: 0.3, delay: 0.6 },
+                        }
+                      : { opacity: 0 }
+                  }
+                  className="text-limeDark relative text-[34px] mt-10 md:text-[30px] font-custom2 opacity-70 z-[100]"
+                >
+                  We are an international Ecstatic Dance venue and community in
+                  Goa since 2021. We host dances two times in a week every month
+                  with renowned dj’s from all over the World. We also have a
+                  nice vegetarian cafe and tea ceremony corner.<br></br>
+                </motion.div>
+              </div>
+            </motion.div>
 
-            
-            <Text className="text-greenDark text-left text-[32px] mt-[50px]">
-                Shunya Wellness
-              </Text>
-              <Text className="text-greenDark text-left text-[32px] mt-[50px]">
-                Shunya Wellness
-              </Text>
+            <motion.div
+              ref={ref4}
+              initial={{ opacity: 1 }}
+              animate={isInView4 ? "scrolled" : "base"}
+              variants={variantsTextLeft}
+              className="flex flex-col self-start mt-[40px]"
+            >
+              <div className="flex">
+                <img
+                  src={"/images/concert-home.jpg"}
+                  style={{
+                    opacity: 1,
+                    filter: " contrast(130%) brightness(40%)",
+                    left: 0,
+                    top: 0,
+                    objectFit: "cover",
+                    height: "100vh",
+                    zIndex: 20,
+                  }}
+                />
+              </div>
+
+              <div className="flex flex-col self-center w-3/4 -mt-[800px]">
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={
+                    isInView4
+                      ? {
+                          opacity: 0.7,
+                          transition: { duration: 0.3, delay: 0.3 },
+                        }
+                      : { opacity: 0 }
+                  }
+                  className="text-gold2 text-center relative font-custom3 text-[70px] z-[100] "
+                >
+                  Live-Concerts
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={
+                    isInView4
+                      ? {
+                          opacity: 0.7,
+                          transition: { duration: 0.3, delay: 0.6 },
+                        }
+                      : { opacity: 0 }
+                  }
+                  className="text-limeDark relative text-[34px] mt-10 md:text-[30px] font-custom2 opacity-70 z-[100]"
+                >
+                  Elevate your senses at our live concerts. Immerse yourself in
+                  electrifying performances, feel the music pulsate through your
+                  soul, and create unforgettable memories with friends and
+                  family. Join us for a night of musical magic and pure
+                  entertainment. <br></br>
+                </motion.div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              ref={ref5}
+              initial={{ opacity: 1 }}
+              animate={isInView5 ? "scrolled" : "base"}
+              variants={variantsTextLeft}
+              className="flex flex-col self-start h-[100vh] mt-[95px] "
+            >
+              <div className="flex">
+                <img
+                  src={"/images/DSC_1444.jpg"}
+                  style={{
+                    opacity: 1,
+                    filter: " contrast(110%) brightness(60%)",
+                    left: 0,
+                    top: 0,
+                    objectFit: "cover",
+                    height: "100vh",
+                    zIndex: 20,
+                  }}
+                />
+              </div>
+
+              <div className="flex flex-col self-center w-3/4 -mt-[800px]">
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={
+                    isInView5
+                      ? {
+                          opacity: 0.7,
+                          transition: { duration: 0.3, delay: 0.3 },
+                        }
+                      : { opacity: 0 }
+                  }
+                  className="text-gold2 text-center relative font-custom3 text-[70px] z-[100] "
+                >
+                  Workshops
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={
+                    isInView5
+                      ? {
+                          opacity: 0.7,
+                          transition: { duration: 0.3, delay: 0.6 },
+                        }
+                      : { opacity: 0 }
+                  }
+                  className="text-limeDark relative text-[34px] mt-10 md:text-[30px] font-custom2 opacity-70 z-[100]"
+                >
+                  Experience workshops that nurture inner serenity and holistic
+                  balance. Connect with your inner self through mindfulness
+                  practices, explore the path to well-being, and embark on a
+                  transformative journey toward personal growth and
+                  self-discovery."<br></br>
+                </motion.div>
+              </div>
+            </motion.div>
+
             {
-              //<Text className="text-greenDark text-[80px] font-custom2">Shunya Wellness</Text>
+              //<Text className="text-gold2 text-[80px] font-custom2">Shunya Wellness</Text>
             }
-            <Text className="text-greenDark text-left text-[15px] md:text-[30px]"></Text>
           </div>
         </div>
       </motion.div>

@@ -12,7 +12,7 @@ module.exports = {
       ...colors,
       'blackShunya':'#131313',
     'greenLight':'#bad8a0',
-    'greenDark': '#cfb53b ',
+    'gold2': '#cfb53b ',
     'limeLight': '#C0D065',
     'limeDark': '#C0D688',
     'golden': '#FCA311',

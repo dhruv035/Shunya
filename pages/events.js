@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Menu from "@/components/menu";
 import { Text } from "@chakra-ui/react";
+import Logo from "@/components/logo";
 
 function parseICalDate(date) {
   const year = date.substr(0, 4);
@@ -25,7 +26,11 @@ const weekday = [
 const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
 const Event = () => {
-  const abc = new Date(1672531199000);
+  const abc = new Date(1673531199000);
+  console.log("Init",abc)
+  const [current, setCurrent] = useState(abc);
+  const next = new Date(abc.setDate(abc.getDate()+(7-abc.getDay())));
+  console.log("Upcoming",next)
   const [data, setData] = useState([]);
   console.log("STart", abc);
   useEffect(() => {
@@ -43,8 +48,9 @@ const Event = () => {
   }, []);
   return (
     <div>
-      <main className="flex-col grow-1 px-6 py-10 bg-black w-[100vw] h-max overflow-clip">
-        <Menu />
+       <Menu />
+      <main className="flex-col grow-1 px-6 py-10 bg-black w-[100vw] min-h-[100vh] h-max overflow-clip"> 
+        <Logo/>
         <div className="flex flex-col items-center mx-5">
           <Text className="text-[30px] md:text-[60px] text-amber-400 mb-10">
             Events

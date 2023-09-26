@@ -67,7 +67,7 @@ const Ecstatic = () => {
             variants={variantsTextLeft}
             className="w-3/4  ml-10 md:ml-20 self-start z-[20]"
           >
-            <Text className="text-greenDark text-[32px] mt-[150px]">
+            <Text className="text-gold2 text-[32px] mt-[150px]">
               Ecstatic Dance
             </Text>
             <Text className="text-greenLight relative text-[24px] md:text-[30px] mt-6 z-[100]">
@@ -86,7 +86,7 @@ const Ecstatic = () => {
             variants={variantsTextRight}
             className="w-3/4  ml-10 md:ml-20 self-start z-[20] mt-[40px] mb-[20px]"
           >
-            <Text className="text-greenDark text-center text-[32px]">
+            <Text className="text-gold2 text-center text-[32px]">
               Ecstatic Team<br></br>
               <br></br>
             </Text>

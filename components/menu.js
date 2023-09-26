@@ -22,7 +22,7 @@ const Menu = () => {
   const logoScale = 0.15
   const menuElements = {
 
-    "Home":"index",
+    "Home":"home",
     "Ecstatic Dance":"ecstatic",
     "Workshops":"workshops",
     "Carnival":"carnival",
@@ -59,7 +59,7 @@ const Menu = () => {
         <DrawerBody>
           <div className="flex flex-col">
             {Object.keys(menuElements).map((element, index) => {
-              return <Link key={index+"menu"} className="mt-5 font-custom2" href={element==="Home"?"/":("/"+menuElements[element])}>{element}</Link>;
+              return <Link key={index+"menu"} className="mt-5 font-custom2" href={("/"+menuElements[element])}>{element}</Link>;
             })}
           </div>
         </DrawerBody>
