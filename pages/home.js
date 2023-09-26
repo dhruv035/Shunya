@@ -18,7 +18,7 @@ const Home = () => {
   const [tracker, setTracker] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const ref = useRef(null);
-  const isInView = useInView(ref, { amount: 0.3 });
+  const isInView = useInView(ref, { amount: 0.25 });
   const ref2 = useRef(null);
   const isInView2 = useInView(ref2, { amount: 0.3 });
   const ref3 = useRef(null);
@@ -198,7 +198,7 @@ const Home = () => {
                   }}
                 />
               </div>
-              <div className="self-center w-3/4 -mt-[835px] h-[835px] z-[100]">
+              <div className="self-center w-5/6 justify-center -mt-[835px] h-[835px] z-[100]">
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
@@ -223,10 +223,8 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  style={{
-                    fontSize:"6.4vw",
-                  }}
-                  className="text-limeDark relative opacity-70 z-[100]"
+                 
+                  className="text-limeDark text-[6.8vw] relative opacity-70 z-[100]"
                 >
                   Every season from November till April,
                   <i className="text-gold2 font-custom2 font-black">
@@ -262,7 +260,7 @@ const Home = () => {
                 />
               </div>
 
-              <div className="flex flex-col self-center w-3/4 -mt-[835px] h-[835px]">
+              <div className="flex flex-col self-center justify-center w-5/6 -mt-[835px] h-[835px]">
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
@@ -287,7 +285,7 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  className="text-limeDark relative text-[6.4vw] mt-10 md:text-[30px] font-custom2 opacity-70 z-[100]"
+                  className="text-limeDark relative text-[6.8vw] mt-10 md:text-[30px] font-custom2 opacity-70 z-[100]"
                 >
                   We are an international Ecstatic Dance venue and community in
                   Goa since 2021. We host dances two times in a week every month
@@ -319,7 +317,7 @@ const Home = () => {
                 />
               </div>
 
-              <div className="flex flex-col self-center w-3/4 -mt-[835px] h-[835px]">
+              <div className="flex flex-col self-center w-5/6 justify-center -mt-[835px] h-[835px]">
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
@@ -332,7 +330,7 @@ const Home = () => {
                   }
                   className="text-gold2 text-center relative font-custom3 mt-[30px] text-[70px] z-[100] "
                 >
-                  Live-Concerts
+                  Live Concerts
                 </motion.div>
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -344,7 +342,7 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  className="text-limeDark relative text-[6.4vw] mt-10 md:text-[30px] font-custom2 opacity-70 z-[100]"
+                  className="text-limeDark relative text-[6.8vw] mt-10 md:text-[30px] font-custom2 opacity-70 z-[100]"
                 >
                   Elevate your senses at our live concerts. Immerse yourself in
                   electrifying performances, feel the music pulsate through your
@@ -377,7 +375,7 @@ const Home = () => {
                 />
               </div>
 
-              <div className="flex flex-col self-center w-3/4 -mt-[835px] h-[835px]">
+              <div className="flex flex-col self-center w-5/6 justify-center -mt-[835px] h-[835px]">
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
@@ -402,7 +400,7 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  className="text-limeDark relative text-[6.4vw] mt-10 md:text-[30px] font-custom2 opacity-70 z-[100]"
+                  className="text-limeDark relative text-[6.8vw] mt-10 md:text-[30px] font-custom2 opacity-70 z-[100]"
                 >
                   Experience workshops that nurture inner serenity and holistic
                   balance. Connect with your inner self through mindfulness
