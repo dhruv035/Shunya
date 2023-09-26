@@ -15,15 +15,15 @@ const Home = () => {
   const [tracker, setTracker] = useState();
   const [scrolled, setScrolled] = useState(false);
   const ref = useRef(null);
-  const isInView = useInView(ref, { amount: 0.35 });
+  const isInView = useInView(ref, { amount: 0.2 });
   const ref2 = useRef(null);
-  const isInView2 = useInView(ref2, { amount: 0.35});
+  const isInView2 = useInView(ref2, { amount: 0.2});
   const ref3 = useRef(null);
-  const isInView3 = useInView(ref3, { amount: 0.35 });
+  const isInView3 = useInView(ref3, { amount: 0.2 });
   const ref4 = useRef(null);
-  const isInView4 = useInView(ref4, { amount: 0.35 });
+  const isInView4 = useInView(ref4, { amount: 0.2 });
   const ref5 = useRef(null);
-  const isInView5 = useInView(ref5, { amount: 0.35 });
+  const isInView5 = useInView(ref5, { amount: 0.2 });
   useEffect(() => {
     if (Math.abs(dimensions.height - windowDimensions.height) > 100)
       setWindowDimensions(dimensions);
