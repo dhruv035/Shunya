@@ -26,7 +26,7 @@ const weekday = [
 const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
 const Event = () => {
-  
+  const abc = new Date(1673531199000);
   console.log("Init",abc)
   const [current, setCurrent] = useState(abc);
   const next = new Date(abc.setDate(abc.getDate()+(7-abc.getDay())));
@@ -35,7 +35,6 @@ const Event = () => {
   console.log("STart", abc);
   useEffect(() => {
     async function data() {
-      const abc = new Date(1673531199000);
       const response = await fetch("/api/calendar");
       const data = await response.json();
       const arr = Object.values(data);
@@ -46,7 +45,7 @@ const Event = () => {
       setData(arr)
     }
     data();
-  }, []);
+  }, [abc]);
   return (
     <div>
        <Menu />
