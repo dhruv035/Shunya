@@ -11,7 +11,8 @@ import { Text } from "@chakra-ui/react";
 import Menu from "@/components/menu";
 const logoTextClass = "text-[25px] my-2 w-[65vw] text-limeLight font-custom3 ";
 const Home = () => {
-  const windowDimensions = useDimensions();
+  const dimensions = useDimensions();
+  const [windowDimensions, setWindowDimensions] = useState(windowDimensions);
   const { scrollY } = useScroll();
   const [tracker, setTracker] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -30,6 +31,12 @@ const Home = () => {
     base: { opacity: 0, x: -70, transition: { duration: 1 } },
     scrolled: { opacity: 1, x: 0, transition: { duration: 1 } },
   };
+
+  useEffect(() => {
+    if (Math.abs(dimensions.height - windowDimensions.height) > 100)
+      setWindowDimensions(dimensions);
+  }, [dimensions]);
+
   const logoScale = 0.15;
   const logoVariants = {
     initial: { opacity: 0, transition: { duration: 0.5 } },
