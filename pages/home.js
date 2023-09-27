@@ -106,7 +106,7 @@ const Home = () => {
                 animate={!isInView && isInView2 ? "base" : "scrolled"}
                 variants={variantsTextLeft}
                 transition={{ duration: 0.5 }}
-                src={"/images/banyan.jpg"}
+                src={"/images/banyan-home.jpg"}
                 style={{
                   opacity: 1,
                   filter: " contrast(120%) brightness(60%)",
@@ -379,7 +379,7 @@ const Home = () => {
             >
               <div className="flex">
                 <img
-                  src={"/images/DSC_1444.jpeg"}
+                  src={"/images/workshop-home.jpeg"}
                   style={{
                     opacity: 1,
                     filter: " contrast(110%) brightness(60%)",
