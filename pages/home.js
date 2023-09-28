@@ -112,7 +112,7 @@ const InnerTitle = styled.div`
 color: ${twFullConfig.theme.colors["gold2"]};
 text-align:center;
 position: relative;
-font-size: 70px;
+font-size: 65px;
 z-index-100;
 font-family: Custom-3;
 `;
