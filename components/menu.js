@@ -36,7 +36,7 @@ const Menu = () => {
        <IconButton
           className="fixed z-[100] mr-8"
           onClick={onOpen}
-          style={{ position: "fixed", background: "transparent", opacity:"0.7", marginTop: width>height?height*6*logoScale/10:width*4*logoScale/10, marginRight:width>height?"4rem":"2rem" }}
+          style={{ position: "fixed", background: "transparent", opacity:"0.7", marginTop: width>height?height*6*logoScale/10:width*4*logoScale/10, marginRight:width>height?"4rem":"1.5rem" }}
           aria-label="Drawer-Icon"
           icon={<HamburgerIcon boxSize={`${width<810?width/15:50}px`} color="#C0D065" />}
         />

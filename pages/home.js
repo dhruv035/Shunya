@@ -163,7 +163,7 @@ const Home = () => {
       opacity: 0.6,
       x:
         windowDimensions.height > windowDimensions.width
-          ? (-windowDimensions.width * (5 - 4 * logoScale)) / 10 + 32
+          ? (-windowDimensions.width * (5 - 4 * logoScale)) / 10 + 15
           : -windowDimensions.width/2+windowDimensions.height*3.5/10*logoScale+windowDimensions.width*1/100,
       y:
         windowDimensions.height > windowDimensions.width
