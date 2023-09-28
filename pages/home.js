@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
+import styled from "@emotion/styled";
 import {
   motion,
   useScroll,
@@ -7,6 +9,75 @@ import {
 } from "framer-motion";
 import useDimensions from "@/components/useDimensions";
 import Menu from "@/components/menu";
+
+{
+  /*width:
+    windowDimensions.width < windowDimensions.height &&
+    windowDimensions.width < 1300
+      ? "auto"
+      : windowDimensions.width + 200,
+  height:
+    windowDimensions.width < windowDimensions.height &&
+    windowDimensions.width < 1300
+      ? windowDimensions.height + 100
+      : windowDimensions.height,*/
+}
+
+const AnimatedImage = styled.img`
+  width: ${({ windowDimensions }) => {
+    return windowDimensions.width < windowDimensions.height &&
+      windowDimensions.width < 1300
+      ? "auto"
+      : (windowDimensions.width + 200).toString() + "px";
+  }};
+  height: ${({ windowDimensions }) => {
+    return windowDimensions.width < windowDimensions.height &&
+      windowDimensions.width < 1300
+      ? (windowDimensions.height + 100).toString() + "px"
+      : windowDimensions.height + "px";
+  }};
+  object-fit: cover;
+`;
+
+const LogoContainer = styled.div`
+  top: ${({ windowDimensions }) => {
+    return windowDimensions.width > windowDimensions.height
+      ? windowDimensions.width / 6 + "px"
+      : windowDimensions.height / 6 + "px";
+  }};
+`;
+
+const OverlapContainer = styled.div`
+  height: ${({ windowDimensions }) => {
+    return windowDimensions.width < windowDimensions.height &&
+      windowDimensions.width < 1300
+      ? (windowDimensions.height + 100).toString() + "px"
+      : windowDimensions.height + "px";
+  }};
+
+  margin-top: ${({ windowDimensions }) => {
+    return windowDimensions.width < windowDimensions.height &&
+      windowDimensions.width < 1300
+      ? (-1 * (windowDimensions.height + 100)).toString() + "px"
+      : windowDimensions.height * -1 + "px";
+  }};
+
+  font-size: ${({ windowDimensions }) => {
+    return (
+      (windowDimensions.width * 1.2) / 100 +
+      (windowDimensions.height * 2.5) / 100
+    ).toString() + "px";
+  }};
+`;
+
+const LogoText = styled.div`
+margin-top: ${({windowDimensions})=>{
+  return windowDimensions.width > windowDimensions.height
+    ? ((windowDimensions.height * 8) / 10)+"px"
+      
+    : (((windowDimensions.width * 8) / 10) + (windowDimensions.height / 6) + (windowDimensions.height/9))+"px"
+}}
+`;
 const logoTextClass = "text-[25px] my-2 w-[65vw] text-limeLight font-custom3 ";
 const Home = () => {
   const dimensions = useDimensions();
@@ -15,15 +86,15 @@ const Home = () => {
   const [tracker, setTracker] = useState();
   const [scrolled, setScrolled] = useState(false);
   const ref = useRef(null);
-  const isInView = useInView(ref, { amount: 0.2 });
+  const isInView = useInView(ref, { amount: 0.3 });
   const ref2 = useRef(null);
-  const isInView2 = useInView(ref2, { amount: 0.2 });
+  const isInView2 = useInView(ref2, { amount: 0.3 });
   const ref3 = useRef(null);
-  const isInView3 = useInView(ref3, { amount: 0.2 });
+  const isInView3 = useInView(ref3, { amount: 0.3 });
   const ref4 = useRef(null);
-  const isInView4 = useInView(ref4, { amount: 0.2 });
+  const isInView4 = useInView(ref4, { amount: 0.3 });
   const ref5 = useRef(null);
-  const isInView5 = useInView(ref5, { amount: 0.2 });
+  const isInView5 = useInView(ref5, { amount: 0.3 });
   const ref6 = useRef(null);
   const isInView6 = useInView(ref6, {
     amount: 0.5,
@@ -89,6 +160,14 @@ const Home = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  const height = " h-[" + windowDimensions.height + "] ";
+
+  const gidth =
+    windowDimensions.width < windowDimensions.height &&
+    windowDimensions.width < 1300
+      ? " w-auto "
+      : " w-[" + (windowDimensions.width + 200).toString() + "] ";
+  console.log("W", gidth);
   return (
     <main className="flex-col bg-black">
       <motion.div
@@ -100,72 +179,48 @@ const Home = () => {
         <div className="flex flex-row place-items-center bg-black ">
           <div className=" flex flex-col  w-[100vw] items-center self-start overflow-clip bg-black">
             {
-              <motion.img
+              <motion.div
                 ref={ref}
                 initial={{ opacity: 1 }}
                 animate={!isInView && isInView2 ? "base" : "scrolled"}
                 variants={variantsTextLeft}
                 transition={{ duration: 0.5 }}
-                src={"/images/banyan-home.jpg"}
-                style={{
-                  opacity: 1,
-                  filter: " contrast(120%) brightness(60%)",
-                  left: 0,
-                  top: 0,
-                  objectFit: "cover",
-                  height:
-                    windowDimensions.width < 700
-                      ? "900px"
-                      : windowDimensions.height + 100,
-                  zIndex: 10,
-                }}
-              />
+              >
+                <AnimatedImage
+                  windowDimensions={windowDimensions}
+                  src={"/images/banyan-home.jpg"}
+                />
+              </motion.div>
             }
-            <motion.img
-              initial={{ opacity: 0 }}
-              animate={tracker > 0 ? "scrolled" : "base"}
-              variants={logoVariants}
-              transition={{ duration: 0.5 }}
-              className="shunya-logo fixed"
-              src={"/images/shunyaLogo.png"}
-              style={{
-                opacity: 1,
-                top:
-                  windowDimensions.width > windowDimensions.height
-                    ? windowDimensions.width / 6
-                    : windowDimensions.height / 6,
-
-                //filter: "hue-rotate(90deg) contrast(160%)",
-                height:
+            <LogoContainer
+              windowDimensions={windowDimensions}
+              className=" shunya-logo fixed z-[100]"
+              //filter: "hue-rotate(90deg) contrast(160%)",
+            >
+              <motion.img
+                initial={{ opacity: 0 }}
+                animate={tracker > 0 ? "scrolled" : "base"}
+                variants={logoVariants}
+                transition={{ duration: 0.5 }}
+                width={
                   windowDimensions.width > windowDimensions.height
                     ? (windowDimensions.height * 8) / 10
-                    : (windowDimensions.width * 8) / 10,
-                width:
-                  windowDimensions.width > windowDimensions.height
-                    ? (windowDimensions.height * 8) / 10
-                    : (windowDimensions.width * 8) / 10,
-                zIndex: 100,
-              }}
-            />
-            <div
+                    : (windowDimensions.width * 8) / 10
+                }
+                src={"/images/shunyaLogo.png"}
+              />
+            </LogoContainer>
+            <OverlapContainer
+              windowDimensions={windowDimensions}
               ref={ref6}
-              style={{
-                top:
-                  windowDimensions.width > windowDimensions.height
-                    ? windowDimensions.width / 6
-                    : (windowDimensions.height * 7) / 10,
-                height: "900px",
-                marginTop: "-900px",
-              }}
               className="flex flex-col z-20 "
             >
+              <LogoText windowDimensions={windowDimensions}>
               <motion.div
                 initial={"scrolled"}
                 animate={!isInView6 ? "scrolled" : "base"}
                 variants={textLeftVariants}
-                style={{
-                  marginTop: 600,
-                }}
+                
                 className={logoTextClass + "text-left"}
               >
                 ECSTATIC DANCE
@@ -188,7 +243,8 @@ const Home = () => {
               >
                 ART SPACE
               </motion.div>
-            </div>
+              </LogoText>
+            </OverlapContainer>
 
             <motion.div
               ref={ref2}
@@ -198,20 +254,16 @@ const Home = () => {
               className="flex flex-col self-start"
             >
               <div className="flex">
-                <img
+                <AnimatedImage
+                  windowDimensions={windowDimensions}
                   src={"/images/shunya-wellness-home.jpg"}
-                  style={{
-                    opacity: 1,
-                    filter: "contrast(110%) brightness(40%)",
-                    left: 0,
-                    top: 0,
-                    objectFit: "cover",
-                    height: "900px",
-                    zIndex: 20,
-                  }}
+                  className="contrast-[1.1] brightness-[0.4] z-[20] object-cover"
                 />
               </div>
-              <div className="flex flex-col self-center w-[87.5%] justify-center -mt-[900px] h-[900px] z-[100]">
+              <OverlapContainer
+                windowDimensions={windowDimensions}
+                className="flex flex-col self-center w-[87.5%] justify-center z-[100]"
+              >
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
@@ -236,7 +288,7 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  className="text-limeDark text-[6.8vw] relative opacity-70 z-[100]"
+                  className="text-limeDark relative mt-10 opacity-70 z-[100]"
                 >
                   Every year, from November through April,{" "}
                   <i className="text-gold2 font-custom2 font-black">
@@ -249,7 +301,7 @@ const Home = () => {
                   uniting under nature&apos;s canopy.
                   <br></br>
                 </motion.div>
-              </div>
+              </OverlapContainer>
             </motion.div>
 
             <motion.div
@@ -260,21 +312,17 @@ const Home = () => {
               className="flex flex-col self-start"
             >
               <div className="flex">
-                <img
+                <AnimatedImage
+                  windowDimensions={windowDimensions}
+                  className="object-cover contrast-[1.1] brightness-[0.4]"
                   src={"/images/ecstatic-home.jpg"}
-                  style={{
-                    opacity: 1,
-                    filter: " contrast(110%) brightness(40%)",
-                    left: 0,
-                    top: 0,
-                    objectFit: "cover",
-                    height: "900px",
-                    zIndex: 20,
-                  }}
                 />
               </div>
 
-              <div className="flex flex-col self-center justify-center w-[87.5%] -mt-[900px] h-[900px]">
+              <OverlapContainer
+                windowDimensions={windowDimensions}
+                className="flex flex-col self-center justify-center w-[87.5%]"
+              >
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
@@ -287,7 +335,7 @@ const Home = () => {
                   }
                   className="text-gold2 text-center relative font-custom3 text-[70px] z-[100] "
                 >
-                  Ecstatic<br></br>Dance
+                  Ecstatic Dance
                 </motion.div>
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -299,7 +347,8 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  className="text-limeDark relative text-[6.8vw] mt-10 md:text-[30px] font-custom2 opacity-70 z-[100]"
+                  
+                  className="text-limeDark relative mt-10 font-custom2 opacity-70 z-[100]"
                 >
                   Since 2021, we&apos;ve been the heart of Ecstatic Dance in
                   Goa, hosting bi-weekly dance sessions with acclaimed DJs from
@@ -309,7 +358,7 @@ const Home = () => {
                   ceremony corner, creating a holistic experience for mind,
                   body, and soul.<br></br>
                 </motion.div>
-              </div>
+              </OverlapContainer>
             </motion.div>
 
             <motion.div
@@ -320,21 +369,17 @@ const Home = () => {
               className="flex flex-col self-start"
             >
               <div className="flex">
-                <img
+                <AnimatedImage
+                  windowDimensions={windowDimensions}
+                  className="contrast-[1.1] brightness-[0.4] z-[20] object-cover"
                   src={"/images/concert-home.jpg"}
-                  style={{
-                    opacity: 1,
-                    filter: " contrast(130%) brightness(40%)",
-                    left: 0,
-                    top: 0,
-                    objectFit: "cover",
-                    height: "900px",
-                    zIndex: 20,
-                  }}
                 />
               </div>
 
-              <div className="flex flex-col self-center w-[87.5%] justify-center -mt-[900px] h-[900px]">
+              <OverlapContainer
+                windowDimensions={windowDimensions}
+                className="flex flex-col self-center w-[87.5%] justify-center"
+              >
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
@@ -359,7 +404,8 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  className="text-limeDark relative text-[6.8vw] mt-10 md:text-[30px] font-custom2 opacity-70 z-[100]"
+                  
+                  className="text-limeDark relative  mt-10 font-custom2 opacity-70 z-[100]"
                 >
                   Elevate your senses at our live concerts. Immerse yourself in
                   electrifying performances, feel the music pulsate through your
@@ -367,7 +413,7 @@ const Home = () => {
                   family. Join us for a night of musical magic and pure
                   entertainment. <br></br>
                 </motion.div>
-              </div>
+              </OverlapContainer>
             </motion.div>
 
             <motion.div
@@ -378,21 +424,17 @@ const Home = () => {
               className="flex flex-col self-start h-[100vh]"
             >
               <div className="flex">
-                <img
+                <AnimatedImage
+                  windowDimensions={windowDimensions}
+                  className="contrast-[1.1] brightness-[0.4] z-[20] object-cover"
                   src={"/images/workshop-home.jpeg"}
-                  style={{
-                    opacity: 1,
-                    filter: " contrast(110%) brightness(60%)",
-                    left: 0,
-                    top: 0,
-                    objectFit: "cover",
-                    height: "900px",
-                    zIndex: 20,
-                  }}
                 />
               </div>
 
-              <div className="flex flex-col self-center w-[87.5%] justify-center -mt-[900px] h-[900px]">
+              <OverlapContainer
+                windowDimensions={windowDimensions}
+                className="flex flex-col self-center w-[87.5%] justify-center"
+              >
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={
@@ -417,7 +459,8 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  className="text-limeDark relative text-[6.8vw] mt-10 md:text-[30px] font-custom2 opacity-70 z-[100]"
+                
+                  className="text-limeDark relative  mt-10 font-custom2 opacity-70 z-[100]"
                 >
                   Experience workshops that nurture inner serenity and holistic
                   balance. Connect with your inner self through mindfulness
@@ -425,7 +468,7 @@ const Home = () => {
                   transformative journey toward personal growth and
                   self-discovery.<br></br>
                 </motion.div>
-              </div>
+              </OverlapContainer>
             </motion.div>
 
             {
