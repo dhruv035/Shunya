@@ -64,8 +64,8 @@ const OverlapContainer = styled.div`
 
   font-size: ${({ windowDimensions }) => {
     return (
-      (windowDimensions.width * 1.2) / 100 +
-      (windowDimensions.height * 2.5) / 100
+      (windowDimensions.width * 1.5) / 100 +
+      (windowDimensions.height * 3) / 100
     ).toString() + "px";
   }};
 `;
