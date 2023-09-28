@@ -37,6 +37,7 @@ const AnimatedImage = styled.img`
       : windowDimensions.height + "px";
   }};
   object-fit: cover;
+  filter: contrast(110%) brightness(40%)
 `;
 
 const LogoContainer = styled.div`
@@ -355,8 +356,7 @@ const Home = () => {
                   across the globe. Our vibrant community welcomes all to join
                   in the rhythmic celebration. In addition to the dance floor,
                   we offer a delightful vegetarian cafe and a serene tea
-                  ceremony corner, creating a holistic experience for mind,
-                  body, and soul.<br></br>
+                  ceremony corner.<br></br>
                 </motion.div>
               </OverlapContainer>
             </motion.div>
