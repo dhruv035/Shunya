@@ -7,8 +7,12 @@ import {
   useMotionValueEvent,
   useInView,
 } from "framer-motion";
+import resolveConfig from "tailwindcss/resolveConfig";
+import tailwindConfig from "@/tailwind.config.js";
+const twFullConfig = resolveConfig(tailwindConfig);
 import useDimensions from "@/components/useDimensions";
 import Menu from "@/components/menu";
+import { theme } from "@/tailwind.config";
 
 {
   /*width:
@@ -37,10 +41,27 @@ const AnimatedImage = styled.img`
       : windowDimensions.height + "px";
   }};
   object-fit: cover;
-  filter: contrast(110%) brightness(40%)
+  filter: contrast(110%) brightness(40%);
   .home: {
-    filter:brightness(100%)
+    filter: brightness(100%);
   }
+`;
+
+const AnimatedImageHome = styled.img`
+  width: ${({ windowDimensions }) => {
+    return windowDimensions.width < windowDimensions.height &&
+      windowDimensions.width < 1300
+      ? "auto"
+      : (windowDimensions.width + 200).toString() + "px";
+  }};
+  height: ${({ windowDimensions }) => {
+    return windowDimensions.width < windowDimensions.height &&
+      windowDimensions.width < 1300
+      ? (windowDimensions.height + 100).toString() + "px"
+      : windowDimensions.height + "px";
+  }};
+  object-fit: cover;
+  filter: contrast(110%);
 `;
 
 const LogoContainer = styled.div`
@@ -58,30 +79,50 @@ const OverlapContainer = styled.div`
       ? (windowDimensions.height + 100).toString() + "px"
       : windowDimensions.height + "px";
   }};
-
   margin-top: ${({ windowDimensions }) => {
     return windowDimensions.width < windowDimensions.height &&
       windowDimensions.width < 1300
       ? (-1 * (windowDimensions.height + 100)).toString() + "px"
       : windowDimensions.height * -1 + "px";
   }};
-
   font-size: ${({ windowDimensions }) => {
     return (
-      (windowDimensions.width * 1.5) / 100 +
-      (windowDimensions.height * 2.8) / 100
-    ).toString() + "px";
+      (
+        (windowDimensions.width * 1.5) / 100 +
+        (windowDimensions.height * 2.8) / 100
+      ).toString() + "px"
+    );
   }};
 `;
 
 const LogoText = styled.div`
-margin-top: ${({windowDimensions})=>{
-  return windowDimensions.width > windowDimensions.height
-    ? ((windowDimensions.height * 8) / 10)+"px"
-      
-    : (((windowDimensions.width * 8) / 10) + (windowDimensions.height / 6) + (windowDimensions.height/9))+"px"
-}}
+  margin-top: ${({ windowDimensions }) => {
+    return windowDimensions.width > windowDimensions.height
+      ? (windowDimensions.height * 8) / 10 + "px"
+      : (windowDimensions.width * 8) / 10 +
+          windowDimensions.height / 6 +
+          windowDimensions.height / 9 +
+          "px";
+  }};
 `;
+
+const InnerTitle = styled.div`
+color: ${twFullConfig.theme.colors["gold2"]};
+text-align:center;
+position: relative;
+font-size: 70px;
+z-index-100;
+font-family: Custom-3;
+`;
+
+const InnerText = styled.div`
+margin-top:2.5rem;
+opacity-0.7;
+z-index: 100;
+color: ${twFullConfig.theme.colors["limeDark"]};
+font-family: Custom-2
+`;
+
 const logoTextClass = "text-[25px] my-2 w-[65vw] text-limeLight font-custom3 ";
 const Home = () => {
   const dimensions = useDimensions();
@@ -190,10 +231,9 @@ const Home = () => {
                 variants={variantsTextLeft}
                 transition={{ duration: 0.5 }}
               >
-                <AnimatedImage
+                <AnimatedImageHome
                   windowDimensions={windowDimensions}
                   src={"/images/banyan-home.jpg"}
-                  className="home"
                 />
               </motion.div>
             }
@@ -221,33 +261,32 @@ const Home = () => {
               className="flex flex-col z-20 "
             >
               <LogoText windowDimensions={windowDimensions}>
-              <motion.div
-                initial={"scrolled"}
-                animate={!isInView6 ? "scrolled" : "base"}
-                variants={textLeftVariants}
-                
-                className={logoTextClass + "text-left"}
-              >
-                ECSTATIC DANCE
-              </motion.div>
-              <motion.div
-                initial={"scrolled"}
-                animate={!isInView6 ? "scrolled" : "base"}
-                variants={textRightVariants}
-                transition={{ duration: 0.6, delay: 1 }}
-                className={logoTextClass + "text-right overflow-hidden"}
-              >
-                WELLNESS RETREAT
-              </motion.div>
-              <motion.div
-                initial={"scrolled"}
-                animate={!isInView6 ? "scrolled" : "base"}
-                variants={textLeftVariants}
-                transition={{ duration: 0.6, delay: 1 }}
-                className={logoTextClass}
-              >
-                ART SPACE
-              </motion.div>
+                <motion.div
+                  initial={"scrolled"}
+                  animate={!isInView6 ? "scrolled" : "base"}
+                  variants={textLeftVariants}
+                  className={logoTextClass + "text-left"}
+                >
+                  ECSTATIC DANCE
+                </motion.div>
+                <motion.div
+                  initial={"scrolled"}
+                  animate={!isInView6 ? "scrolled" : "base"}
+                  variants={textRightVariants}
+                  transition={{ duration: 0.6, delay: 1 }}
+                  className={logoTextClass + "text-right overflow-hidden"}
+                >
+                  WELLNESS RETREAT
+                </motion.div>
+                <motion.div
+                  initial={"scrolled"}
+                  animate={!isInView6 ? "scrolled" : "base"}
+                  variants={textLeftVariants}
+                  transition={{ duration: 0.6, delay: 1 }}
+                  className={logoTextClass}
+                >
+                  ART SPACE
+                </motion.div>
               </LogoText>
             </OverlapContainer>
 
@@ -262,7 +301,6 @@ const Home = () => {
                 <AnimatedImage
                   windowDimensions={windowDimensions}
                   src={"/images/shunya-wellness-home.jpg"}
-                  className="contrast-[1.1] brightness-[0.4] z-[20] object-cover"
                 />
               </div>
               <OverlapContainer
@@ -279,9 +317,8 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  className="text-gold2 text-center relative font-custom3 text-[70px] z-[100] "
                 >
-                  Shunya Wellness
+                  <InnerTitle>Shunya Wellness</InnerTitle>
                 </motion.div>
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -293,18 +330,19 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  className="text-limeDark relative mt-10 opacity-70 z-[100]"
                 >
-                  Every year, from November through April,{" "}
-                  <i className="text-gold2 font-custom2 font-black">
-                    Shunya Wellness{" "}
-                  </i>
-                  Shunya Wellness, nestled within a jungle, attracts people
-                  worldwide. Nomads, travelers, musicians, and dancers gather
-                  beneath the starry skies around a towering Banyan tree.
-                  It&apos;s a unique destination where a global community forms,
-                  uniting under nature&apos;s canopy.
-                  <br></br>
+                  <InnerText>
+                    Every year, from November through April,{" "}
+                    <i className="text-gold2 font-custom2 font-black">
+                      Shunya Wellness,{" "}
+                    </i>
+                    nestled within a jungle, attracts people worldwide. Nomads,
+                    travelers, musicians, and dancers gather beneath the starry
+                    skies around a towering Banyan tree. It&apos;s a unique
+                    destination where a global community forms, uniting under
+                    nature&apos;s canopy.
+                    <br></br>
+                  </InnerText>
                 </motion.div>
               </OverlapContainer>
             </motion.div>
@@ -319,7 +357,6 @@ const Home = () => {
               <div className="flex">
                 <AnimatedImage
                   windowDimensions={windowDimensions}
-                  className="object-cover contrast-[1.1] brightness-[0.4]"
                   src={"/images/ecstatic-home.jpg"}
                 />
               </div>
@@ -338,9 +375,8 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  className="text-gold2 text-center relative font-custom3 text-[70px] z-[100] "
                 >
-                  Ecstatic Dance
+                  <InnerTitle>Ecstatic Dance</InnerTitle>
                 </motion.div>
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -352,15 +388,15 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  
-                  className="text-limeDark relative mt-10 font-custom2 opacity-70 z-[100]"
                 >
-                  Since 2021, we&apos;ve been the heart of Ecstatic Dance in
-                  Goa, hosting bi-weekly dance sessions with acclaimed DJs from
-                  across the globe. Our vibrant community welcomes all to join
-                  in the rhythmic celebration. In addition to the dance floor,
-                  we offer a delightful vegetarian cafe and a serene tea
-                  ceremony corner.<br></br>
+                  <InnerText>
+                    Since 2021, we&apos;ve been the heart of Ecstatic Dance in
+                    Goa, hosting bi-weekly dance sessions with acclaimed DJs
+                    from across the globe. Our vibrant community welcomes all to
+                    join in the rhythmic celebration. In addition to the dance
+                    floor, we offer a delightful vegetarian cafe and a serene
+                    tea ceremony corner.<br></br>
+                  </InnerText>
                 </motion.div>
               </OverlapContainer>
             </motion.div>
@@ -375,7 +411,6 @@ const Home = () => {
               <div className="flex">
                 <AnimatedImage
                   windowDimensions={windowDimensions}
-                  className="contrast-[1.1] brightness-[0.4] z-[20] object-cover"
                   src={"/images/concert-home.jpg"}
                 />
               </div>
@@ -394,9 +429,8 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  className="text-gold2 text-center relative font-custom3 text-[70px] z-[100] "
                 >
-                  Live Concerts
+                  <InnerTitle>Live Concerts</InnerTitle>
                 </motion.div>
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -408,14 +442,14 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  
-                  className="text-limeDark relative  mt-10 font-custom2 opacity-70 z-[100]"
                 >
-                  Elevate your senses at our live concerts. Immerse yourself in
-                  electrifying performances, feel the music pulsate through your
-                  soul, and create unforgettable memories with friends and
-                  family. Join us for a night of musical magic and pure
-                  entertainment. <br></br>
+                  <InnerText>
+                    Elevate your senses at our live concerts. Immerse yourself
+                    in electrifying performances, feel the music pulsate through
+                    your soul, and create unforgettable memories with friends
+                    and family. Join us for a night of musical magic and pure
+                    entertainment. <br></br>
+                  </InnerText>
                 </motion.div>
               </OverlapContainer>
             </motion.div>
@@ -430,7 +464,6 @@ const Home = () => {
               <div className="flex">
                 <AnimatedImage
                   windowDimensions={windowDimensions}
-                  className="contrast-[1.1] brightness-[0.4] z-[20] object-cover"
                   src={"/images/workshop-home.jpeg"}
                 />
               </div>
@@ -449,9 +482,8 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                  className="text-gold2 text-center relative font-custom3 text-[70px] z-[100] "
                 >
-                  Workshops
+                  <InnerTitle>Workshops</InnerTitle>
                 </motion.div>
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -463,14 +495,14 @@ const Home = () => {
                         }
                       : { opacity: 0 }
                   }
-                
-                  className="text-limeDark relative  mt-10 font-custom2 opacity-70 z-[100]"
                 >
-                  Experience workshops that nurture inner serenity and holistic
-                  balance. Connect with your inner self through mindfulness
-                  practices, explore the path to well-being, and embark on a
-                  transformative journey toward personal growth and
-                  self-discovery.<br></br>
+                  <InnerText>
+                    Experience workshops that nurture inner serenity and
+                    holistic balance. Connect with your inner self through
+                    mindfulness practices, explore the path to well-being, and
+                    embark on a transformative journey toward personal growth
+                    and self-discovery.<br></br>
+                  </InnerText>
                 </motion.div>
               </OverlapContainer>
             </motion.div>
