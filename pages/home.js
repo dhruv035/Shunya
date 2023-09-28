@@ -38,6 +38,9 @@ const AnimatedImage = styled.img`
   }};
   object-fit: cover;
   filter: contrast(110%) brightness(40%)
+  .home: {
+    filter:brightness(100%)
+  }
 `;
 
 const LogoContainer = styled.div`
@@ -66,7 +69,7 @@ const OverlapContainer = styled.div`
   font-size: ${({ windowDimensions }) => {
     return (
       (windowDimensions.width * 1.5) / 100 +
-      (windowDimensions.height * 3) / 100
+      (windowDimensions.height * 2.8) / 100
     ).toString() + "px";
   }};
 `;
@@ -190,6 +193,7 @@ const Home = () => {
                 <AnimatedImage
                   windowDimensions={windowDimensions}
                   src={"/images/banyan-home.jpg"}
+                  className="home"
                 />
               </motion.div>
             }
