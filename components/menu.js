@@ -38,7 +38,7 @@ const Menu = () => {
           onClick={onOpen}
           style={{ position: "fixed", background: "transparent", opacity:"0.7", marginTop: width>height?height*6*logoScale/10:width*4*logoScale/10, marginRight:width>height?"4rem":"1.5rem" }}
           aria-label="Drawer-Icon"
-          icon={<HamburgerIcon boxSize={`${width<810?width/13:50}px`} color="#C0D065" />}
+          icon={<HamburgerIcon boxSize={`${width<810?width/10:50}px`} color="#C0D065" />}
         />
     <Drawer
       isOpen={isOpen}
