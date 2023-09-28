@@ -52,7 +52,7 @@ const AnimatedImageHome = styled.img`
     return windowDimensions.width < windowDimensions.height &&
       windowDimensions.width < 1300
       ? "auto"
-      : (windowDimensions.width + 200).toString() + "px";
+      : (windowDimensions.width + 400).toString() + "px";
   }};
   height: ${({ windowDimensions }) => {
     return windowDimensions.width < windowDimensions.height &&
@@ -66,9 +66,7 @@ const AnimatedImageHome = styled.img`
 
 const LogoContainer = styled.div`
   top: ${({ windowDimensions }) => {
-    return windowDimensions.width > windowDimensions.height
-      ? windowDimensions.width / 6 + "px"
-      : windowDimensions.height / 6 + "px";
+    return  windowDimensions.height / 6 + "px";
   }};
 `;
 
@@ -104,7 +102,11 @@ const LogoText = styled.div`
           windowDimensions.height / 9 +
           "px";
   }};
+  font-size: ${({windowDimensions})=>{
+    return 
+  }}
 `;
+
 
 const InnerTitle = styled.div`
 color: ${twFullConfig.theme.colors["gold2"]};
@@ -162,13 +164,14 @@ const Home = () => {
       x:
         windowDimensions.height > windowDimensions.width
           ? (-windowDimensions.width * (5 - 4 * logoScale)) / 10 + 32
-          : -265,
+          : -windowDimensions.width/2+windowDimensions.height*3.5/10*logoScale+windowDimensions.width*1/100,
       y:
         windowDimensions.height > windowDimensions.width
           ? -windowDimensions.height / 6 -
             ((windowDimensions.width * 2) / 5) * (1 - logoScale) +
             20
-          : -265,
+          : -windowDimensions.height / 6 -
+          ((windowDimensions.height * 3.5) / 10) + windowDimensions.height*3.5*logoScale/10+20+windowDimensions.height*3.5*logoScale/20,
       transition: { duration: 0.5 },
     },
   };
@@ -249,7 +252,7 @@ const Home = () => {
                 transition={{ duration: 0.5 }}
                 width={
                   windowDimensions.width > windowDimensions.height
-                    ? (windowDimensions.height * 8) / 10
+                    ? (windowDimensions.height * 7) / 10
                     : (windowDimensions.width * 8) / 10
                 }
                 src={"/images/shunyaLogo.png"}
@@ -266,6 +269,9 @@ const Home = () => {
                   animate={!isInView6 ? "scrolled" : "base"}
                   variants={textLeftVariants}
                   className={logoTextClass + "text-left"}
+                  style={{
+                    fontSize:windowDimensions.width/100+windowDimensions.height*2/100
+                  }}
                 >
                   ECSTATIC DANCE
                 </motion.div>
@@ -275,6 +281,9 @@ const Home = () => {
                   variants={textRightVariants}
                   transition={{ duration: 0.6, delay: 1 }}
                   className={logoTextClass + "text-right overflow-hidden"}
+                  style={{
+                    fontSize:windowDimensions.width/100+windowDimensions.height*2/100
+                  }}
                 >
                   WELLNESS RETREAT
                 </motion.div>
@@ -284,6 +293,9 @@ const Home = () => {
                   variants={textLeftVariants}
                   transition={{ duration: 0.6, delay: 1 }}
                   className={logoTextClass}
+                  style={{
+                    fontSize:windowDimensions.width/100+windowDimensions.height*2/100
+                  }}
                 >
                   ART SPACE
                 </motion.div>
@@ -305,7 +317,7 @@ const Home = () => {
               </div>
               <OverlapContainer
                 windowDimensions={windowDimensions}
-                className="flex flex-col self-center w-[87.5%] justify-center z-[100]"
+                className="flex flex-col self-center w-[85%] justify-center z-[100]"
               >
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -363,7 +375,7 @@ const Home = () => {
 
               <OverlapContainer
                 windowDimensions={windowDimensions}
-                className="flex flex-col self-center justify-center w-[87.5%]"
+                className="flex flex-col self-center justify-center w-[85%]"
               >
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -417,7 +429,7 @@ const Home = () => {
 
               <OverlapContainer
                 windowDimensions={windowDimensions}
-                className="flex flex-col self-center w-[87.5%] justify-center"
+                className="flex flex-col self-center w-[85%] justify-center"
               >
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -470,7 +482,7 @@ const Home = () => {
 
               <OverlapContainer
                 windowDimensions={windowDimensions}
-                className="flex flex-col self-center w-[87.5%] justify-center"
+                className="flex flex-col self-center w-[85%] justify-center"
               >
                 <motion.div
                   initial={{ opacity: 0 }}
