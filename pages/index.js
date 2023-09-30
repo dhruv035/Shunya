@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import Head from "next/head";
 import banyanImage from "@/public/images/banyan-home.jpg";
 import placeHolder from "@/public/images/placeholder-banyan.jpg";
 import styled from "@emotion/styled";
@@ -210,12 +211,11 @@ const Home = () => {
 
   return (
     <main className="flex-col bg-black">
-      <head><link rel="preload" as="image" href="/images/workshop-home.jpeg"/>
+      <Head><link rel="preload" as="image" href="/images/workshop-home.jpeg"/>
       <link rel="preload" as="image" href="/images/shunyaLogo.png"/>
       <link rel="preload" as="image" href="/images/banyan-home.jpg"/>
       <link rel="preload" as="image" href="/images/concert-home.jpg"/>
-      <link rel="preload" as="image" href="/images/shunya-wellness-home.jpg"/>
-      </head>
+      <link rel="preload" as="image" href="/images/shunya-wellness-home.jpg"/></Head>
       {isLoading && (
         <div className="fixed inset-0 z-10 h-screen bg-[#000000] flex items-center justify-center flex-col">
           <div style={{ width: "70%" }}>
