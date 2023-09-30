@@ -151,7 +151,6 @@ const Home = () => {
     amount: 0.5,
     margin: "-200px 100px 100px 100px",
   });
-  const [delay, setDelay] = useState(1.2);
 
   useEffect(() => {
     if (Math.abs(dimensions.height - windowDimensions.height) > 100)
@@ -196,12 +195,12 @@ const Home = () => {
   };
 
   var textLeftVariants = {
-    base: { opacity: 1, y: 0, transition: { duration: 0.6, delay: delay } },
+    base: { opacity: 1, y: 0, transition: { duration: 0.6 } },
     scrolled: { opacity: 0, y: +40, transition: { duration: 0.6, delay: 0 } },
   };
 
   var textRightVariants = {
-    base: { opacity: 1, y: 0, transition: { duration: 0.6, delay: delay } },
+    base: { opacity: 1, y: 0, transition: { duration: 0.6 } },
     scrolled: { opacity: 0, y: +40, transition: { duration: 0.6, delay: 0 } },
   };
 
@@ -270,6 +269,7 @@ const Home = () => {
                 >
                   <m.img
                     loading="lazy"
+                    style={{visibility:isLoading?"hidden":"visible"}}
                     initial={{ opacity: 0 }}
                     animate={tracker > 0 ? "scrolled" : "base"}
                     variants={logoVariants}
@@ -302,7 +302,7 @@ const Home = () => {
                           (windowDimensions.height * 2) / 100,
                       }}
                     >
-                      ECSTATIC DANCE
+                                            {isLoading?"":"ECSTATIC DANCE"}
                     </m.div>
                     <m.div
                       initial={"scrolled"}
@@ -315,7 +315,7 @@ const Home = () => {
                           (windowDimensions.height * 2) / 100,
                       }}
                     >
-                      WELLNESS RETREAT
+                      {isLoading?"":"WELLNESS RETREAT"}
                     </m.div>
                     <m.div
                       initial={"scrolled"}
@@ -328,7 +328,7 @@ const Home = () => {
                           (windowDimensions.height * 2) / 100,
                       }}
                     >
-                      ART SPACE
+                                            {isLoading?"":"ART SPACE"}
                     </m.div>
                   </LogoText>
                 </OverlapContainer>
