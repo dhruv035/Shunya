@@ -72,7 +72,7 @@ const Event = () => {
   return (
     <div>
       <Menu />
-      <main className="flex-col grow-1 px-6 py-10 bg-black w-[100vw] min-h-[100vh] h-max overflow-clip">
+      <div className="flex-col grow-1 px-6 py-10 bg-black w-[100vw] min-h-[100vh] h-max overflow-clip">
         <Logo />
         <div className="flex flex-col items-center mx-5">
           <Text className="text-[30px] md:text-[60px] text-amber-400 mb-10">
@@ -111,7 +111,7 @@ const Event = () => {
             })}
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 };
