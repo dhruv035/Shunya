@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import Image from "next/image";
+import banyanImage from "@/public/images/banyan-home.jpg";
+import placeHolder from "@/public/images/placeholder-banyan.jpg";
 import styled from "@emotion/styled";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import {
   LazyMotion,
   m,
@@ -13,8 +15,6 @@ import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "@/tailwind.config.js";
 const twFullConfig = resolveConfig(tailwindConfig);
 import useDimensions from "@/components/useDimensions";
-import Menu from "@/components/menu";
-import { theme } from "@/tailwind.config";
 
 {
   /*width:
@@ -116,7 +116,11 @@ position: relative;
 font-size: 65px;
 z-index-100;
 font-family: Custom-3;
-`;
+visibility: ${({isLoading}) => {
+  return isLoading?"hidden":"visible"
+}}
+`
+;
 
 const InnerText = styled.div`
 margin-top:2.5rem;
@@ -129,6 +133,7 @@ font-family: Custom-2
 const logoTextClass = "text-[25px] my-2 w-[65vw] text-limeLight font-custom3 ";
 const Home = () => {
   const dimensions = useDimensions();
+  const [isLoading, setIsLoading] = useState(true);
   const [windowDimensions, setWindowDimensions] = useState(dimensions);
   const { scrollY } = useScroll();
   const [tracker, setTracker] = useState();
@@ -206,249 +211,239 @@ const Home = () => {
     setTracker(latest);
   });
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDelay(0);
-    }, 1000); // 5000 ms = 5 seconds
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  const height = " h-[" + windowDimensions.height + "] ";
-
-  const gidth =
-    windowDimensions.width < windowDimensions.height &&
-    windowDimensions.width < 1300
-      ? " w-auto "
-      : " w-[" + (windowDimensions.width + 200).toString() + "] ";
-  console.log("W", gidth);
   return (
     <main className="flex-col bg-black">
-      <LazyMotion features={domAnimation}>
+      {isLoading && (
+        <div className="fixed inset-0 z-10 h-screen bg-[#000000] flex items-center justify-center flex-col">
+          <div style={{ width: "70%" }}>
+            <video
+              autoPlay
+              muted
+              loop
+              style={{ opacity: 1, width: "100%", height: "100%" }}
+            >
+              <source src="./animations/anime.mp4" />
+            </video>
+          </div>
+        </div>
+      )}
+      {(<LazyMotion features={domAnimation} style={{visibility:isLoading?"hidden":"visible"}}>
         <m.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 2, delay: 0.5 }}
         >
-          <Menu />
           <div className="flex flex-row place-items-center bg-black ">
             <div className=" flex flex-col  w-[100vw] items-center self-start overflow-clip bg-black">
               {
-                <LazyMotion features={domAnimation}>
-                  <m.div
-                    ref={ref}
-                    initial={{ opacity: 1 }}
-                    animate={!isInView && isInView2 ? "base" : "scrolled"}
-                    variants={variantsTextLeft}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <AnimatedImageHome
-                      windowDimensions={windowDimensions}
-                      src={"/images/banyan-home.jpg"}
-                    />
-                  </m.div>
-                </LazyMotion>
+                <m.div
+                  ref={ref}
+                  initial={{ opacity: 1 }}
+                  animate={!isInView && isInView2 ? "base" : "scrolled"}
+                  variants={variantsTextLeft}
+                  transition={{ duration: 0.5 }}
+                >
+                  <LazyLoadImage
+                    style={{
+                      width:
+                        windowDimensions.width < windowDimensions.height &&
+                        windowDimensions.width < 1300
+                          ? ((windowDimensions.height + 100) * 16) / 9
+                          : windowDimensions.width + 400,
+                      height:
+                        windowDimensions.width < windowDimensions.height &&
+                        windowDimensions.width < 1300
+                          ? windowDimensions.height + 100
+                          : windowDimensions.height,
+                    }}
+                    className="object-cover contrast-[110%]"
+                    src={"/images/banyan-home.webp"}
+                    
+                  ></LazyLoadImage>
+                </m.div>
               }
               <LogoContainer
                 windowDimensions={windowDimensions}
                 className=" shunya-logo fixed z-[100]"
                 //filter: "hue-rotate(90deg) contrast(160%)",
               >
-                <LazyMotion features={domAnimation}>
-                  <m.img
-                    initial={{ opacity: 0 }}
-                    animate={tracker > 0 ? "scrolled" : "base"}
-                    variants={logoVariants}
-                    transition={{ duration: 0.5 }}
-                    width={
-                      windowDimensions.width > windowDimensions.height
-                        ? (windowDimensions.height * 7) / 10
-                        : (windowDimensions.width * 8) / 10
-                    }
-                    src={"/images/shunyaLogo.png"}
-                  />
-                </LazyMotion>
+                <m.img
+                onLoad={()=>{setIsLoading(false)}}
+                  loading="lazy"
+                  initial={{ opacity: 0 }}
+                  animate={tracker > 0 ? "scrolled" : "base"}
+                  variants={logoVariants}
+                  transition={{ duration: 0.5 }}
+                  width={
+                    windowDimensions.width > windowDimensions.height
+                      ? (windowDimensions.height * 7) / 10
+                      : (windowDimensions.width * 8) / 10
+                  }
+                  src={"/images/shunyaLogo.png"}
+                />
               </LogoContainer>
               <OverlapContainer
                 windowDimensions={windowDimensions}
                 ref={ref6}
                 className="flex flex-col z-20 "
               >
-                <LogoText windowDimensions={windowDimensions}>
-                  <LazyMotion features={domAnimation}>
-                    <m.div
-                      initial={"scrolled"}
-                      animate={!isInView6 ? "scrolled" : "base"}
-                      variants={textLeftVariants}
-                      className={logoTextClass + "text-left"}
-                      style={{
-                        fontSize:
-                          windowDimensions.width / 100 +
-                          (windowDimensions.height * 2) / 100,
-                      }}
-                    >
-                      ECSTATIC DANCE
-                    </m.div>
-                  </LazyMotion>
-                  <LazyMotion features={domAnimation}>
-                    <m.div
-                      initial={"scrolled"}
-                      animate={!isInView6 ? "scrolled" : "base"}
-                      variants={textRightVariants}
-                      transition={{ duration: 0.6, delay: 1 }}
-                      className={logoTextClass + "text-right overflow-hidden"}
-                      style={{
-                        fontSize:
-                          windowDimensions.width / 100 +
-                          (windowDimensions.height * 2) / 100,
-                      }}
-                    >
-                      WELLNESS RETREAT
-                    </m.div>
-                  </LazyMotion>
-                  <LazyMotion features={domAnimation}>
-                    <m.div
-                      initial={"scrolled"}
-                      animate={!isInView6 ? "scrolled" : "base"}
-                      variants={textLeftVariants}
-                      transition={{ duration: 0.6, delay: 1 }}
-                      className={logoTextClass}
-                      style={{
-                        fontSize:
-                          windowDimensions.width / 100 +
-                          (windowDimensions.height * 2) / 100,
-                      }}
-                    >
-                      ART SPACE
-                    </m.div>
-                  </LazyMotion>
+                <LogoText windowDimensions={windowDimensions} isLoading={isLoading}>
+                  <m.div
+                    initial={"scrolled"}
+                    animate={!isInView6 ? "scrolled" : "base"}
+                    variants={textLeftVariants}
+                    className={logoTextClass + "text-left"}
+                    style={{
+                      fontSize:
+                        windowDimensions.width / 100 +
+                        (windowDimensions.height * 2) / 100,
+                    }}
+                  >
+                    ECSTATIC DANCE
+                  </m.div>
+                  <m.div
+                    initial={"scrolled"}
+                    animate={!isInView6 ? "scrolled" : "base"}
+                    variants={textRightVariants}
+                   
+                    className={logoTextClass + "text-right overflow-hidden"}
+                    style={{
+                      fontSize:
+                        windowDimensions.width / 100 +
+                        (windowDimensions.height * 2) / 100,
+                    }}
+                  >
+                    WELLNESS RETREAT
+                  </m.div>
+                  <m.div
+                    initial={"scrolled"}
+                    animate={!isInView6 ? "scrolled" : "base"}
+                    variants={textLeftVariants}
+                  
+                    className={logoTextClass}
+                    style={{
+                      fontSize:
+                        windowDimensions.width / 100 +
+                        (windowDimensions.height * 2) / 100,
+                    }}
+                  >
+                    ART SPACE
+                  </m.div>
                 </LogoText>
               </OverlapContainer>
 
-              <LazyMotion features={domAnimation}>
-                <m.div
-                  ref={ref2}
-                  initial={{ opacity: 1 }}
-                  animate={isInView2 && !isInView ? "scrolled" : "base"}
-                  variants={variantsTextLeft}
-                  className="flex flex-col self-start"
-                >
-                  <div className="flex">
-                    <AnimatedImage
-                      windowDimensions={windowDimensions}
-                      src={"/images/shunya-wellness-home.jpg"}
-                    />
-                  </div>
-                  <OverlapContainer
+              <m.div
+                ref={ref2}
+                initial={{ opacity: 1 }}
+                animate={isInView2 && !isInView ? "scrolled" : "base"}
+                variants={variantsTextLeft}
+                className="flex flex-col self-start"
+              >
+                <div className="flex">
+                  <AnimatedImage
+                    loading="lazy"
                     windowDimensions={windowDimensions}
-                    className="flex flex-col self-center w-[85%] justify-center z-[100]"
-                  >
-                    <LazyMotion features={domAnimation}>
-                      <m.div
-                        initial={{ opacity: 0 }}
-                        animate={
-                          isInView2 && !isInView
-                            ? {
-                                opacity: 0.7,
-                                transition: { duration: 0.3, delay: 0.3 },
-                              }
-                            : { opacity: 0 }
-                        }
-                      >
-                        <InnerTitle>Shunya Wellness</InnerTitle>
-                      </m.div>
-                    </LazyMotion>
-                    <LazyMotion features={domAnimation}>
-                      <m.div
-                        initial={{ opacity: 0 }}
-                        animate={
-                          isInView2 && !isInView
-                            ? {
-                                opacity: 0.7,
-                                transition: { duration: 0.3, delay: 0.6 },
-                              }
-                            : { opacity: 0 }
-                        }
-                      >
-                        <InnerText>
-                          Every year, from November through April,{" "}
-                          <i className="text-gold2 font-custom2 font-black">
-                            Shunya Wellness,{" "}
-                          </i>
-                          nestled within a jungle, attracts people worldwide.
-                          Nomads, travelers, musicians, and dancers gather
-                          beneath the starry skies around a towering Banyan
-                          tree. It&apos;s a unique destination where a global
-                          community forms, uniting under nature&apos;s canopy.
-                          <br></br>
-                        </InnerText>
-                      </m.div>
-                    </LazyMotion>
-                  </OverlapContainer>
-                </m.div>
-              </LazyMotion>
-
-              <LazyMotion features={domAnimation}>
-                <m.div
-                  ref={ref3}
-                  initial={{ opacity: 1 }}
-                  animate={isInView3 && !isInView2 ? "scrolled" : "base"}
-                  variants={variantsTextRight}
-                  className="flex flex-col self-start"
+                    src={"/images/shunya-wellness-home.jpg"}
+                  />
+                </div>
+                <OverlapContainer
+                  windowDimensions={windowDimensions}
+                  className="flex flex-col self-center w-[85%] justify-center z-[100]"
                 >
-                  <div className="flex">
-                    <AnimatedImage
-                      windowDimensions={windowDimensions}
-                      src={"/images/ecstatic-home.jpg"}
-                    />
-                  </div>
-
-                  <OverlapContainer
-                    windowDimensions={windowDimensions}
-                    className="flex flex-col self-center justify-center w-[85%]"
+                  <m.div
+                    initial={{ opacity: 0 }}
+                    animate={
+                      isInView2 && !isInView
+                        ? {
+                            opacity: 0.7,
+                            transition: { duration: 0.3, delay: 0.3 },
+                          }
+                        : { opacity: 0 }
+                    }
                   >
-                    <LazyMotion features={domAnimation}>
-                      <m.div
-                        initial={{ opacity: 0 }}
-                        animate={
-                          isInView3 && !isInView2
-                            ? {
-                                opacity: 0.7,
-                                transition: { duration: 0.3, delay: 0.3 },
-                              }
-                            : { opacity: 0 }
-                        }
-                      >
-                        <InnerTitle>Ecstatic Dance</InnerTitle>
-                      </m.div>
-                    </LazyMotion>
-                    <LazyMotion features={domAnimation}>
-                      <m.div
-                        initial={{ opacity: 0 }}
-                        animate={
-                          isInView3 && !isInView2
-                            ? {
-                                opacity: 0.7,
-                                transition: { duration: 0.3, delay: 0.6 },
-                              }
-                            : { opacity: 0 }
-                        }
-                      >
-                        <InnerText>
-                          Since 2021, we&apos;ve been the heart of Ecstatic
-                          Dance in Goa, hosting bi-weekly dance sessions with
-                          acclaimed DJs from across the globe. Our vibrant
-                          community welcomes all to join in the rhythmic
-                          celebration. In addition to the dance floor, we offer
-                          a delightful vegetarian cafe and a serene tea ceremony
-                          corner.<br></br>
-                        </InnerText>
-                      </m.div>
-                    </LazyMotion>
-                  </OverlapContainer>
-                </m.div>
-              </LazyMotion>
-              <LazyMotion features={domAnimation}>
+                    <InnerTitle>Shunya Wellness</InnerTitle>
+                  </m.div>
+                  <m.div
+                    initial={{ opacity: 0 }}
+                    animate={
+                      isInView2 && !isInView
+                        ? {
+                            opacity: 0.7,
+                            transition: { duration: 0.3, delay: 0.6 },
+                          }
+                        : { opacity: 0 }
+                    }
+                  >
+                    <InnerText>
+                      Every year, from November through April,{" "}
+                      <i className="text-gold2 font-custom2 font-black">
+                        Shunya Wellness,{" "}
+                      </i>
+                      nestled within a jungle, attracts people worldwide.
+                      Nomads, travelers, musicians, and dancers gather beneath
+                      the starry skies around a towering Banyan tree. It&apos;s
+                      a unique destination where a global community forms,
+                      uniting under nature&apos;s canopy.
+                      <br></br>
+                    </InnerText>
+                  </m.div>
+                </OverlapContainer>
+              </m.div>
+
+              <m.div
+                ref={ref3}
+                initial={{ opacity: 1 }}
+                animate={isInView3 && !isInView2 ? "scrolled" : "base"}
+                variants={variantsTextRight}
+                className="flex flex-col self-start"
+              >
+                <div className="flex">
+                  <AnimatedImage
+                    loading="lazy"
+                    windowDimensions={windowDimensions}
+                    src={"/images/ecstatic-home.jpg"}
+                  />
+                </div>
+
+                <OverlapContainer
+                  windowDimensions={windowDimensions}
+                  className="flex flex-col self-center justify-center w-[85%]"
+                >
+                  <m.div
+                    initial={{ opacity: 0 }}
+                    animate={
+                      isInView3 && !isInView2
+                        ? {
+                            opacity: 0.7,
+                            transition: { duration: 0.3, delay: 0.3 },
+                          }
+                        : { opacity: 0 }
+                    }
+                  >
+                    <InnerTitle>Ecstatic Dance</InnerTitle>
+                  </m.div>
+                  <m.div
+                    initial={{ opacity: 0 }}
+                    animate={
+                      isInView3 && !isInView2
+                        ? {
+                            opacity: 0.7,
+                            transition: { duration: 0.3, delay: 0.6 },
+                          }
+                        : { opacity: 0 }
+                    }
+                  >
+                    <InnerText>
+                      Since 2021, we&apos;ve been the heart of Ecstatic Dance in
+                      Goa, hosting bi-weekly dance sessions with acclaimed DJs
+                      from across the globe. Our vibrant community welcomes all
+                      to join in the rhythmic celebration. In addition to the
+                      dance floor, we offer a delightful vegetarian cafe and a
+                      serene tea ceremony corner.<br></br>
+                    </InnerText>
+                  </m.div>
+                </OverlapContainer>
+              </m.div>
               <m.div
                 ref={ref4}
                 initial={{ opacity: 1 }}
@@ -458,6 +453,7 @@ const Home = () => {
               >
                 <div className="flex">
                   <AnimatedImage
+                    loading="lazy"
                     windowDimensions={windowDimensions}
                     src={"/images/concert-home.jpg"}
                   />
@@ -467,7 +463,6 @@ const Home = () => {
                   windowDimensions={windowDimensions}
                   className="flex flex-col self-center w-[85%] justify-center"
                 >
-                  <LazyMotion features={domAnimation}>
                   <m.div
                     initial={{ opacity: 0 }}
                     animate={
@@ -480,8 +475,7 @@ const Home = () => {
                     }
                   >
                     <InnerTitle>Live Concerts</InnerTitle>
-                  </m.div></LazyMotion>
-                  <LazyMotion features={domAnimation}>
+                  </m.div>
                   <m.div
                     initial={{ opacity: 0 }}
                     animate={
@@ -500,13 +494,9 @@ const Home = () => {
                       friends and family. Join us for a night of musical magic
                       and pure entertainment. <br></br>
                     </InnerText>
-                  </m.div></LazyMotion>
+                  </m.div>
                 </OverlapContainer>
               </m.div>
-              </LazyMotion>
-              <LazyMotion features={domAnimation}>
-
-
               <m.div
                 ref={ref5}
                 initial={{ opacity: 1 }}
@@ -516,6 +506,7 @@ const Home = () => {
               >
                 <div className="flex">
                   <AnimatedImage
+                    loading="lazy"
                     windowDimensions={windowDimensions}
                     src={"/images/workshop-home.jpeg"}
                   />
@@ -525,7 +516,6 @@ const Home = () => {
                   windowDimensions={windowDimensions}
                   className="flex flex-col self-center w-[85%] justify-center"
                 >
-                  <LazyMotion features={domAnimation}>
                   <m.div
                     initial={{ opacity: 0 }}
                     animate={
@@ -538,8 +528,7 @@ const Home = () => {
                     }
                   >
                     <InnerTitle>Workshops</InnerTitle>
-                  </m.div></LazyMotion>
-                  <LazyMotion features={domAnimation}>
+                  </m.div>
                   <m.div
                     initial={{ opacity: 0 }}
                     animate={
@@ -558,10 +547,9 @@ const Home = () => {
                       embark on a transformative journey toward personal growth
                       and self-discovery.<br></br>
                     </InnerText>
-                  </m.div></LazyMotion>
+                  </m.div>
                 </OverlapContainer>
               </m.div>
-              </LazyMotion>
 
               {
                 //<Text className="text-gold2 text-[80px] font-custom2">Shunya Wellness</Text>
@@ -569,7 +557,7 @@ const Home = () => {
             </div>
           </div>
         </m.div>
-      </LazyMotion>
+      </LazyMotion>)}
     </main>
   );
 };

@@ -12,7 +12,7 @@ const Contact = () => {
   const ref = useRef();
   const [opacity, setOpacity] = useState(0.2);
   return (
-    <main className="flex-col grow-1 px-6 py-10 bg-black w-full h-[100vh]">
+    <div className="flex-col grow-1 px-6 py-10 bg-black w-full h-[100vh]">
       {/*<motion.img
         initial={{ opacity: 0.7 }}
         animate={{ opacity: 1 }}
@@ -126,7 +126,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 };
 export default Contact;
