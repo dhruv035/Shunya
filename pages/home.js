@@ -2,10 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import styled from "@emotion/styled";
 import {
-  motion,
+  LazyMotion,
+  m,
   useScroll,
   useMotionValueEvent,
   useInView,
+  domAnimation,
 } from "framer-motion";
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "@/tailwind.config.js";
@@ -66,7 +68,7 @@ const AnimatedImageHome = styled.img`
 
 const LogoContainer = styled.div`
   top: ${({ windowDimensions }) => {
-    return  windowDimensions.height / 6 + "px";
+    return windowDimensions.height / 6 + "px";
   }};
 `;
 
@@ -102,11 +104,10 @@ const LogoText = styled.div`
           windowDimensions.height / 9 +
           "px";
   }};
-  font-size: ${({windowDimensions})=>{
-    return 
-  }}
+  font-size: ${({ windowDimensions }) => {
+    return;
+  }};
 `;
-
 
 const InnerTitle = styled.div`
 color: ${twFullConfig.theme.colors["gold2"]};
@@ -164,14 +165,19 @@ const Home = () => {
       x:
         windowDimensions.height > windowDimensions.width
           ? (-windowDimensions.width * (5 - 4 * logoScale)) / 10 + 15
-          : -windowDimensions.width/2+windowDimensions.height*3.5/10*logoScale+windowDimensions.width*1/100,
+          : -windowDimensions.width / 2 +
+            ((windowDimensions.height * 3.5) / 10) * logoScale +
+            (windowDimensions.width * 1) / 100,
       y:
         windowDimensions.height > windowDimensions.width
           ? -windowDimensions.height / 6 -
             ((windowDimensions.width * 2) / 5) * (1 - logoScale) +
             20
           : -windowDimensions.height / 6 -
-          ((windowDimensions.height * 3.5) / 10) + windowDimensions.height*3.5*logoScale/10+20+windowDimensions.height*3.5*logoScale/20,
+            (windowDimensions.height * 3.5) / 10 +
+            (windowDimensions.height * 3.5 * logoScale) / 10 +
+            20 +
+            (windowDimensions.height * 3.5 * logoScale) / 20,
       transition: { duration: 0.5 },
     },
   };
@@ -218,313 +224,352 @@ const Home = () => {
   console.log("W", gidth);
   return (
     <main className="flex-col bg-black">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 2, delay: 0.5 }}
-      >
-        <Menu />
-        <div className="flex flex-row place-items-center bg-black ">
-          <div className=" flex flex-col  w-[100vw] items-center self-start overflow-clip bg-black">
-            {
-              <motion.div
-                ref={ref}
+      <LazyMotion features={domAnimation}>
+        <m.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2, delay: 0.5 }}
+        >
+          <Menu />
+          <div className="flex flex-row place-items-center bg-black ">
+            <div className=" flex flex-col  w-[100vw] items-center self-start overflow-clip bg-black">
+              {
+                <LazyMotion features={domAnimation}>
+                  <m.div
+                    ref={ref}
+                    initial={{ opacity: 1 }}
+                    animate={!isInView && isInView2 ? "base" : "scrolled"}
+                    variants={variantsTextLeft}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <AnimatedImageHome
+                      windowDimensions={windowDimensions}
+                      src={"/images/banyan-home.jpg"}
+                    />
+                  </m.div>
+                </LazyMotion>
+              }
+              <LogoContainer
+                windowDimensions={windowDimensions}
+                className=" shunya-logo fixed z-[100]"
+                //filter: "hue-rotate(90deg) contrast(160%)",
+              >
+                <LazyMotion features={domAnimation}>
+                  <m.img
+                    initial={{ opacity: 0 }}
+                    animate={tracker > 0 ? "scrolled" : "base"}
+                    variants={logoVariants}
+                    transition={{ duration: 0.5 }}
+                    width={
+                      windowDimensions.width > windowDimensions.height
+                        ? (windowDimensions.height * 7) / 10
+                        : (windowDimensions.width * 8) / 10
+                    }
+                    src={"/images/shunyaLogo.png"}
+                  />
+                </LazyMotion>
+              </LogoContainer>
+              <OverlapContainer
+                windowDimensions={windowDimensions}
+                ref={ref6}
+                className="flex flex-col z-20 "
+              >
+                <LogoText windowDimensions={windowDimensions}>
+                  <LazyMotion features={domAnimation}>
+                    <m.div
+                      initial={"scrolled"}
+                      animate={!isInView6 ? "scrolled" : "base"}
+                      variants={textLeftVariants}
+                      className={logoTextClass + "text-left"}
+                      style={{
+                        fontSize:
+                          windowDimensions.width / 100 +
+                          (windowDimensions.height * 2) / 100,
+                      }}
+                    >
+                      ECSTATIC DANCE
+                    </m.div>
+                  </LazyMotion>
+                  <LazyMotion features={domAnimation}>
+                    <m.div
+                      initial={"scrolled"}
+                      animate={!isInView6 ? "scrolled" : "base"}
+                      variants={textRightVariants}
+                      transition={{ duration: 0.6, delay: 1 }}
+                      className={logoTextClass + "text-right overflow-hidden"}
+                      style={{
+                        fontSize:
+                          windowDimensions.width / 100 +
+                          (windowDimensions.height * 2) / 100,
+                      }}
+                    >
+                      WELLNESS RETREAT
+                    </m.div>
+                  </LazyMotion>
+                  <LazyMotion features={domAnimation}>
+                    <m.div
+                      initial={"scrolled"}
+                      animate={!isInView6 ? "scrolled" : "base"}
+                      variants={textLeftVariants}
+                      transition={{ duration: 0.6, delay: 1 }}
+                      className={logoTextClass}
+                      style={{
+                        fontSize:
+                          windowDimensions.width / 100 +
+                          (windowDimensions.height * 2) / 100,
+                      }}
+                    >
+                      ART SPACE
+                    </m.div>
+                  </LazyMotion>
+                </LogoText>
+              </OverlapContainer>
+
+              <LazyMotion features={domAnimation}>
+                <m.div
+                  ref={ref2}
+                  initial={{ opacity: 1 }}
+                  animate={isInView2 && !isInView ? "scrolled" : "base"}
+                  variants={variantsTextLeft}
+                  className="flex flex-col self-start"
+                >
+                  <div className="flex">
+                    <AnimatedImage
+                      windowDimensions={windowDimensions}
+                      src={"/images/shunya-wellness-home.jpg"}
+                    />
+                  </div>
+                  <OverlapContainer
+                    windowDimensions={windowDimensions}
+                    className="flex flex-col self-center w-[85%] justify-center z-[100]"
+                  >
+                    <LazyMotion features={domAnimation}>
+                      <m.div
+                        initial={{ opacity: 0 }}
+                        animate={
+                          isInView2 && !isInView
+                            ? {
+                                opacity: 0.7,
+                                transition: { duration: 0.3, delay: 0.3 },
+                              }
+                            : { opacity: 0 }
+                        }
+                      >
+                        <InnerTitle>Shunya Wellness</InnerTitle>
+                      </m.div>
+                    </LazyMotion>
+                    <LazyMotion features={domAnimation}>
+                      <m.div
+                        initial={{ opacity: 0 }}
+                        animate={
+                          isInView2 && !isInView
+                            ? {
+                                opacity: 0.7,
+                                transition: { duration: 0.3, delay: 0.6 },
+                              }
+                            : { opacity: 0 }
+                        }
+                      >
+                        <InnerText>
+                          Every year, from November through April,{" "}
+                          <i className="text-gold2 font-custom2 font-black">
+                            Shunya Wellness,{" "}
+                          </i>
+                          nestled within a jungle, attracts people worldwide.
+                          Nomads, travelers, musicians, and dancers gather
+                          beneath the starry skies around a towering Banyan
+                          tree. It&apos;s a unique destination where a global
+                          community forms, uniting under nature&apos;s canopy.
+                          <br></br>
+                        </InnerText>
+                      </m.div>
+                    </LazyMotion>
+                  </OverlapContainer>
+                </m.div>
+              </LazyMotion>
+
+              <LazyMotion features={domAnimation}>
+                <m.div
+                  ref={ref3}
+                  initial={{ opacity: 1 }}
+                  animate={isInView3 && !isInView2 ? "scrolled" : "base"}
+                  variants={variantsTextRight}
+                  className="flex flex-col self-start"
+                >
+                  <div className="flex">
+                    <AnimatedImage
+                      windowDimensions={windowDimensions}
+                      src={"/images/ecstatic-home.jpg"}
+                    />
+                  </div>
+
+                  <OverlapContainer
+                    windowDimensions={windowDimensions}
+                    className="flex flex-col self-center justify-center w-[85%]"
+                  >
+                    <LazyMotion features={domAnimation}>
+                      <m.div
+                        initial={{ opacity: 0 }}
+                        animate={
+                          isInView3 && !isInView2
+                            ? {
+                                opacity: 0.7,
+                                transition: { duration: 0.3, delay: 0.3 },
+                              }
+                            : { opacity: 0 }
+                        }
+                      >
+                        <InnerTitle>Ecstatic Dance</InnerTitle>
+                      </m.div>
+                    </LazyMotion>
+                    <LazyMotion features={domAnimation}>
+                      <m.div
+                        initial={{ opacity: 0 }}
+                        animate={
+                          isInView3 && !isInView2
+                            ? {
+                                opacity: 0.7,
+                                transition: { duration: 0.3, delay: 0.6 },
+                              }
+                            : { opacity: 0 }
+                        }
+                      >
+                        <InnerText>
+                          Since 2021, we&apos;ve been the heart of Ecstatic
+                          Dance in Goa, hosting bi-weekly dance sessions with
+                          acclaimed DJs from across the globe. Our vibrant
+                          community welcomes all to join in the rhythmic
+                          celebration. In addition to the dance floor, we offer
+                          a delightful vegetarian cafe and a serene tea ceremony
+                          corner.<br></br>
+                        </InnerText>
+                      </m.div>
+                    </LazyMotion>
+                  </OverlapContainer>
+                </m.div>
+              </LazyMotion>
+              <LazyMotion features={domAnimation}>
+              <m.div
+                ref={ref4}
                 initial={{ opacity: 1 }}
-                animate={!isInView && isInView2 ? "base" : "scrolled"}
+                animate={isInView4 && !isInView3 ? "scrolled" : "base"}
                 variants={variantsTextLeft}
-                transition={{ duration: 0.5 }}
+                className="flex flex-col self-start"
               >
-                <AnimatedImageHome
-                  windowDimensions={windowDimensions}
-                  src={"/images/banyan-home.jpg"}
-                />
-              </motion.div>
-            }
-            <LogoContainer
-              windowDimensions={windowDimensions}
-              className=" shunya-logo fixed z-[100]"
-              //filter: "hue-rotate(90deg) contrast(160%)",
-            >
-              <motion.img
-                initial={{ opacity: 0 }}
-                animate={tracker > 0 ? "scrolled" : "base"}
-                variants={logoVariants}
-                transition={{ duration: 0.5 }}
-                width={
-                  windowDimensions.width > windowDimensions.height
-                    ? (windowDimensions.height * 7) / 10
-                    : (windowDimensions.width * 8) / 10
-                }
-                src={"/images/shunyaLogo.png"}
-              />
-            </LogoContainer>
-            <OverlapContainer
-              windowDimensions={windowDimensions}
-              ref={ref6}
-              className="flex flex-col z-20 "
-            >
-              <LogoText windowDimensions={windowDimensions}>
-                <motion.div
-                  initial={"scrolled"}
-                  animate={!isInView6 ? "scrolled" : "base"}
-                  variants={textLeftVariants}
-                  className={logoTextClass + "text-left"}
-                  style={{
-                    fontSize:windowDimensions.width/100+windowDimensions.height*2/100
-                  }}
-                >
-                  ECSTATIC DANCE
-                </motion.div>
-                <motion.div
-                  initial={"scrolled"}
-                  animate={!isInView6 ? "scrolled" : "base"}
-                  variants={textRightVariants}
-                  transition={{ duration: 0.6, delay: 1 }}
-                  className={logoTextClass + "text-right overflow-hidden"}
-                  style={{
-                    fontSize:windowDimensions.width/100+windowDimensions.height*2/100
-                  }}
-                >
-                  WELLNESS RETREAT
-                </motion.div>
-                <motion.div
-                  initial={"scrolled"}
-                  animate={!isInView6 ? "scrolled" : "base"}
-                  variants={textLeftVariants}
-                  transition={{ duration: 0.6, delay: 1 }}
-                  className={logoTextClass}
-                  style={{
-                    fontSize:windowDimensions.width/100+windowDimensions.height*2/100
-                  }}
-                >
-                  ART SPACE
-                </motion.div>
-              </LogoText>
-            </OverlapContainer>
+                <div className="flex">
+                  <AnimatedImage
+                    windowDimensions={windowDimensions}
+                    src={"/images/concert-home.jpg"}
+                  />
+                </div>
 
-            <motion.div
-              ref={ref2}
-              initial={{ opacity: 1 }}
-              animate={isInView2 && !isInView ? "scrolled" : "base"}
-              variants={variantsTextLeft}
-              className="flex flex-col self-start"
-            >
-              <div className="flex">
-                <AnimatedImage
+                <OverlapContainer
                   windowDimensions={windowDimensions}
-                  src={"/images/shunya-wellness-home.jpg"}
-                />
-              </div>
-              <OverlapContainer
-                windowDimensions={windowDimensions}
-                className="flex flex-col self-center w-[85%] justify-center z-[100]"
+                  className="flex flex-col self-center w-[85%] justify-center"
+                >
+                  <LazyMotion features={domAnimation}>
+                  <m.div
+                    initial={{ opacity: 0 }}
+                    animate={
+                      isInView4 && !isInView3
+                        ? {
+                            opacity: 0.7,
+                            transition: { duration: 0.3, delay: 0.3 },
+                          }
+                        : { opacity: 0 }
+                    }
+                  >
+                    <InnerTitle>Live Concerts</InnerTitle>
+                  </m.div></LazyMotion>
+                  <LazyMotion features={domAnimation}>
+                  <m.div
+                    initial={{ opacity: 0 }}
+                    animate={
+                      isInView4 && !isInView3
+                        ? {
+                            opacity: 0.7,
+                            transition: { duration: 0.3, delay: 0.6 },
+                          }
+                        : { opacity: 0 }
+                    }
+                  >
+                    <InnerText>
+                      Elevate your senses at our live concerts. Immerse yourself
+                      in electrifying performances, feel the music pulsate
+                      through your soul, and create unforgettable memories with
+                      friends and family. Join us for a night of musical magic
+                      and pure entertainment. <br></br>
+                    </InnerText>
+                  </m.div></LazyMotion>
+                </OverlapContainer>
+              </m.div>
+              </LazyMotion>
+              <LazyMotion features={domAnimation}>
+
+
+              <m.div
+                ref={ref5}
+                initial={{ opacity: 1 }}
+                animate={isInView5 && !isInView4 ? "scrolled" : "base"}
+                variants={variantsTextRight}
+                className="flex flex-col self-start h-[100vh]"
               >
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={
-                    isInView2 && !isInView
-                      ? {
-                          opacity: 0.7,
-                          transition: { duration: 0.3, delay: 0.3 },
-                        }
-                      : { opacity: 0 }
-                  }
-                >
-                  <InnerTitle>Shunya Wellness</InnerTitle>
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={
-                    isInView2 && !isInView
-                      ? {
-                          opacity: 0.7,
-                          transition: { duration: 0.3, delay: 0.6 },
-                        }
-                      : { opacity: 0 }
-                  }
-                >
-                  <InnerText>
-                    Every year, from November through April,{" "}
-                    <i className="text-gold2 font-custom2 font-black">
-                      Shunya Wellness,{" "}
-                    </i>
-                    nestled within a jungle, attracts people worldwide. Nomads,
-                    travelers, musicians, and dancers gather beneath the starry
-                    skies around a towering Banyan tree. It&apos;s a unique
-                    destination where a global community forms, uniting under
-                    nature&apos;s canopy.
-                    <br></br>
-                  </InnerText>
-                </motion.div>
-              </OverlapContainer>
-            </motion.div>
+                <div className="flex">
+                  <AnimatedImage
+                    windowDimensions={windowDimensions}
+                    src={"/images/workshop-home.jpeg"}
+                  />
+                </div>
 
-            <motion.div
-              ref={ref3}
-              initial={{ opacity: 1 }}
-              animate={isInView3 && !isInView2 ? "scrolled" : "base"}
-              variants={variantsTextRight}
-              className="flex flex-col self-start"
-            >
-              <div className="flex">
-                <AnimatedImage
+                <OverlapContainer
                   windowDimensions={windowDimensions}
-                  src={"/images/ecstatic-home.jpg"}
-                />
-              </div>
-
-              <OverlapContainer
-                windowDimensions={windowDimensions}
-                className="flex flex-col self-center justify-center w-[85%]"
-              >
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={
-                    isInView3 && !isInView2
-                      ? {
-                          opacity: 0.7,
-                          transition: { duration: 0.3, delay: 0.3 },
-                        }
-                      : { opacity: 0 }
-                  }
+                  className="flex flex-col self-center w-[85%] justify-center"
                 >
-                  <InnerTitle>Ecstatic Dance</InnerTitle>
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={
-                    isInView3 && !isInView2
-                      ? {
-                          opacity: 0.7,
-                          transition: { duration: 0.3, delay: 0.6 },
-                        }
-                      : { opacity: 0 }
-                  }
-                >
-                  <InnerText>
-                    Since 2021, we&apos;ve been the heart of Ecstatic Dance in
-                    Goa, hosting bi-weekly dance sessions with acclaimed DJs
-                    from across the globe. Our vibrant community welcomes all to
-                    join in the rhythmic celebration. In addition to the dance
-                    floor, we offer a delightful vegetarian cafe and a serene
-                    tea ceremony corner.<br></br>
-                  </InnerText>
-                </motion.div>
-              </OverlapContainer>
-            </motion.div>
+                  <LazyMotion features={domAnimation}>
+                  <m.div
+                    initial={{ opacity: 0 }}
+                    animate={
+                      isInView5 && !isInView4
+                        ? {
+                            opacity: 0.7,
+                            transition: { duration: 0.3, delay: 0.3 },
+                          }
+                        : { opacity: 0 }
+                    }
+                  >
+                    <InnerTitle>Workshops</InnerTitle>
+                  </m.div></LazyMotion>
+                  <LazyMotion features={domAnimation}>
+                  <m.div
+                    initial={{ opacity: 0 }}
+                    animate={
+                      isInView5 && !isInView4
+                        ? {
+                            opacity: 0.7,
+                            transition: { duration: 0.3, delay: 0.6 },
+                          }
+                        : { opacity: 0 }
+                    }
+                  >
+                    <InnerText>
+                      Experience workshops that nurture inner serenity and
+                      holistic balance. Connect with your inner self through
+                      mindfulness practices, explore the path to well-being, and
+                      embark on a transformative journey toward personal growth
+                      and self-discovery.<br></br>
+                    </InnerText>
+                  </m.div></LazyMotion>
+                </OverlapContainer>
+              </m.div>
+              </LazyMotion>
 
-            <motion.div
-              ref={ref4}
-              initial={{ opacity: 1 }}
-              animate={isInView4 && !isInView3 ? "scrolled" : "base"}
-              variants={variantsTextLeft}
-              className="flex flex-col self-start"
-            >
-              <div className="flex">
-                <AnimatedImage
-                  windowDimensions={windowDimensions}
-                  src={"/images/concert-home.jpg"}
-                />
-              </div>
-
-              <OverlapContainer
-                windowDimensions={windowDimensions}
-                className="flex flex-col self-center w-[85%] justify-center"
-              >
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={
-                    isInView4 && !isInView3
-                      ? {
-                          opacity: 0.7,
-                          transition: { duration: 0.3, delay: 0.3 },
-                        }
-                      : { opacity: 0 }
-                  }
-                >
-                  <InnerTitle>Live Concerts</InnerTitle>
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={
-                    isInView4 && !isInView3
-                      ? {
-                          opacity: 0.7,
-                          transition: { duration: 0.3, delay: 0.6 },
-                        }
-                      : { opacity: 0 }
-                  }
-                >
-                  <InnerText>
-                    Elevate your senses at our live concerts. Immerse yourself
-                    in electrifying performances, feel the music pulsate through
-                    your soul, and create unforgettable memories with friends
-                    and family. Join us for a night of musical magic and pure
-                    entertainment. <br></br>
-                  </InnerText>
-                </motion.div>
-              </OverlapContainer>
-            </motion.div>
-
-            <motion.div
-              ref={ref5}
-              initial={{ opacity: 1 }}
-              animate={isInView5 && !isInView4 ? "scrolled" : "base"}
-              variants={variantsTextRight}
-              className="flex flex-col self-start h-[100vh]"
-            >
-              <div className="flex">
-                <AnimatedImage
-                  windowDimensions={windowDimensions}
-                  src={"/images/workshop-home.jpeg"}
-                />
-              </div>
-
-              <OverlapContainer
-                windowDimensions={windowDimensions}
-                className="flex flex-col self-center w-[85%] justify-center"
-              >
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={
-                    isInView5 && !isInView4
-                      ? {
-                          opacity: 0.7,
-                          transition: { duration: 0.3, delay: 0.3 },
-                        }
-                      : { opacity: 0 }
-                  }
-                >
-                  <InnerTitle>Workshops</InnerTitle>
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={
-                    isInView5 && !isInView4
-                      ? {
-                          opacity: 0.7,
-                          transition: { duration: 0.3, delay: 0.6 },
-                        }
-                      : { opacity: 0 }
-                  }
-                >
-                  <InnerText>
-                    Experience workshops that nurture inner serenity and
-                    holistic balance. Connect with your inner self through
-                    mindfulness practices, explore the path to well-being, and
-                    embark on a transformative journey toward personal growth
-                    and self-discovery.<br></br>
-                  </InnerText>
-                </motion.div>
-              </OverlapContainer>
-            </motion.div>
-
-            {
-              //<Text className="text-gold2 text-[80px] font-custom2">Shunya Wellness</Text>
-            }
+              {
+                //<Text className="text-gold2 text-[80px] font-custom2">Shunya Wellness</Text>
+              }
+            </div>
           </div>
-        </div>
-      </motion.div>
+        </m.div>
+      </LazyMotion>
     </main>
   );
 };
