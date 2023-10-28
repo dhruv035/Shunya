@@ -105,9 +105,7 @@ const LogoText = styled.div`
           windowDimensions.height / 9 +
           "px";
   }};
-  font-size: ${({ windowDimensions }) => {
-    return;
-  }};
+  font-family:
 `;
 
 const InnerTitle = styled.div`
