@@ -5,6 +5,7 @@ import { Text } from "@chakra-ui/react";
 import Logo from "@/components/logo";
 import CircleIcon from "@/components/circleIcon";
 import CalendarCarousel from "@/components/calendarCarousel";
+import useDimensions from "@/components/useDimensions";
 function parseICalDate(date) {
   const year = date.substr(0, 4);
   const month = parseInt(date.substr(4, 2), 10) - 1;
@@ -41,6 +42,8 @@ const month = [
 ];
 
 const Event = () => {
+  const dimensions = useDimensions()
+  const [windowDimensions,setWindowDimensions]= useState(dimensions)
   const abc = new Date(1673531199000);
   //console.log("Init", abc);
   const [current, setCurrent] = useState(abc);

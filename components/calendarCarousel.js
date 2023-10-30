@@ -148,7 +148,7 @@ const CalendarCarousel = ({ data }) => {
   return (
     <>
       <div className="flex flex-col items-center z-10">
-        <div className="flex flex-row items-center w-full">
+        <div className="flex flex-row items-center w-[90%] justify-center ">
           <IconButton
             className="fixed z-[100] bg-transparent "
             aria-label="Back-Icon"
@@ -209,15 +209,15 @@ const CalendarCarousel = ({ data }) => {
             if (filteredData.length > 0)
               return (
                 <div className="flex flex-row w-full my-8">
-                  <div className="flex text-[20px] text-gold2 w-2/3">{day}</div>
+                  <div className="flex text-[5vw] font-bold self-center ml-[6vw] text-gold2 w-1/3">{day}</div>
 
                   {filteredData.map((myEvent,index) => {
                     return (
-                      <div key={index} className="flex flex-col ml-20 items-start w-full">
-                        <div className="flex w-3/4 text-bold text-[18px] text-limeDark w-full font-bold">
+                      <div key={index} className="flex flex-col ml-[10vw] items-start w-full">
+                        <div className="flex w-3/4 text-bold text-[5vw] text-center justify-center text-limeDark w-full font-bold">
                           {myEvent.summary}
                         </div>
-                        <div className="text-[16px] text-amber-400 w-full">
+                        <div className="text-[4vw] text-center text-amber-400 w-full">
                           {myEvent.startDate.getHours() === 0
                             ? 12
                             : myEvent.startDate.getHours() > 12
