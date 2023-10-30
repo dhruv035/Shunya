@@ -16,6 +16,7 @@ import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "@/tailwind.config.js";
 const twFullConfig = resolveConfig(tailwindConfig);
 import useDimensions from "@/components/useDimensions";
+import Menu from "@/components/menu";
 
 {
   /*width:
@@ -211,11 +212,8 @@ const Home = () => {
 
   return (
     <main className="flex-col bg-black">
-      <Head><link rel="preload" as="image" href="/images/workshop-home.jpeg"/>
-      <link rel="preload" as="image" href="/images/shunyaLogo.png"/>
-      <link rel="preload" as="image" href="/images/banyan-home.jpg"/>
-      <link rel="preload" as="image" href="/images/concert-home.jpg"/>
-      <link rel="preload" as="image" href="/images/shunya-wellness-home.jpg"/></Head>
+      <Head></Head>
+      <Menu></Menu>
       {isLoading && (
         <div className="fixed inset-0 z-10 h-screen bg-[#000000] flex items-center justify-center flex-col">
           <div style={{ width: "70%" }}>
@@ -275,7 +273,7 @@ const Home = () => {
                 >
                   <m.img
                     loading="lazy"
-                    style={{visibility:isLoading?"hidden":"visible"}}
+                    style={{ visibility: isLoading ? "hidden" : "visible" }}
                     initial={{ opacity: 0 }}
                     animate={tracker > 0 ? "scrolled" : "base"}
                     variants={logoVariants}
@@ -308,7 +306,7 @@ const Home = () => {
                           (windowDimensions.height * 2) / 100,
                       }}
                     >
-                                            {isLoading?"":"ECSTATIC DANCE"}
+                      {isLoading ? "" : "ECSTATIC DANCE"}
                     </m.div>
                     <m.div
                       initial={"scrolled"}
@@ -321,7 +319,7 @@ const Home = () => {
                           (windowDimensions.height * 2) / 100,
                       }}
                     >
-                      {isLoading?"":"WELLNESS RETREAT"}
+                      {isLoading ? "" : "WELLNESS RETREAT"}
                     </m.div>
                     <m.div
                       initial={"scrolled"}
@@ -334,7 +332,7 @@ const Home = () => {
                           (windowDimensions.height * 2) / 100,
                       }}
                     >
-                                            {isLoading?"":"ART SPACE"}
+                      {isLoading ? "" : "ART SPACE"}
                     </m.div>
                   </LogoText>
                 </OverlapContainer>

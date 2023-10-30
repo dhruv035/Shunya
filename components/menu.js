@@ -1,5 +1,5 @@
 import React from "react";
-import { background, useDisclosure } from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 import { IconButton, Input, Button, Link, Text } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
