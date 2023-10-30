@@ -67,9 +67,6 @@ const Event = () => {
     }
     data();
   }, []);
-  useEffect(() => {
-    //console.log("aa", abc);
-  }, [abc]);
   //console.log(data);
   return (
     <div>

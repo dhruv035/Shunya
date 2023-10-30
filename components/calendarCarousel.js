@@ -211,9 +211,9 @@ const CalendarCarousel = ({ data }) => {
                 <div className="flex flex-row w-full my-8">
                   <div className="flex text-[20px] text-gold2 w-2/3">{day}</div>
 
-                  {filteredData.map((myEvent) => {
+                  {filteredData.map((myEvent,index) => {
                     return (
-                      <div className="flex flex-col ml-20 items-start w-full">
+                      <div key={index} className="flex flex-col ml-20 items-start w-full">
                         <div className="flex w-3/4 text-bold text-[14px] text-limeDark font-bold">
                           {myEvent.summary}
                         </div>
