@@ -24,11 +24,7 @@ const Menu = () => {
 
     "Home":"home",
     "Ecstatic Dance":"ecstatic",
-    "Workshops":"workshops",
-    "Carnival":"carnival",
-    "Events":"events",
-    "Gallery": "gallery",
-    "Stay":"stay",
+    "Upcoming Events":"events",
   }
   return (
 
