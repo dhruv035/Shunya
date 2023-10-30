@@ -49,7 +49,7 @@ const monthToString = [
 
 const oneDay = 1000 * 60 * 60 * 24;
 
-const CalendarCarousel = ({ data }) => {
+const CalendarCarousel = ({ data,setHeight }) => {
   const dateToday = new Date();
 
   const [start,setStart]=useState(0)
@@ -77,7 +77,7 @@ const CalendarCarousel = ({ data }) => {
     );
     setShowData(filteredData);
     console.log("FILTERED DATA IS", filteredData);
-
+    setHeight(filteredData.length*50)
     if (dateToday > startDate) {
       setBackDisabled(true);
     } else setBackDisabled(false);
@@ -243,9 +243,11 @@ const CalendarCarousel = ({ data }) => {
          onTouchStart={(e)=>setStart(e.changedTouches[0].clientX)}
          onTouchEnd={(e)=>{
             if(e.changedTouches[0].clientX>start){
+               if(e.changedTouches[0].clientX-start>50)
                handleBack();
             }
             else{
+               if(start-e.changedTouches[0].clientX>50)
                handleForward();
             }
             setStart(0)
@@ -255,7 +257,7 @@ const CalendarCarousel = ({ data }) => {
         initial={"initial"}
         animate={"display"}
         variants={carouselVariant}
-        className="flex flex-col mt-4 self-center w-[90%] z-10 h-max"
+        className="flex flex-col mt-4 min-h-[60vh] self-center w-[90%] z-10 h-max"
       >
         {showData &&
           days.map((day, index) => {

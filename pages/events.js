@@ -18,20 +18,21 @@ function parseICalDate(date) {
 }
 
 const BackgroundImage = styled.img`
-height:150vh;
-width:100vw;
-filter:brightness(40%) contrast(110$);
-object-fit:cover;`
-
+  filter: brightness(40%) contrast(110$);
+  object-fit: cover;
+`;
 
 const Event = () => {
-  const dimensions = useDimensions()
-  const [windowDimensions,setWindowDimensions]= useState(dimensions)
+  const dimensions = useDimensions();
+  const [windowDimensions, setWindowDimensions] = useState(dimensions);
+  const [height, setHeight] = useState(windowDimensions.height);
   const today = new Date();
-  //console.log("Init", abc);
-  //console.log("Upcoming", next);
   const [data, setData] = useState([]);
-  //console.log("STart", abc);
+  console.log("SSD", height + windowDimensions.height);
+  useEffect(() => {
+    if (Math.abs(dimensions.height - windowDimensions.height) > 100)
+      setWindowDimensions(dimensions);
+  }, [dimensions]);
   useEffect(() => {
     async function data() {
       const response = await fetch("/api/calendar");
@@ -52,21 +53,32 @@ const Event = () => {
   }, []);
   //console.log(data);
   return (
-    <div className="bg-black">
+    <div style={{height: height + windowDimensions.height}} className="bg-black overflow-clip">
       <Menu />
       <BackgroundImage
-      loading="lazy"
-      className=" contrast-110  opacity-40 z-[-40] overflow-hidden"
-      src={"/images/bg-events.jpg"}
+        loading="lazy"
+        style={{
+          overflow:"clip",
+          height:"150vh",
+        }}
+        className=" contrast-110  opacity-40 z-[-40]"
+        src={"/images/bg-events.jpg"}
       />
-      <div className="flex-col px-6 py-10 bg-black w-[100vw] min-h-[150vh] mt-[-150vh] h-full">
+      <div
+        style={{
+          marginTop: "-150vh",
+          height: height + windowDimensions.height,
+        }}
+        className="flex-col px-6 py-10 bg-black"
+      >
         <Logo />
         <div className="flex flex-col">
           <Text className="text-[30px] self-center md:text-[60px] text-amber-400 mt-5 mb-10">
             Upcoming Events
           </Text>
-          {data.length > 0 && <CalendarCarousel data={data} />}
-          
+          {data.length > 0 && (
+            <CalendarCarousel data={data} setHeight={setHeight} />
+          )}
         </div>
       </div>
     </div>
