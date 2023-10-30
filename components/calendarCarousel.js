@@ -65,13 +65,11 @@ const CalendarCarousel = ({ data }) => {
     if (dateToday > startDate) {
       setBackDisabled(true);
     } else setBackDisabled(false);
-    
-    if(data[data.length-1].startDate<endDate)
-    {
-      setForwardDisabled(true)
-    }
-    else{
-      setForwardDisabled(false)
+
+    if (data[data.length - 1].startDate < endDate) {
+      setForwardDisabled(true);
+    } else {
+      setForwardDisabled(false);
     }
   }, [endDate, startDate]);
   const getWeekendDate = (currentDate, time) => {
@@ -148,7 +146,6 @@ const CalendarCarousel = ({ data }) => {
     setEndDate(getWeekendDate(newDate));
     setStartDate(getStartDate(newDate));
     setCurrent(newDate);
-
   };
   return (
     <>
@@ -188,7 +185,12 @@ const CalendarCarousel = ({ data }) => {
             style={{
               background: "transparent",
             }}
-            icon={<ArrowRightIcon boxSize={"4vw"} color={forwardDisabled ? "ffffff" : "#C0D065"} />}
+            icon={
+              <ArrowRightIcon
+                boxSize={"4vw"}
+                color={forwardDisabled ? "ffffff" : "#C0D065"}
+              />
+            }
           />
         </div>
       </div>
@@ -210,11 +212,43 @@ const CalendarCarousel = ({ data }) => {
               )
                 return innerData;
             });
+            const month = startDate.getMonth();
+            const date = startDate.getDate();
+            let effectiveDate;
+            let effectiveMonth;
+            if (date + index > months[month]) {
+              effectiveDate = date + index - months[month];
+              effectiveMonth = month + 1;
+            } else {
+              effectiveDate = date + index;
+              effectiveMonth = month;
+            }
+            let prefix;
+            switch (effectiveDate % 10) {
+              default:
+                prefix = "th";
+                break;
+              case 1:
+                if (Math.floor(effectiveDate / 10) !== 1) prefix = "st";
+                else prefix = "th";
+                break;
+              case 2:
+                prefix = "2nd";
+                break;
+              case 3:
+                prefix = "3rd";
+                break;
+            }
             if (filteredData.length > 0)
               return (
                 <div key={index} className="flex flex-row w-full my-8">
-                  <div className="flex text-[5vw] font-bold self-center ml-[6vw] text-gold2 w-1/3">
+                  <div className="flex flex-col text-[5vw] font-bold self-center ml-[6vw] text-gold2 w-1/3">
                     {day}
+                    <p className="text-[3vw] text-center">
+                      {effectiveDate}
+                      <sup>{prefix}</sup>
+                      {" " + monthToStringShort[effectiveMonth]}
+                    </p>
                   </div>
 
                   {filteredData.map((myEvent, index) => {
