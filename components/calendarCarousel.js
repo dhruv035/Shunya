@@ -32,11 +32,27 @@ const monthToStringShort = [
   "Nov",
   "Dec",
 ];
+const monthToString = [
+   "January",
+   "February",
+   "March",
+   "April",
+   "May",
+   "June",
+   "July",
+   "August",
+   "September",
+   "October",
+   "November",
+   "December",
+ ];
 
 const oneDay = 1000 * 60 * 60 * 24;
 
 const CalendarCarousel = ({ data }) => {
   const dateToday = new Date();
+
+  const [start,setStart]=useState(0)
   const [current, setCurrent] = useState(dateToday);
   const [currentYear, setCurrentYear] = useState(current.getFullYear());
   const [endDate, setEndDate] = useState();
@@ -131,6 +147,8 @@ const CalendarCarousel = ({ data }) => {
   };
 
   const handleForward = () => {
+   if(forwardDisabled)
+   return;
     const timeStamp = current.getTime();
     const newTime = timeStamp + 1000 * 60 * 60 * 24 * 7;
     const newDate = new Date(newTime);
@@ -140,6 +158,8 @@ const CalendarCarousel = ({ data }) => {
   };
 
   const handleBack = () => {
+   if(backDisabled)
+   return;
     const timeStamp = current.getTime();
     const newTime = timeStamp - 1000 * 60 * 60 * 24 * 7;
     const newDate = new Date(newTime);
@@ -195,6 +215,17 @@ const CalendarCarousel = ({ data }) => {
         </div>
       </div>
       <motion.div
+         onTouchStart={(e)=>setStart(e.changedTouches[0].clientX)}
+         onTouchEnd={(e)=>{
+            if(e.changedTouches[0].clientX>start){
+               handleForward();
+            }
+            else{
+               handleBack();
+            }
+            setStart(0)
+         }}
+         draggable="true"
         key={showData}
         initial={"initial"}
         animate={"display"}
@@ -245,9 +276,9 @@ const CalendarCarousel = ({ data }) => {
                   <div className="flex flex-col text-[5vw] font-bold self-center ml-[6vw] text-gold2 w-1/3">
                     {day}
                     <p className="text-[3vw] text-center">
-                      {effectiveDate}
-                      <sup>{prefix}</sup>
-                      {" " + monthToStringShort[effectiveMonth]}
+                       {monthToStringShort[effectiveMonth]}
+                     
+                     {" "+effectiveDate}<sup>{prefix}</sup>
                     </p>
                   </div>
 
