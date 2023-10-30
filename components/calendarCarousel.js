@@ -214,10 +214,10 @@ const CalendarCarousel = ({ data }) => {
                   {filteredData.map((myEvent,index) => {
                     return (
                       <div key={index} className="flex flex-col ml-20 items-start w-full">
-                        <div className="flex w-3/4 text-bold text-[14px] text-limeDark font-bold">
+                        <div className="flex w-3/4 text-bold text-[18px] text-limeDark w-full font-bold">
                           {myEvent.summary}
                         </div>
-                        <div className="text-[10px] text-amber-400 w-max">
+                        <div className="text-[16px] text-amber-400 w-full">
                           {myEvent.startDate.getHours() === 0
                             ? 12
                             : myEvent.startDate.getHours() > 12
