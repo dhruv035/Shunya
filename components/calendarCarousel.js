@@ -159,13 +159,13 @@ const CalendarCarousel = ({ data }) => {
             }}
             icon={
               <ArrowLeftIcon
-                boxSize={"2vw"}
+                boxSize={"4vw"}
                 color={backDisabled ? "ffffff" : "#C0D065"}
               />
             }
           />
           {startDate && endDate && (
-            <div className=" text-amber-200 text-center text-[3vw] w-3/4">
+            <div className=" text-amber-200 text-center text-[6vw] w-3/4">
               {startDate.getDate() +
                 " " +
                 monthToStringShort[startDate.getMonth()] +
@@ -182,7 +182,7 @@ const CalendarCarousel = ({ data }) => {
             style={{
               background: "transparent",
             }}
-            icon={<ArrowRightIcon boxSize={"2vw"} color="#C0D065" />}
+            icon={<ArrowRightIcon boxSize={"4vw"} color="#C0D065" />}
           />
         </div>
       </div>
