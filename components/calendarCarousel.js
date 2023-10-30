@@ -167,6 +167,32 @@ const CalendarCarousel = ({ data }) => {
     setStartDate(getStartDate(newDate));
     setCurrent(newDate);
   };
+
+
+  const calculatePrefix = (date)=>{
+   let prefix;
+   switch (date % 10) {
+      default:
+        prefix = "th";
+        break;
+      case 1:
+        if (Math.floor(date / 10) !== 1) prefix = "st";
+        else prefix = "th";
+        break;
+      case 2:
+         if (Math.floor(date / 10) !== 1) prefix = "nd";
+         else
+        prefix = "th";
+        break;
+      case 3:
+         if (Math.floor(date / 10) !== 1) prefix = "rd";
+         else
+        prefix = "th";
+        break;
+    }
+    return prefix;
+
+  }
   return (
     <>
       <div className="flex flex-col items-center z-10">
@@ -186,15 +212,14 @@ const CalendarCarousel = ({ data }) => {
               />
             }
           />
-          {startDate && endDate && (
+          {
+          startDate && endDate && (
             <div className=" text-amber-200 text-center text-[6vw] w-3/4">
-              {startDate.getDate() +
-                " " +
-                monthToStringShort[startDate.getMonth()] +
-                " - " +
-                endDate.getDate() +
-                " " +
-                monthToStringShort[endDate.getMonth()]}
+             {startDate.getDate()}<sup>{calculatePrefix(startDate.getDate())}</sup>
+             {" "+monthToStringShort[startDate.getMonth()]+" "}
+              - 
+              {" "+endDate.getDate()}<sup>{calculatePrefix(endDate.getDate())}</sup>
+             {" "+monthToStringShort[endDate.getMonth()]}
             </div>
           )}
           <IconButton
@@ -254,22 +279,8 @@ const CalendarCarousel = ({ data }) => {
               effectiveDate = date + index;
               effectiveMonth = month;
             }
-            let prefix;
-            switch (effectiveDate % 10) {
-              default:
-                prefix = "th";
-                break;
-              case 1:
-                if (Math.floor(effectiveDate / 10) !== 1) prefix = "st";
-                else prefix = "th";
-                break;
-              case 2:
-                prefix = "2nd";
-                break;
-              case 3:
-                prefix = "3rd";
-                break;
-            }
+            let prefix = calculatePrefix(effectiveDate);
+            
             if (filteredData.length > 0)
               return (
                 <div key={index} className="flex flex-row w-full my-8">
