@@ -218,10 +218,10 @@ const CalendarCarousel = ({ data }) => {
          onTouchStart={(e)=>setStart(e.changedTouches[0].clientX)}
          onTouchEnd={(e)=>{
             if(e.changedTouches[0].clientX>start){
-               handleForward();
+               handleBack();
             }
             else{
-               handleBack();
+               handleForward();
             }
             setStart(0)
          }}
@@ -230,7 +230,7 @@ const CalendarCarousel = ({ data }) => {
         initial={"initial"}
         animate={"display"}
         variants={carouselVariant}
-        className="mt-4 self-center w-[90%] z-10"
+        className="flex flex-col mt-4 self-center w-[90%] z-10 h-max"
       >
         {showData &&
           days.map((day, index) => {

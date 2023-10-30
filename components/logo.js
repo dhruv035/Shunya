@@ -10,7 +10,7 @@ const Logo = () => {
       style={{
         opacity: 0.6,
         top: "20px",
-        left: "32px",
+        left: "15px",
 
         //filter: "hue-rotate(90deg) contrast(160%)",
         height: ((windowDimensions.width * 8) / 10) * logoScale,

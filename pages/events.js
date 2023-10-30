@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Menu from "@/components/menu";
+import styled from "@emotion/styled";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Text } from "@chakra-ui/react";
 import Logo from "@/components/logo";
@@ -16,30 +17,12 @@ function parseICalDate(date) {
   return new Date(Date.UTC(year, month, day, hour, minute, second));
 }
 
-const weekday = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
+const BackgroundImage = styled.img`
+height:150vh;
+width:100vw;
+filter:brightness(40%) contrast(110$);
+object-fit:cover;`
 
-const month = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
 
 const Event = () => {
   const dimensions = useDimensions()
@@ -69,20 +52,21 @@ const Event = () => {
   }, []);
   //console.log(data);
   return (
-    <div>
+    <div className="bg-black">
       <Menu />
-      <LazyLoadImage
-        className="object-cover contrast-110 h-[100vh] w-[100vw] brightness-10 opacity-40 z-[-40]"
-        src={"/images/bg-events.jpg"}
-      ></LazyLoadImage>
-      <div className="flex-col grow-1 px-6 py-10 bg-black w-[100vw] min-h-[100vh] mt-[-100vh] h-max overflow-clip">
+      <BackgroundImage
+      loading="lazy"
+      className=" contrast-110  opacity-40 z-[-40] overflow-hidden"
+      src={"/images/bg-events.jpg"}
+      />
+      <div className="flex-col px-6 py-10 bg-black w-[100vw] min-h-[150vh] mt-[-150vh] h-full">
         <Logo />
         <div className="flex flex-col">
-          <Text className="text-[30px] self-center md:text-[60px] text-amber-400 mt-16 mb-10">
+          <Text className="text-[30px] self-center md:text-[60px] text-amber-400 mt-5 mb-10">
             Upcoming Events
           </Text>
           {data.length > 0 && <CalendarCarousel data={data} />}
-          <div></div>
+          
         </div>
       </div>
     </div>
