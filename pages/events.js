@@ -44,10 +44,8 @@ const month = [
 const Event = () => {
   const dimensions = useDimensions()
   const [windowDimensions,setWindowDimensions]= useState(dimensions)
-  const abc = new Date(1673531199000);
+  const today = new Date();
   //console.log("Init", abc);
-  const [current, setCurrent] = useState(abc);
-  const next = new Date(abc.setDate(abc.getDate() + (7 - abc.getDay())));
   //console.log("Upcoming", next);
   const [data, setData] = useState([]);
   //console.log("STart", abc);
@@ -61,11 +59,10 @@ const Event = () => {
         element.endDate = parseICalDate(element.endDate);
       });
       const newData = arr
-        .filter((a) => a.startDate > abc)
+        .filter((a) => a.startDate > today)
         .sort((a, b) => {
           return new Date(a.startDate) - new Date(b.startDate);
         });
-
       setData(newData);
     }
     data();

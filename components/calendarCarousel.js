@@ -36,18 +36,14 @@ const monthToStringShort = [
 const oneDay = 1000 * 60 * 60 * 24;
 
 const CalendarCarousel = ({ data }) => {
-  const firstDate = data[0]?.start;
   const dateToday = new Date();
   const [current, setCurrent] = useState(dateToday);
-  const [date, setDate] = useState(current.getDate());
-  const [day, setDay] = useState(current.getDay());
   const [currentYear, setCurrentYear] = useState(current.getFullYear());
-  const [currentMonth, setCurrentMonth] = useState(current.getMonth());
   const [endDate, setEndDate] = useState();
   const [startDate, setStartDate] = useState();
   const [showData, setShowData] = useState();
   const [backDisabled, setBackDisabled] = useState(false);
-
+  const [forwardDisabled, setForwardDisabled] = useState(false);
   const feb = leapyear(currentYear) ? 29 : 28;
   const months = [31, feb, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
@@ -69,6 +65,14 @@ const CalendarCarousel = ({ data }) => {
     if (dateToday > startDate) {
       setBackDisabled(true);
     } else setBackDisabled(false);
+    
+    if(data[data.length-1].startDate<endDate)
+    {
+      setForwardDisabled(true)
+    }
+    else{
+      setForwardDisabled(false)
+    }
   }, [endDate, startDate]);
   const getWeekendDate = (currentDate, time) => {
     let fDate = currentDate.getDate();
@@ -99,9 +103,9 @@ const CalendarCarousel = ({ data }) => {
     return end;
   };
   const carouselVariant = {
-   initial:{y:150,opacity:0,transition:{duration:0.5}},
-   display:{y:0,opacity:1,transition:{duration:0.5}}
-  }
+    initial: { y: 150, opacity: 0, transition: { duration: 0.5 } },
+    display: { y: 0, opacity: 1, transition: { duration: 0.5 } },
+  };
   const getStartDate = (currentDate) => {
     let fDate = currentDate.getDate();
     let month = currentDate.getMonth();
@@ -144,6 +148,7 @@ const CalendarCarousel = ({ data }) => {
     setEndDate(getWeekendDate(newDate));
     setStartDate(getStartDate(newDate));
     setCurrent(newDate);
+
   };
   return (
     <>
@@ -178,11 +183,12 @@ const CalendarCarousel = ({ data }) => {
           <IconButton
             className="fixed z-[100] bg-transparent"
             aria-label="Back-Icon"
+            isDisabled={forwardDisabled}
             onClick={handleForward}
             style={{
               background: "transparent",
             }}
-            icon={<ArrowRightIcon boxSize={"4vw"} color="#C0D065" />}
+            icon={<ArrowRightIcon boxSize={"4vw"} color={forwardDisabled ? "ffffff" : "#C0D065"} />}
           />
         </div>
       </div>
@@ -196,7 +202,6 @@ const CalendarCarousel = ({ data }) => {
         {showData &&
           days.map((day, index) => {
             const filteredData = showData.filter((innerData) => {
-              console.log("INNERDATA", innerData);
               const buff = index * oneDay;
               if (
                 innerData.startDate.getTime() >= startDate.getTime() + buff &&
@@ -205,15 +210,19 @@ const CalendarCarousel = ({ data }) => {
               )
                 return innerData;
             });
-            console.log("InnerData for ", day, " is ", filteredData);
             if (filteredData.length > 0)
               return (
-                <div className="flex flex-row w-full my-8">
-                  <div className="flex text-[5vw] font-bold self-center ml-[6vw] text-gold2 w-1/3">{day}</div>
+                <div key={index} className="flex flex-row w-full my-8">
+                  <div className="flex text-[5vw] font-bold self-center ml-[6vw] text-gold2 w-1/3">
+                    {day}
+                  </div>
 
-                  {filteredData.map((myEvent,index) => {
+                  {filteredData.map((myEvent, index) => {
                     return (
-                      <div key={index} className="flex flex-col ml-[10vw] items-start w-full">
+                      <div
+                        key={index}
+                        className="flex flex-col ml-[10vw] items-start w-full"
+                      >
                         <div className="flex w-3/4 text-bold text-[5vw] text-center justify-center text-limeDark w-full font-bold">
                           {myEvent.summary}
                         </div>
